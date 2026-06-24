@@ -6,6 +6,7 @@ import Marquee from './components/Marquee'
 import Stats from './components/Stats'
 import ServicesHelix from './components/ServicesHelix'
 import Features from './components/Features'
+import WarpTunnel from './components/WarpTunnel'
 import Packages from './components/Pricing'
 import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
@@ -40,6 +41,7 @@ export default function App() {
         <Stats />
         <ServicesHelix />
         <Features />
+        <WarpTunnel />
         <Packages />
         <Testimonials />
         <CTA />
