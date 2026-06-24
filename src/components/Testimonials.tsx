@@ -24,7 +24,7 @@ const quotes = [
 
 export default function Testimonials() {
   return (
-    <section id="results" className="relative py-28">
+    <section id="results" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">

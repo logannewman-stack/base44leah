@@ -81,7 +81,7 @@ function TiltCard({ feature, i }: { feature: (typeof features)[number]; i: numbe
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-28">
+    <section id="features" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">

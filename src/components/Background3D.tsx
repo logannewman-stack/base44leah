@@ -7,7 +7,7 @@ import * as THREE from 'three'
  * A GPU-driven particle field that gently drifts and reacts to the pointer.
  * This is the "depth" layer that makes the page feel three-dimensional.
  */
-function ParticleField({ count = 4000 }: { count?: number }) {
+function ParticleField({ count = 5500 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null)
 
   const positions = useMemo(() => {
@@ -38,11 +38,11 @@ function ParticleField({ count = 4000 }: { count?: number }) {
     <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
       <PointMaterial
         transparent
-        color="#5fd6ff"
-        size={0.02}
+        color="#7cdcff"
+        size={0.026}
         sizeAttenuation
         depthWrite={false}
-        opacity={0.9}
+        opacity={1}
         blending={THREE.AdditiveBlending}
       />
     </Points>
@@ -64,12 +64,12 @@ function FloatingOrb() {
       <meshStandardMaterial
         color="#3b82f6"
         emissive="#8b5cf6"
-        emissiveIntensity={0.4}
+        emissiveIntensity={0.7}
         roughness={0.15}
         metalness={0.9}
         wireframe
         transparent
-        opacity={0.18}
+        opacity={0.28}
       />
     </mesh>
   )
@@ -90,8 +90,8 @@ export default function Background3D() {
         <ParticleField />
       </Canvas>
       {/* Color wash + vignette layered on top of the canvas */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.12),_transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(139,92,246,0.14),_transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.18),_transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(139,92,246,0.20),_transparent_55%)]" />
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink-900" />
     </div>
   )

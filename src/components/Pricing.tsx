@@ -38,7 +38,7 @@ export default function Pricing() {
   const [annual, setAnnual] = useState(true)
 
   return (
-    <section id="pricing" className="relative py-28">
+    <section id="pricing" className="relative py-20">
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-cyber-violet/10 blur-[120px]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="mx-auto max-w-2xl text-center">

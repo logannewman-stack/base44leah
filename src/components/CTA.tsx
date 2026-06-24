@@ -8,7 +8,7 @@ export default function CTA() {
   const scale = useTransform(scrollYProgress, [0, 0.5], [0.9, 1])
 
   return (
-    <section id="cta" ref={ref} className="relative py-28">
+    <section id="cta" ref={ref} className="relative py-20">
       <div className="mx-auto max-w-5xl px-6">
         <motion.div
           style={{ scale }}
