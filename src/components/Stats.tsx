@@ -29,10 +29,11 @@ function Counter({
     return () => controls.stop()
   }, [inView, to, from])
 
+  const formatted = val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
   return (
     <span ref={ref}>
       {prefix}
-      {val.toFixed(decimals)}
+      {formatted}
       {suffix}
     </span>
   )
@@ -40,10 +41,10 @@ function Counter({
 
 // `from` higher than `to` makes the number count DOWN (e.g. lowering cost per lead).
 const stats = [
-  { prefix: '$', from: 0, to: 4.2, decimals: 1, suffix: 'M+', label: 'Revenue generated for clients', sub: 'Across every campaign we run' },
-  { prefix: '$', from: 57, to: 13, decimals: 0, suffix: '', label: 'Average cost per lead', sub: 'Driven down, far below average' },
-  { prefix: '', from: 0, to: 31, decimals: 0, suffix: 'K+', label: 'Qualified leads generated', sub: 'Captured and routed to your pipeline' },
-  { prefix: '', from: 0, to: 4.8, decimals: 1, suffix: 'x', label: 'Average return on ad spend', sub: 'For every dollar of ad budget' },
+  { prefix: '', from: 0, to: 10400, decimals: 0, suffix: '+', label: 'Opportunities Tracked', sub: 'Leads & deals in your pipeline' },
+  { prefix: '$', from: 0, to: 3.4, decimals: 1, suffix: 'M+', label: 'Pipeline Value Generated', sub: 'Created for our clients' },
+  { prefix: '$', from: 42, to: 3.9, decimals: 2, suffix: ' avg', label: 'Cost Per Lead', sub: 'Driven down across campaigns' },
+  { prefix: '', from: 0, to: 24, decimals: 0, suffix: '/7', label: 'AI Availability', sub: 'Always answering, never closed' },
 ]
 
 export default function Stats() {
