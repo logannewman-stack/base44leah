@@ -32,9 +32,14 @@ const steps = [
 function Step({ step, i, progress }: { step: (typeof steps)[number]; i: number; progress: MotionValue<number> }) {
   const start = i / steps.length
   const end = (i + 1) / steps.length
-  const opacity = useTransform(progress, [start - 0.12, start, end - 0.08, end], [0.25, 1, 1, 0.25])
-  const x = useTransform(progress, [start - 0.12, start], [80, 0])
-  const scale = useTransform(progress, [start - 0.12, start, end], [0.96, 1, 0.98])
+  // All breakpoints MUST stay within [0, 1] and strictly increasing. framer-motion
+  // offloads these scroll-linked fades to the Web Animations API, which rejects
+  // out-of-range offsets (e.g. a negative value) by throwing during mount.
+  const lead = start + 0.06
+  const tail = end - 0.06
+  const opacity = useTransform(progress, [start, lead, tail, end], [0.2, 1, 1, 0.2])
+  const x = useTransform(progress, [start, lead], [80, 0])
+  const scale = useTransform(progress, [start, lead, end], [0.96, 1, 0.98])
 
   return (
     <motion.div style={{ opacity, x, scale }} className="flex min-h-screen items-center">
