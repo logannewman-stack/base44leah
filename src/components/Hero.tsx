@@ -3,11 +3,11 @@ import { useEffect, useRef } from 'react'
 import { MagneticButton } from './ui'
 
 const channels = [
-  { name: 'Meta Ads', icon: 'M3 11l18-7-7 18-2.5-7.5L3 11z', tone: 'from-sky-400 to-blue-600' },
-  { name: 'Google My Business', icon: 'M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z', tone: 'from-emerald-400 to-teal-600' },
-  { name: 'Website', icon: 'M3 5h18v14H3V5zm0 4h18', tone: 'from-cyan-400 to-indigo-600' },
-  { name: 'Social Media', icon: 'M18 8a3 3 0 1 0-2.8-4 3 3 0 0 0 .2 1.1L8.9 8.5a3 3 0 1 0 0 7l6.3 3.4A3 3 0 1 0 18 16a3 3 0 0 0-2.1.9', tone: 'from-fuchsia-400 to-violet-600' },
-  { name: 'Voice AI Caller', icon: 'M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z', tone: 'from-cyan-400 to-purple-600' },
+  { name: 'Meta Ads', icon: 'M3 11l18-7-7 18-2.5-7.5L3 11z', tone: 'from-zinc-700 to-zinc-900' },
+  { name: 'Google My Business', icon: 'M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z', tone: 'from-zinc-700 to-zinc-900' },
+  { name: 'Website', icon: 'M3 5h18v14H3V5zm0 4h18', tone: 'from-zinc-700 to-zinc-900' },
+  { name: 'Social Media', icon: 'M18 8a3 3 0 1 0-2.8-4 3 3 0 0 0 .2 1.1L8.9 8.5a3 3 0 1 0 0 7l6.3 3.4A3 3 0 1 0 18 16a3 3 0 0 0-2.1.9', tone: 'from-zinc-700 to-zinc-900' },
+  { name: 'Voice AI Caller', icon: 'M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z', tone: 'from-zinc-700 to-zinc-900' },
 ]
 
 /** A glassy "command center" showing every channel the agency runs for you. */
@@ -36,10 +36,10 @@ function CommandCard() {
       <div className="flex items-center justify-between">
         <div>
           <p className="text-xs uppercase tracking-widest text-cyber-cyan">Growth engine</p>
-          <p className="text-sm font-semibold text-white">All channels · Live</p>
+          <p className="text-sm font-semibold text-neutral-900">All channels · Live</p>
         </div>
-        <span className="flex items-center gap-1.5 rounded-full bg-emerald-400/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-emerald-300">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> Running
+        <span className="flex items-center gap-1.5 rounded-full bg-black/[0.06] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-600">
+          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-neutral-800" /> Running
         </span>
       </div>
 
@@ -50,27 +50,27 @@ function CommandCard() {
             initial={{ opacity: 0, x: 16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.7 + i * 0.12 }}
-            className="flex items-center gap-3 rounded-xl bg-white/5 px-3 py-2.5"
+            className="flex items-center gap-3 rounded-xl bg-black/[0.04] px-3 py-2.5"
           >
             <span className={`flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br ${c.tone}`}>
               <svg viewBox="0 0 24 24" className="h-4 w-4 text-white" fill={c.name === 'Website' || c.name === 'Social Media' ? 'none' : 'currentColor'} stroke={c.name === 'Website' || c.name === 'Social Media' ? 'currentColor' : 'none'} strokeWidth="2">
                 <path d={c.icon} />
               </svg>
             </span>
-            <span className="flex-1 text-sm font-medium text-white/85">{c.name}</span>
-            <span className="text-[10px] uppercase tracking-wider text-emerald-300">Active</span>
+            <span className="flex-1 text-sm font-medium text-neutral-800">{c.name}</span>
+            <span className="text-[10px] uppercase tracking-wider text-neutral-600">Active</span>
           </motion.div>
         ))}
       </div>
 
       <div className="mt-5 grid grid-cols-2 gap-2 text-center">
-        <div className="rounded-xl bg-white/5 py-2.5">
+        <div className="rounded-xl bg-black/[0.04] py-2.5">
           <p className="text-sm font-bold gradient-text">+38%</p>
-          <p className="text-[10px] uppercase tracking-wider text-white/50">More booked</p>
+          <p className="text-[10px] uppercase tracking-wider text-neutral-500">More booked</p>
         </div>
-        <div className="rounded-xl bg-white/5 py-2.5">
+        <div className="rounded-xl bg-black/[0.04] py-2.5">
           <p className="text-sm font-bold gradient-text">0</p>
-          <p className="text-[10px] uppercase tracking-wider text-white/50">Leads missed</p>
+          <p className="text-[10px] uppercase tracking-wider text-neutral-500">Leads missed</p>
         </div>
       </div>
     </motion.div>
@@ -89,14 +89,14 @@ function FloatChip({ className, delay, label, value, icon }: { className: string
       }}
       className={`absolute z-20 flex items-center gap-2.5 rounded-2xl glass-strong px-3.5 py-2.5 shadow-glow ${className}`}
     >
-      <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-cyber-cyan/30 to-cyber-violet/30 text-cyber-cyan">
+      <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-black/[0.06] text-neutral-700">
         <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
           <path d={icon} />
         </svg>
       </span>
       <div className="leading-tight">
-        <p className="text-sm font-bold text-white">{value}</p>
-        <p className="text-[10px] uppercase tracking-wider text-white/50">{label}</p>
+        <p className="text-sm font-bold text-neutral-900">{value}</p>
+        <p className="text-[10px] uppercase tracking-wider text-neutral-500">{label}</p>
       </div>
     </motion.div>
   )
@@ -116,12 +116,12 @@ export default function Hero() {
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5], scale: [1, 1.15, 1] }}
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-        className="pointer-events-none absolute -left-32 top-24 h-[28rem] w-[28rem] rounded-full bg-cyber-blue/25 blur-[120px]"
+        className="pointer-events-none absolute -left-32 top-24 h-[28rem] w-[28rem] rounded-full bg-black/[0.03] blur-[120px]"
       />
       <motion.div
         animate={{ opacity: [0.45, 0.8, 0.45], scale: [1.1, 1, 1.1] }}
         transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
-        className="pointer-events-none absolute right-0 bottom-10 h-[32rem] w-[32rem] rounded-full bg-cyber-violet/25 blur-[130px]"
+        className="pointer-events-none absolute right-0 bottom-10 h-[32rem] w-[32rem] rounded-full bg-black/[0.03] blur-[130px]"
       />
 
       <div className="relative mx-auto grid w-full max-w-6xl items-center gap-10 px-6 lg:grid-cols-[1.05fr_0.95fr]">
@@ -152,7 +152,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.62, duration: 0.8 }}
-            className="mt-6 max-w-md text-lg leading-relaxed text-white/70"
+            className="mt-6 max-w-md text-lg leading-relaxed text-neutral-600"
           >
             We run your Meta &amp; Google ads, build and optimize your Google Business profile,
             design your website, manage your social media, and answer every call with AI — one
@@ -180,12 +180,12 @@ export default function Hero() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/50"
+            className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-neutral-500"
           >
-            <span>★★★★★ <span className="text-white/70">4.9/5</span></span>
-            <span className="hidden h-4 w-px bg-white/15 sm:block" />
+            <span>★★★★★ <span className="text-neutral-600">4.9/5</span></span>
+            <span className="hidden h-4 w-px bg-black/[0.06] sm:block" />
             <span>Trusted by 1,200+ businesses</span>
-            <span className="hidden h-4 w-px bg-white/15 sm:block" />
+            <span className="hidden h-4 w-px bg-black/[0.06] sm:block" />
             <span>Fully managed, done for you</span>
           </motion.div>
         </motion.div>
@@ -195,7 +195,7 @@ export default function Hero() {
           <motion.div
             animate={{ rotate: 360 }}
             transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5 [mask-image:linear-gradient(transparent,#000,transparent)]"
+            className="pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-black/[0.06] [mask-image:linear-gradient(transparent,#000,transparent)]"
           />
           <CommandCard />
           <FloatChip className="-left-4 top-6 sm:-left-10" delay={1} value="+38%" label="More booked" icon="M3 17l6-6 4 4 8-8M21 7v6h-6" />
@@ -208,7 +208,7 @@ export default function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/40"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-neutral-400"
       >
         <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 1.8, repeat: Infinity }} className="flex flex-col items-center gap-2 text-xs uppercase tracking-widest">
           Scroll

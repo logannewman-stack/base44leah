@@ -8,7 +8,7 @@ export function ScrollProgress() {
   return (
     <motion.div
       style={{ scaleX }}
-      className="fixed inset-x-0 top-0 z-[60] h-1 origin-left bg-gradient-to-r from-cyber-cyan via-cyber-blue to-cyber-violet shadow-[0_0_14px_rgba(59,130,246,0.9)]"
+      className="fixed inset-x-0 top-0 z-[60] h-0.5 origin-left bg-neutral-900"
     />
   )
 }
@@ -73,17 +73,17 @@ export function CursorGlow() {
           height: 460,
           marginLeft: -230,
           marginTop: -230,
-          background: 'radial-gradient(circle, rgba(99,102,241,0.20), rgba(34,211,238,0.10) 38%, transparent 68%)',
+          background: 'radial-gradient(circle, rgba(15,15,20,0.10), rgba(15,15,20,0.05) 38%, transparent 68%)',
           filter: 'blur(26px)',
-          mixBlendMode: 'screen',
+          mixBlendMode: 'multiply',
         }}
       />
-      <svg className="pointer-events-none fixed inset-0 z-[55] h-full w-full" aria-hidden style={{ mixBlendMode: 'screen' }}>
+      <svg className="pointer-events-none fixed inset-0 z-[55] h-full w-full" aria-hidden style={{ mixBlendMode: 'multiply' }}>
         <defs>
           <linearGradient id="cometgrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#c7f3ff" />
-            <stop offset="45%" stopColor="#5fb8ff" />
-            <stop offset="100%" stopColor="#b07bff" />
+            <stop offset="0%" stopColor="#3f3f46" />
+            <stop offset="45%" stopColor="#27272a" />
+            <stop offset="100%" stopColor="#09090b" />
           </linearGradient>
           <filter id="cometglow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="6" />
@@ -108,9 +108,9 @@ export function CursorGlow() {
           return <line key={`c${i}`} x1={prev.x} y1={prev.y} x2={p.x} y2={p.y} stroke="url(#cometgrad)" strokeWidth={Math.max(1, f * 6)} strokeLinecap="round" opacity={f} />
         })}
 
-        {/* glowing glass head */}
-        <circle cx={pts[0].x} cy={pts[0].y} r={9} fill="url(#cometgrad)" opacity={0.35} style={{ filter: 'blur(3px)' }} />
-        <circle cx={pts[0].x} cy={pts[0].y} r={4.5} fill="#eaffff" style={{ filter: 'drop-shadow(0 0 6px #5fb8ff) drop-shadow(0 0 14px #8b5cf6)' }} />
+        {/* head */}
+        <circle cx={pts[0].x} cy={pts[0].y} r={8} fill="#09090b" opacity={0.18} style={{ filter: 'blur(3px)' }} />
+        <circle cx={pts[0].x} cy={pts[0].y} r={4} fill="#0a0a0b" />
       </svg>
     </>
   )

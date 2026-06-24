@@ -15,8 +15,8 @@ const items = [
 export default function Marquee() {
   const row = [...items, ...items]
   return (
-    <section className="relative border-y border-white/5 py-8">
-      <p className="mb-6 text-center text-xs uppercase tracking-[0.3em] text-white/40">
+    <section className="relative border-y border-black/[0.06] py-8">
+      <p className="mb-6 text-center text-xs uppercase tracking-[0.3em] text-neutral-400">
         Powering front desks across every industry
       </p>
       <div className="relative flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_15%,#000_85%,transparent)]">
@@ -28,7 +28,7 @@ export default function Marquee() {
           {row.map((item, i) => (
             <span
               key={i}
-              className="whitespace-nowrap font-display text-xl font-medium text-white/30 transition-colors hover:text-white/70"
+              className="whitespace-nowrap font-display text-xl font-medium text-neutral-400 transition-colors hover:text-neutral-600"
             >
               {item}
             </span>

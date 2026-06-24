@@ -33,7 +33,7 @@ function Check() {
 export default function Packages() {
   return (
     <section id="packages" className="relative py-20">
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-cyber-violet/10 blur-[120px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-black/[0.03] blur-[120px]" />
       <div className="mx-auto max-w-6xl px-6">
         <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
           <div className="flex justify-center">
@@ -42,7 +42,7 @@ export default function Packages() {
           <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
             Built around your business. <span className="gradient-text">Fully managed.</span>
           </h2>
-          <p className="mt-5 text-white/60">
+          <p className="mt-5 text-neutral-500">
             Bundle everything or pick the services you need — every package is done-for-you and
             tailored to your goals. Let's map out the right fit on a quick call.
           </p>
@@ -58,14 +58,14 @@ export default function Packages() {
                 }`}
               >
                 {plan.featured && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink-900">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-neutral-900 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
                     Most popular
                   </span>
                 )}
-                <h3 className="font-display text-xl font-semibold text-white">{plan.name}</h3>
-                <p className="mt-1 text-sm text-white/50">{plan.tagline}</p>
+                <h3 className="font-display text-xl font-semibold text-neutral-900">{plan.name}</h3>
+                <p className="mt-1 text-sm text-neutral-500">{plan.tagline}</p>
 
-                <ul className="mt-6 space-y-3 text-sm text-white/75">
+                <ul className="mt-6 space-y-3 text-sm text-neutral-600">
                   {plan.includes.map((f) => (
                     <li key={f} className="flex gap-2.5">
                       <Check />
@@ -83,7 +83,7 @@ export default function Packages() {
             </Depth3D>
           ))}
         </div>
-        <p className="mt-8 text-center text-sm text-white/40">
+        <p className="mt-8 text-center text-sm text-neutral-400">
           Prefer just one service? We offer Meta Ads, Google My Business, Websites, Social Media, and
           the Voice AI Caller individually too — just ask.
         </p>

@@ -4,16 +4,17 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Monochrome light theme. Names kept so existing classes keep working.
         ink: {
-          900: '#04060f',
-          800: '#070b18',
-          700: '#0b1124',
+          900: '#0a0a0b', // near-black (dark text / dark elements)
+          800: '#1c1c1f',
+          700: '#3a3a3f',
         },
         cyber: {
-          cyan: '#22d3ee',
-          blue: '#3b82f6',
-          violet: '#8b5cf6',
-          magenta: '#e23bd2',
+          cyan: '#52525b', // zinc-600 — mid grey accent
+          blue: '#27272a', // zinc-800
+          violet: '#18181b', // zinc-900
+          magenta: '#3f3f46', // zinc-700
         },
       },
       fontFamily: {
@@ -21,8 +22,8 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        glow: '0 0 60px -10px rgba(34,211,238,0.55)',
-        'glow-violet': '0 0 70px -10px rgba(139,92,246,0.55)',
+        glow: '0 12px 40px -14px rgba(15,15,20,0.22)',
+        'glow-violet': '0 18px 55px -16px rgba(15,15,20,0.26)',
       },
       keyframes: {
         float: {

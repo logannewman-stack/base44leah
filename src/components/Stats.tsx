@@ -44,12 +44,12 @@ export default function Stats() {
                 whileHover={{ y: -6 }}
                 className="glass relative overflow-hidden rounded-2xl p-6"
               >
-                <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-cyber-cyan/10 blur-2xl" />
+                <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-black/[0.03] blur-2xl" />
                 <p className="font-display text-4xl font-bold gradient-text sm:text-5xl">
                   <Counter to={s.to} suffix={s.suffix} decimals={s.decimals} />
                 </p>
-                <p className="mt-2 font-semibold text-white">{s.label}</p>
-                <p className="text-sm text-white/50">{s.sub}</p>
+                <p className="mt-2 font-semibold text-neutral-900">{s.label}</p>
+                <p className="text-sm text-neutral-500">{s.sub}</p>
               </motion.div>
             </Depth3D>
           ))}

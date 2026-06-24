@@ -28,9 +28,9 @@ export default function Navbar() {
         }`}
       >
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyber-cyan to-cyber-violet">
-            <span className="absolute inset-0 rounded-xl bg-cyber-cyan/40 blur-md" />
-            <svg viewBox="0 0 24 24" className="relative h-5 w-5 text-ink-900" fill="currentColor">
+          <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-neutral-900">
+            <span className="absolute inset-0 rounded-xl bg-black/10 blur-md" />
+            <svg viewBox="0 0 24 24" className="relative h-5 w-5 text-white" fill="currentColor">
               <path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z" />
             </svg>
           </span>
@@ -44,10 +44,10 @@ export default function Navbar() {
             <a
               key={l.href}
               href={l.href}
-              className="group relative text-sm font-medium text-white/70 transition-colors hover:text-white"
+              className="group relative text-sm font-medium text-neutral-600 transition-colors hover:text-white"
             >
               {l.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-cyber-cyan to-cyber-violet transition-all duration-300 group-hover:w-full" />
+              <span className="absolute -bottom-1 left-0 h-px w-0 bg-neutral-900 transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
@@ -60,7 +60,7 @@ export default function Navbar() {
 
         <button
           aria-label="Toggle menu"
-          className="md:hidden text-white"
+          className="md:hidden text-neutral-900"
           onClick={() => setOpen((o) => !o)}
         >
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
@@ -80,7 +80,7 @@ export default function Navbar() {
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block rounded-lg px-4 py-3 text-white/80 hover:bg-white/5"
+              className="block rounded-lg px-4 py-3 text-neutral-700 hover:bg-black/[0.04]"
             >
               {l.label}
             </a>
@@ -88,7 +88,7 @@ export default function Navbar() {
           <a
             href="#contact"
             onClick={() => setOpen(false)}
-            className="mt-2 block rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet px-4 py-3 text-center font-semibold text-ink-900"
+            className="mt-2 block rounded-full bg-neutral-900 px-4 py-3 text-center font-semibold text-white"
           >
             Speak with a representative
           </a>

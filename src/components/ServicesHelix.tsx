@@ -10,7 +10,7 @@ const services = [
     what: 'We run fully-managed paid campaigns on Facebook and Instagram — strategy, creative, audience targeting, and relentless optimization that puts your offer in front of the right people.',
     why: 'Turn ad spend into booked jobs by reaching ready-to-buy customers in your area — every lead funnelled straight into your pipeline.',
     icon: 'M3 11l18-7-7 18-2.5-7.5L3 11z',
-    color: 'from-sky-400 to-blue-600',
+    color: 'from-zinc-700 to-zinc-900',
   },
   {
     key: 'gmb',
@@ -19,7 +19,7 @@ const services = [
     what: 'We create and fully optimize your Google Business Profile — photos, services, local-SEO keywords, and reviews — so you rank in local search and Google Maps.',
     why: 'Own the map and the local 3-pack so you are the first business people find, trust, and call when they search.',
     icon: 'M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z',
-    color: 'from-emerald-400 to-teal-600',
+    color: 'from-zinc-700 to-zinc-900',
   },
   {
     key: 'web',
@@ -28,7 +28,7 @@ const services = [
     what: 'A professional, lightning-fast, mobile-friendly website built to convert — local SEO baked in, lead-capture forms, and a direct line into your CRM.',
     why: 'A fast, trustworthy site that works around the clock, turning curious visitors into booked leads while you sleep.',
     icon: 'M3 5h18v14H3V5zm0 4h18M7 5v4',
-    color: 'from-cyan-400 to-indigo-600',
+    color: 'from-zinc-700 to-zinc-900',
   },
   {
     key: 'social',
@@ -37,7 +37,7 @@ const services = [
     what: 'We keep your brand active and consistent across platforms — content creation, scheduling, posting, and community engagement that compounds your reach.',
     why: 'Stay top-of-mind and build the social proof that makes choosing you the obvious, easy decision.',
     icon: 'M18 8a3 3 0 1 0-2.8-4H15a3 3 0 0 0 .2 1.1L8.9 8.5a3 3 0 1 0 0 7l6.3 3.4A3 3 0 1 0 18 16a3 3 0 0 0-2.1.9L9.6 13.5a3 3 0 0 0 0-3L15.9 7A3 3 0 0 0 18 8z',
-    color: 'from-fuchsia-400 to-violet-600',
+    color: 'from-zinc-700 to-zinc-900',
   },
   {
     key: 'voice',
@@ -46,7 +46,7 @@ const services = [
     what: 'An always-on AI that answers every call in milliseconds, qualifies leads, books appointments, makes outbound follow-ups, and replies to texts automatically.',
     why: 'Never miss a call or a lead again — every enquiry answered and booked, day or night, even while you work.',
     icon: 'M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z',
-    color: 'from-cyan-400 to-purple-600',
+    color: 'from-zinc-700 to-zinc-900',
   },
 ]
 
@@ -67,18 +67,18 @@ function StrandLevel({ k, total, rotate }: { k: number; total: number; rotate: M
     <motion.div className="absolute left-1/2 top-1/2" style={{ rotateY: ry, y, transformStyle: 'preserve-3d' }}>
       {rung && (
         <span
-          className="absolute left-1/2 top-1/2 h-[2px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-cyber-cyan/45 via-white/15 to-cyber-magenta/45"
+          className="absolute left-1/2 top-1/2 h-[2px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-black/30 via-black/10 to-black/30"
           style={{ transform: 'translate(-50%,-50%)', width: STRAND_R * 2 }}
         />
       )}
-      {/* strand A — cyan sphere */}
+      {/* strand A — dark sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ecffff,#22d3ee_55%,#0b4a63)] shadow-[0_0_18px_5px_rgba(34,211,238,0.7)]"
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#7c7c84,#27272a_55%,#09090b)] shadow-[0_2px_8px_rgba(15,15,20,0.35)]"
         style={{ transform: `translate(-50%,-50%) translateX(${STRAND_R}px)` }}
       />
-      {/* strand B — magenta sphere */}
+      {/* strand B — light-grey sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ffe9fb,#e23bd2_55%,#5e1457)] shadow-[0_0_18px_5px_rgba(226,59,210,0.7)]"
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ffffff,#c4c4cb_55%,#71717a)] shadow-[0_2px_8px_rgba(15,15,20,0.22)] ring-1 ring-black/5"
         style={{ transform: `translate(-50%,-50%) translateX(-${STRAND_R}px)` }}
       />
     </motion.div>
@@ -90,7 +90,7 @@ function DnaStrand({ rotate }: { rotate: MotionValue<number> }) {
   return (
     <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
       {/* soft glowing core so the spine reads as solid */}
-      <div className="absolute left-1/2 top-1/2 h-[86vh] w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-transparent via-white/15 to-transparent blur-[4px]" />
+      <div className="absolute left-1/2 top-1/2 h-[86vh] w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-transparent via-black/10 to-transparent blur-[4px]" />
       {levels.map((_, k) => (
         <StrandLevel key={k} k={k} total={levels.length} rotate={rotate} />
       ))}
@@ -121,13 +121,13 @@ function Tile({ service, i, progress }: { service: (typeof services)[number]; i:
   const stroke = service.key === 'web' || service.key === 'social'
   return (
     <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[248px]">
-      <div className="glow-border rounded-[1.75rem] border border-white/10 bg-white/[0.07] px-6 py-7 text-center backdrop-blur-md">
+      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/80 px-6 py-7 text-center backdrop-blur-md">
         <span className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color}`}>
           <svg viewBox="0 0 24 24" className="h-8 w-8 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
             <path d={service.icon} />
           </svg>
         </span>
-        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-white">{service.name}</h3>
+        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-neutral-900">{service.name}</h3>
         <p className="mt-2 text-xs uppercase tracking-[0.2em] text-cyber-cyan">{service.label}</p>
       </div>
     </motion.div>
@@ -137,7 +137,7 @@ function Tile({ service, i, progress }: { service: (typeof services)[number]; i:
 function ProgressDot({ i, progress }: { i: number; progress: MotionValue<number> }) {
   const w = useTransform(progress, (p) => (Math.abs(i - p * (N - 1)) < 0.5 ? 30 : 8))
   const o = useTransform(progress, (p) => (Math.abs(i - p * (N - 1)) < 0.5 ? 1 : 0.3))
-  return <motion.span style={{ width: w, opacity: o }} className="h-1.5 rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet" />
+  return <motion.span style={{ width: w, opacity: o }} className="h-1.5 rounded-full bg-neutral-900" />
 }
 
 /* --------------------------------- Section -------------------------------- */
@@ -165,7 +165,7 @@ export default function ServicesHelix() {
 
         {/* LEFT — what it does */}
         <div className="absolute left-5 top-1/2 z-20 hidden w-[384px] -translate-y-1/2 md:block lg:left-10 xl:left-16">
-          <div className="glow-border rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-8 backdrop-blur-md">
+          <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/70 p-8 backdrop-blur-md">
             <div className="flex items-center gap-2 text-cyber-cyan">
               <span className="h-1.5 w-1.5 rounded-full bg-cyber-cyan shadow-glow" />
               <p className="text-sm font-semibold uppercase tracking-[0.28em]">What it does</p>
@@ -184,9 +184,9 @@ export default function ServicesHelix() {
                       <path d={cur.icon} />
                     </svg>
                   </span>
-                  <h3 className="font-display text-[1.7rem] font-bold leading-tight text-white">{cur.name}</h3>
+                  <h3 className="font-display text-[1.7rem] font-bold leading-tight text-neutral-900">{cur.name}</h3>
                 </div>
-                <p className="mt-5 text-base leading-relaxed text-white/70">{cur.what}</p>
+                <p className="mt-5 text-base leading-relaxed text-neutral-600">{cur.what}</p>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -194,7 +194,7 @@ export default function ServicesHelix() {
 
         {/* RIGHT — why it matters */}
         <div className="absolute right-5 top-1/2 z-20 hidden w-[384px] -translate-y-1/2 md:block lg:right-10 xl:right-16">
-          <div className="glow-border rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-8 text-right backdrop-blur-md">
+          <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/70 p-8 text-right backdrop-blur-md">
             <div className="flex items-center justify-end gap-2 text-cyber-magenta">
               <p className="text-sm font-semibold uppercase tracking-[0.28em]">Why it matters</p>
               <span className="h-1.5 w-1.5 rounded-full bg-cyber-magenta shadow-glow-violet" />
@@ -207,8 +207,8 @@ export default function ServicesHelix() {
                 exit={{ opacity: 0, x: 14, filter: 'blur(8px)' }}
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="mt-6 font-display text-[1.7rem] font-bold leading-tight text-white">{cur.name}</p>
-                <p className="mt-5 text-base leading-relaxed text-white/75">{cur.why}</p>
+                <p className="mt-6 font-display text-[1.7rem] font-bold leading-tight text-neutral-900">{cur.name}</p>
+                <p className="mt-5 text-base leading-relaxed text-neutral-600">{cur.why}</p>
               </motion.div>
             </AnimatePresence>
           </div>

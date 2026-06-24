@@ -44,15 +44,15 @@ export default function Testimonials() {
               >
                 <div>
                   <div className="text-cyber-cyan">★★★★★</div>
-                  <blockquote className="mt-4 text-white/80">“{q.quote}”</blockquote>
+                  <blockquote className="mt-4 text-neutral-700">“{q.quote}”</blockquote>
                 </div>
                 <figcaption className="mt-6 flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-violet font-display font-bold text-ink-900">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-neutral-900 font-display font-bold text-white">
                     {q.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}
                   </span>
                   <div>
-                    <p className="font-semibold text-white">{q.name}</p>
-                    <p className="text-sm text-white/50">{q.role}</p>
+                    <p className="font-semibold text-neutral-900">{q.name}</p>
+                    <p className="text-sm text-neutral-500">{q.role}</p>
                   </div>
                 </figcaption>
               </motion.figure>
