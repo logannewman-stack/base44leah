@@ -107,10 +107,10 @@ function Tile({ service, i, progress }: { service: (typeof services)[number]; i:
     const phi = d * STEP_ANGLE
     const rad = (phi * Math.PI) / 180
     const x = Math.sin(rad) * R
-    const z = Math.cos(rad) * R
+    const z = Math.cos(rad) * 110 // shallow depth: focused card sits near the screen plane → crisp text
     const y = d * STEP_Y
-    const depth = (z / R + 1) / 2
-    const scale = 0.66 + depth * 0.5
+    const depth = (z / 110 + 1) / 2
+    const scale = 0.78 + depth * 0.22 // focused ~1.0 (no magnification blur)
     return `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${z.toFixed(1)}px) rotateY(${phi.toFixed(1)}deg) scale(${scale.toFixed(3)})`
   })
   const opacity = useTransform(progress, (p) => {
@@ -154,7 +154,7 @@ export default function ServicesHelix() {
 
   return (
     <section ref={ref} id="services" className="relative" style={{ height: `${N * 92}vh` }}>
-      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1000px]">
+      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1600px]">
         {/* heading */}
         <div className="absolute top-[8%] left-1/2 z-20 -translate-x-1/2 text-center">
           <Eyebrow>What we do</Eyebrow>

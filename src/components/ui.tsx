@@ -18,14 +18,14 @@ export function Depth3D({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const z = useTransform(scrollYProgress, [0, 0.42, 0.82, 1], [-820 * power, 0, 200 * power, 560 * power])
-  const rotateX = useTransform(scrollYProgress, [0, 0.42, 1], [38, 0, -26])
-  const opacity = useTransform(scrollYProgress, [0, 0.16, 0.88, 1], [0, 1, 1, 0.32])
+  // Flat & crisp through the whole reading band (z=0, rotateX=0); the 3D fly-in
+  // and fly-out only happen at the edges, so text is never blurry while you read.
+  const z = useTransform(scrollYProgress, [0, 0.4, 0.66, 1], [-560 * power, 0, 0, 220 * power])
+  const rotateX = useTransform(scrollYProgress, [0, 0.4, 0.66, 1], [30, 0, 0, -18])
+  const opacity = useTransform(scrollYProgress, [0, 0.18, 0.9, 1], [0, 1, 1, 0.45])
   return (
-    <div ref={ref} className={className} style={{ perspective: 780 }}>
-      <motion.div className="will-change-transform" style={{ z, rotateX, opacity, transformStyle: 'preserve-3d' }}>
-        {children}
-      </motion.div>
+    <div ref={ref} className={className} style={{ perspective: 1300 }}>
+      <motion.div style={{ z, rotateX, opacity, transformStyle: 'preserve-3d' }}>{children}</motion.div>
     </div>
   )
 }

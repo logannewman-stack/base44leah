@@ -15,8 +15,8 @@ function CommandCard() {
   // live mouse-driven 3D tilt so the hero reads as dimensional immediately
   const mx = useMotionValue(0)
   const my = useMotionValue(0)
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-16, 16]), { stiffness: 120, damping: 16 })
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [14, -14]), { stiffness: 120, damping: 16 })
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-7, 7]), { stiffness: 120, damping: 16 })
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [6, -6]), { stiffness: 120, damping: 16 })
   useEffect(() => {
     const h = (e: PointerEvent) => {
       mx.set(e.clientX / window.innerWidth - 0.5)

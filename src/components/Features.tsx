@@ -38,7 +38,7 @@ const features = [
 const M = features.length
 const STEP = 56 // degrees around the horizontal (X) axis between cards
 const RY = 240 // vertical radius of the roll
-const RZ = 350 // depth radius
+const RZ = 150 // shallow depth so the focused card stays near the screen plane (crisp text)
 const Y_OFFSET = 34 // nudge the whole wheel down to clear the heading
 
 /** A benefit card riding a vertical 3D wheel — rolls up over the top and back,
@@ -51,7 +51,7 @@ function RollCard({ f, i, progress }: { f: (typeof features)[number]; i: number;
     const y = Math.sin(r) * RY + Y_OFFSET // d>0 below (incoming), d<0 above (rolled away)
     const z = Math.cos(r) * RZ // front-centre when focused, back at top/under
     const depth = (z / RZ + 1) / 2
-    const scale = 0.66 + depth * 0.42
+    const scale = 0.78 + depth * 0.22 // focused ~1.0 (no magnification blur)
     return `translate(-50%,-50%) translate3d(0px,${y.toFixed(1)}px,${z.toFixed(1)}px) rotateX(${(-th).toFixed(1)}deg) scale(${scale.toFixed(3)})`
   })
   const opacity = useTransform(progress, (p) => {
@@ -79,7 +79,7 @@ export default function Features() {
 
   return (
     <section ref={ref} id="why" className="relative" style={{ height: `${M * 75}vh` }}>
-      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1100px]">
+      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1600px]">
         <div className="absolute top-[5%] left-1/2 z-20 -translate-x-1/2 px-6 text-center">
           <Eyebrow>Why Front Desk AI</Eyebrow>
           <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
