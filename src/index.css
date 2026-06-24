@@ -47,17 +47,17 @@ html {
   background: #ededee;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #4361ee, #9b5de5);
+  background: linear-gradient(180deg, #4f7cff, #8b87f0);
   border-radius: 999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #3a55d8, #8a4fd6);
+  background: linear-gradient(180deg, #3f6cf2, #7d79e6);
 }
 
 @layer components {
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(100deg, #4361ee 0%, #6d5cf0 52%, #9b5de5 100%);
+    background-image: linear-gradient(100deg, #4f7cff 0%, #6f80f8 52%, #8f86ef 100%);
   }
 
   .glass {

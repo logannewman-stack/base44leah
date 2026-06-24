@@ -111,7 +111,7 @@ export default function Hero() {
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92])
 
   return (
-    <section ref={ref} id="top" className="relative flex min-h-screen items-center pt-28 pb-12">
+    <section ref={ref} id="top" className="relative flex min-h-screen items-center overflow-x-clip pt-28 pb-12">
       <div className="absolute inset-0 grid-overlay" />
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5], scale: [1, 1.15, 1] }}

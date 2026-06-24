@@ -71,14 +71,14 @@ function StrandLevel({ k, total, rotate }: { k: number; total: number; rotate: M
           style={{ transform: 'translate(-50%,-50%)', width: STRAND_R * 2 }}
         />
       )}
-      {/* strand A — blue sphere */}
+      {/* strand A — light blue sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#aeb9ff,#4361ee_55%,#1f2a8c)] shadow-[0_2px_10px_rgba(67,97,238,0.4)]"
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#c3d2ff,#4f7cff_55%,#2746b0)] shadow-[0_2px_10px_rgba(79,124,255,0.4)]"
         style={{ transform: `translate(-50%,-50%) translateX(${STRAND_R}px)` }}
       />
-      {/* strand B — purple sphere */}
+      {/* strand B — soft violet sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#e3ccff,#9b5de5_55%,#4a1d7a)] shadow-[0_2px_10px_rgba(155,93,229,0.4)]"
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#dcdcff,#8b87f0_55%,#4b48a0)] shadow-[0_2px_10px_rgba(139,135,240,0.4)]"
         style={{ transform: `translate(-50%,-50%) translateX(-${STRAND_R}px)` }}
       />
     </motion.div>

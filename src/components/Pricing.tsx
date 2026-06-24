@@ -32,7 +32,7 @@ function Check() {
 
 export default function Packages() {
   return (
-    <section id="packages" className="relative py-20">
+    <section id="packages" className="relative overflow-x-clip py-20">
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-black/[0.03] blur-[120px]" />
       <div className="mx-auto max-w-6xl px-6">
         <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>

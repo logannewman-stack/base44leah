@@ -16,11 +16,15 @@ function Counter({
   decimals?: number
 }) {
   const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
+  // once:false so the count replays every time the card scrolls back into view
+  const inView = useInView(ref, { once: false, margin: '-80px' })
   const [val, setVal] = useState(from)
 
   useEffect(() => {
-    if (!inView) return
+    if (!inView) {
+      setVal(from) // reset so it counts again next time
+      return
+    }
     const controls = animate(from, to, {
       duration: 2,
       ease: [0.22, 1, 0.36, 1],
@@ -49,7 +53,7 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="relative py-20">
+    <section className="relative overflow-x-clip py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
           <div className="flex justify-center">

@@ -11,11 +11,11 @@ export default {
           700: '#3a3a3f',
         },
         cyber: {
-          // subtle, professional blue → purple accents on the monochrome base
-          cyan: '#4f63e0', // indigo-blue (small labels / dots)
-          blue: '#4361ee',
-          violet: '#7c5cf0',
-          magenta: '#9b5de5', // soft purple
+          // light, professional blue accents with a soft (not bold) violet
+          cyan: '#5b84ff', // light blue (small labels / dots)
+          blue: '#4f7cff',
+          violet: '#7e8cf5',
+          magenta: '#8b87f0', // soft, muted violet
         },
       },
       fontFamily: {
