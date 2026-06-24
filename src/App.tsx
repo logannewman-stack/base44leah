@@ -11,6 +11,7 @@ import Packages from './components/Pricing'
 import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
+import ContactModal from './components/ContactModal'
 
 // Clean light backdrop: soft grey blooms + a faint grid on near-white.
 function LightBg() {
@@ -47,6 +48,7 @@ export default function App() {
         <CTA />
       </main>
       <Footer />
+      <ContactModal />
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState, type ReactNode, type MouseEvent } from 'react'
+import { contactModal } from './useContactModal'
 
 /**
  * Scroll-driven 3D depth: children rush up from deep in the scene, settle crisp
@@ -83,6 +84,14 @@ export function MagneticButton({
     setT({ x: x * 0.3, y: y * 0.3 })
   }
 
+  // Any CTA pointing at "#contact" opens the contact modal instead of jumping.
+  const onClick = (e: MouseEvent) => {
+    if (href === '#contact') {
+      e.preventDefault()
+      contactModal.open()
+    }
+  }
+
   const base =
     'relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors'
   const styles =
@@ -94,6 +103,7 @@ export function MagneticButton({
     <motion.a
       ref={ref}
       href={href}
+      onClick={onClick}
       onMouseMove={onMove}
       onMouseLeave={() => setT({ x: 0, y: 0 })}
       animate={{ x: t.x, y: t.y }}

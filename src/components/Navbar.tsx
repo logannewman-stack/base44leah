@@ -1,6 +1,7 @@
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
 import { useState } from 'react'
 import { MagneticButton } from './ui'
+import { contactModal } from './useContactModal'
 
 const links = [
   { label: 'Services', href: '#services' },
@@ -87,7 +88,11 @@ export default function Navbar() {
           ))}
           <a
             href="#contact"
-            onClick={() => setOpen(false)}
+            onClick={(e) => {
+              e.preventDefault()
+              setOpen(false)
+              contactModal.open()
+            }}
             className="mt-2 block rounded-full bg-neutral-900 px-4 py-3 text-center font-semibold text-white"
           >
             Speak with a representative
