@@ -59,15 +59,15 @@ function RollCard({ f, i, progress }: { f: (typeof features)[number]; i: number;
     return Math.max(0.04, 1 - d * 0.82) // focused card dominates, neighbours fade fast
   })
   return (
-    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[min(90vw,460px)]">
-      <div className="glow-border rounded-[2rem] border border-white/10 bg-white/[0.06] p-8 backdrop-blur-md shadow-glow-violet">
-        <span className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${f.color}`}>
-          <svg viewBox="0 0 24 24" className="h-8 w-8 text-white" fill="currentColor">
+    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[min(92vw,540px)]">
+      <div className="glow-border rounded-[2rem] border border-white/10 bg-white/[0.06] p-10 backdrop-blur-md shadow-glow-violet">
+        <span className={`inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${f.color}`}>
+          <svg viewBox="0 0 24 24" className="h-10 w-10 text-white" fill="currentColor">
             <path d={f.icon} />
           </svg>
         </span>
-        <h3 className="mt-6 font-display text-3xl font-bold leading-tight text-white">{f.title}</h3>
-        <p className="mt-3 text-lg leading-relaxed text-white/70">{f.body}</p>
+        <h3 className="mt-7 font-display text-4xl font-bold leading-tight text-white">{f.title}</h3>
+        <p className="mt-4 text-xl leading-relaxed text-white/70">{f.body}</p>
       </div>
     </motion.div>
   )
