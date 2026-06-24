@@ -51,44 +51,46 @@ const services = [
 ]
 
 const N = services.length
-const R = 250 // orbit radius around the central DNA axis (px)
+const R = 235 // orbit radius around the central DNA axis (px)
 const STEP_ANGLE = 64 // degrees between consecutive services
-const STEP_Y = 120 // vertical spacing between consecutive services (px)
+const STEP_Y = 132 // vertical spacing between consecutive services (px)
 
 /* ----------------------- DNA: dense living double helix -------------------- */
 
+const STRAND_R = 104 // half-distance between the two strands (px)
+
 function StrandLevel({ k, total, rotate }: { k: number; total: number; rotate: MotionValue<number> }) {
   const ry = useTransform(rotate, (r) => k * 30 + r)
-  const y = (k - (total - 1) / 2) * 16.5
+  const y = (k - (total - 1) / 2) * 18.5
   const rung = k % 2 === 0
   return (
     <motion.div className="absolute left-1/2 top-1/2" style={{ rotateY: ry, y, transformStyle: 'preserve-3d' }}>
       {rung && (
         <span
-          className="absolute left-1/2 top-1/2 h-[2px] w-[150px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-cyber-cyan/45 via-white/15 to-cyber-magenta/45"
-          style={{ transform: 'translate(-50%,-50%)' }}
+          className="absolute left-1/2 top-1/2 h-[2px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-cyber-cyan/45 via-white/15 to-cyber-magenta/45"
+          style={{ transform: 'translate(-50%,-50%)', width: STRAND_R * 2 }}
         />
       )}
       {/* strand A — cyan sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-3 w-3 rounded-full bg-[radial-gradient(circle_at_35%_30%,#ecffff,#22d3ee_55%,#0b4a63)] shadow-[0_0_14px_4px_rgba(34,211,238,0.65)]"
-        style={{ transform: 'translate(-50%,-50%) translateX(74px)' }}
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ecffff,#22d3ee_55%,#0b4a63)] shadow-[0_0_18px_5px_rgba(34,211,238,0.7)]"
+        style={{ transform: `translate(-50%,-50%) translateX(${STRAND_R}px)` }}
       />
       {/* strand B — magenta sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-3 w-3 rounded-full bg-[radial-gradient(circle_at_35%_30%,#ffe9fb,#e23bd2_55%,#5e1457)] shadow-[0_0_14px_4px_rgba(226,59,210,0.65)]"
-        style={{ transform: 'translate(-50%,-50%) translateX(-74px)' }}
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ffe9fb,#e23bd2_55%,#5e1457)] shadow-[0_0_18px_5px_rgba(226,59,210,0.7)]"
+        style={{ transform: `translate(-50%,-50%) translateX(-${STRAND_R}px)` }}
       />
     </motion.div>
   )
 }
 
 function DnaStrand({ rotate }: { rotate: MotionValue<number> }) {
-  const levels = Array.from({ length: 46 })
+  const levels = Array.from({ length: 52 })
   return (
     <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
       {/* soft glowing core so the spine reads as solid */}
-      <div className="absolute left-1/2 top-1/2 h-[78vh] w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-transparent via-white/15 to-transparent blur-[3px]" />
+      <div className="absolute left-1/2 top-1/2 h-[86vh] w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-b from-transparent via-white/15 to-transparent blur-[4px]" />
       {levels.map((_, k) => (
         <StrandLevel key={k} k={k} total={levels.length} rotate={rotate} />
       ))}
@@ -108,25 +110,25 @@ function Tile({ service, i, progress }: { service: (typeof services)[number]; i:
     const z = Math.cos(rad) * R
     const y = d * STEP_Y
     const depth = (z / R + 1) / 2
-    const scale = 0.7 + depth * 0.4
+    const scale = 0.66 + depth * 0.5
     return `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${z.toFixed(1)}px) rotateY(${phi.toFixed(1)}deg) scale(${scale.toFixed(3)})`
   })
   const opacity = useTransform(progress, (p) => {
     const d = i - p * (N - 1)
     const depth = (Math.cos((d * STEP_ANGLE * Math.PI) / 180) + 1) / 2
-    return 0.16 + depth * depth * 0.84
+    return 0.14 + depth * depth * 0.86
   })
   const stroke = service.key === 'web' || service.key === 'social'
   return (
-    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[200px]">
-      <div className="glow-border rounded-3xl border border-white/10 bg-white/[0.07] px-5 py-6 text-center backdrop-blur-md">
-        <span className={`mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color}`}>
-          <svg viewBox="0 0 24 24" className="h-7 w-7 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
+    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[248px]">
+      <div className="glow-border rounded-[1.75rem] border border-white/10 bg-white/[0.07] px-6 py-7 text-center backdrop-blur-md">
+        <span className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color}`}>
+          <svg viewBox="0 0 24 24" className="h-8 w-8 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
             <path d={service.icon} />
           </svg>
         </span>
-        <h3 className="mt-4 font-display text-lg font-bold leading-tight text-white">{service.name}</h3>
-        <p className="mt-1 text-[11px] uppercase tracking-widest text-cyber-cyan">{service.label}</p>
+        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-white">{service.name}</h3>
+        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-cyber-cyan">{service.label}</p>
       </div>
     </motion.div>
   )
@@ -162,11 +164,11 @@ export default function ServicesHelix() {
         </div>
 
         {/* LEFT — what it does */}
-        <div className="absolute left-5 top-1/2 z-20 hidden w-[330px] -translate-y-1/2 md:block lg:left-12">
-          <div className="glow-border rounded-3xl border border-white/10 bg-white/[0.05] p-7 backdrop-blur-md">
+        <div className="absolute left-5 top-1/2 z-20 hidden w-[384px] -translate-y-1/2 md:block lg:left-10 xl:left-16">
+          <div className="glow-border rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-8 backdrop-blur-md">
             <div className="flex items-center gap-2 text-cyber-cyan">
               <span className="h-1.5 w-1.5 rounded-full bg-cyber-cyan shadow-glow" />
-              <p className="text-xs font-semibold uppercase tracking-[0.28em]">What it does</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.28em]">What it does</p>
             </div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -176,25 +178,25 @@ export default function ServicesHelix() {
                 exit={{ opacity: 0, x: -14, filter: 'blur(8px)' }}
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
-                <div className="mt-5 flex items-center gap-3">
-                  <span className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${cur.color}`}>
-                    <svg viewBox="0 0 24 24" className="h-5 w-5 text-white" fill={cur.key === 'web' || cur.key === 'social' ? 'none' : 'currentColor'} stroke={cur.key === 'web' || cur.key === 'social' ? 'currentColor' : 'none'} strokeWidth="2">
+                <div className="mt-6 flex items-center gap-3">
+                  <span className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${cur.color}`}>
+                    <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill={cur.key === 'web' || cur.key === 'social' ? 'none' : 'currentColor'} stroke={cur.key === 'web' || cur.key === 'social' ? 'currentColor' : 'none'} strokeWidth="2">
                       <path d={cur.icon} />
                     </svg>
                   </span>
-                  <h3 className="font-display text-2xl font-bold leading-tight text-white">{cur.name}</h3>
+                  <h3 className="font-display text-[1.7rem] font-bold leading-tight text-white">{cur.name}</h3>
                 </div>
-                <p className="mt-4 text-[15px] leading-relaxed text-white/70">{cur.what}</p>
+                <p className="mt-5 text-base leading-relaxed text-white/70">{cur.what}</p>
               </motion.div>
             </AnimatePresence>
           </div>
         </div>
 
         {/* RIGHT — why it matters */}
-        <div className="absolute right-5 top-1/2 z-20 hidden w-[330px] -translate-y-1/2 md:block lg:right-12">
-          <div className="glow-border rounded-3xl border border-white/10 bg-white/[0.05] p-7 text-right backdrop-blur-md">
+        <div className="absolute right-5 top-1/2 z-20 hidden w-[384px] -translate-y-1/2 md:block lg:right-10 xl:right-16">
+          <div className="glow-border rounded-[1.75rem] border border-white/10 bg-white/[0.05] p-8 text-right backdrop-blur-md">
             <div className="flex items-center justify-end gap-2 text-cyber-magenta">
-              <p className="text-xs font-semibold uppercase tracking-[0.28em]">Why it matters</p>
+              <p className="text-sm font-semibold uppercase tracking-[0.28em]">Why it matters</p>
               <span className="h-1.5 w-1.5 rounded-full bg-cyber-magenta shadow-glow-violet" />
             </div>
             <AnimatePresence mode="wait">
@@ -205,8 +207,8 @@ export default function ServicesHelix() {
                 exit={{ opacity: 0, x: 14, filter: 'blur(8px)' }}
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="mt-5 font-display text-xl font-semibold leading-snug text-white">{cur.name}</p>
-                <p className="mt-4 text-[15px] leading-relaxed text-white/75">{cur.why}</p>
+                <p className="mt-6 font-display text-[1.7rem] font-bold leading-tight text-white">{cur.name}</p>
+                <p className="mt-5 text-base leading-relaxed text-white/75">{cur.why}</p>
               </motion.div>
             </AnimatePresence>
           </div>
