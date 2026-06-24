@@ -108,8 +108,8 @@ export function MagneticButton({
 /** Small pill label used above section headings. */
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-neutral-700">
-      <span className="h-1.5 w-1.5 rounded-full bg-neutral-900" />
+    <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyber-blue">
+      <span className="h-1.5 w-1.5 rounded-full bg-cyber-blue" />
       {children}
     </span>
   )

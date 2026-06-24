@@ -67,18 +67,18 @@ function StrandLevel({ k, total, rotate }: { k: number; total: number; rotate: M
     <motion.div className="absolute left-1/2 top-1/2" style={{ rotateY: ry, y, transformStyle: 'preserve-3d' }}>
       {rung && (
         <span
-          className="absolute left-1/2 top-1/2 h-[2px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-black/30 via-black/10 to-black/30"
+          className="absolute left-1/2 top-1/2 h-[2px] -translate-x-1/2 -translate-y-1/2 bg-gradient-to-r from-cyber-blue/40 via-black/10 to-cyber-magenta/40"
           style={{ transform: 'translate(-50%,-50%)', width: STRAND_R * 2 }}
         />
       )}
-      {/* strand A — dark sphere */}
+      {/* strand A — blue sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#7c7c84,#27272a_55%,#09090b)] shadow-[0_2px_8px_rgba(15,15,20,0.35)]"
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#aeb9ff,#4361ee_55%,#1f2a8c)] shadow-[0_2px_10px_rgba(67,97,238,0.4)]"
         style={{ transform: `translate(-50%,-50%) translateX(${STRAND_R}px)` }}
       />
-      {/* strand B — light-grey sphere */}
+      {/* strand B — purple sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ffffff,#c4c4cb_55%,#71717a)] shadow-[0_2px_8px_rgba(15,15,20,0.22)] ring-1 ring-black/5"
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#e3ccff,#9b5de5_55%,#4a1d7a)] shadow-[0_2px_10px_rgba(155,93,229,0.4)]"
         style={{ transform: `translate(-50%,-50%) translateX(-${STRAND_R}px)` }}
       />
     </motion.div>

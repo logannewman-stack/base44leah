@@ -11,10 +11,11 @@ export default {
           700: '#3a3a3f',
         },
         cyber: {
-          cyan: '#52525b', // zinc-600 — mid grey accent
-          blue: '#27272a', // zinc-800
-          violet: '#18181b', // zinc-900
-          magenta: '#3f3f46', // zinc-700
+          // subtle, professional blue → purple accents on the monochrome base
+          cyan: '#4f63e0', // indigo-blue (small labels / dots)
+          blue: '#4361ee',
+          violet: '#7c5cf0',
+          magenta: '#9b5de5', // soft purple
         },
       },
       fontFamily: {

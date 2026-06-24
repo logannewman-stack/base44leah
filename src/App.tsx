@@ -17,8 +17,8 @@ function LightBg() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#f6f6f7]">
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(255,255,255,0.9),_transparent_55%)]" />
-      <div className="absolute -left-1/4 -top-1/4 h-[70vh] w-[70vh] rounded-full bg-black/[0.025] blur-[130px]" />
-      <div className="absolute bottom-0 right-0 h-[70vh] w-[70vh] rounded-full bg-black/[0.03] blur-[140px]" />
+      <div className="absolute -left-1/4 -top-1/4 h-[75vh] w-[75vh] rounded-full bg-cyber-blue/[0.06] blur-[130px]" />
+      <div className="absolute bottom-0 right-0 h-[75vh] w-[75vh] rounded-full bg-cyber-magenta/[0.06] blur-[140px]" />
       <div className="absolute inset-0 grid-overlay opacity-70" />
     </div>
   )

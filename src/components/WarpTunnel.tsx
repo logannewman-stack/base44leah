@@ -61,21 +61,26 @@ const SP = 250 // z-distance between consecutive cards in the tunnel (px)
 const FRONT = 70 // pushes cards slightly past the camera so they magnify as they pass
 const PERSP = 520 // lower = more dramatic warp
 const AHEAD = 6 // how many cards ahead are visible (fading in from the depths)
+const SPIN = 30 // degrees of swirl per depth-step — cards curve around the centre as they fly in
 
 const clamp = (v: number) => Math.max(0, Math.min(1, v))
 const wrap = (v: number) => ((v % 1) + 1) % 1
 
 /** A statement card flying out of the depths toward the viewer, exactly once. */
 function WarpCard({ text, i, progress }: { text: string; i: number; progress: MotionValue<number> }) {
-  const angle = i * 137.5 * (Math.PI / 180) // golden-angle spread fills the whole screen
-  const RR = 40 + (i % 6) * 110 // varied radius: some centre, some out to the edges
+  const baseAngle = i * 137.5 // degrees — golden-angle spread fills the whole screen
+  const RR = 60 + (i % 6) * 120 // varied radius: some centre, some out to the edges
 
   const transform = useTransform(progress, (p) => {
     const d = i - p * (COUNT - 1) // d>0 ahead, 0 at camera, <0 passed
-    const x = Math.cos(angle) * RR
-    const y = Math.sin(angle) * RR
+    // angle swirls with depth, so each card curves around the centre as it approaches
+    const ang = (baseAngle + d * SPIN) * (Math.PI / 180)
+    const x = Math.cos(ang) * RR
+    const y = Math.sin(ang) * RR
     const z = -d * SP + FRONT
-    return `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${z.toFixed(1)}px)`
+    // bank the card a little so it leans into the curve
+    const bank = -(d * SPIN) * 0.35
+    return `translate(-50%,-50%) translate3d(${x.toFixed(1)}px,${y.toFixed(1)}px,${z.toFixed(1)}px) rotateZ(${bank.toFixed(1)}deg)`
   })
   const opacity = useTransform(progress, (p) => {
     const d = i - p * (COUNT - 1)
@@ -109,7 +114,7 @@ function Ring({ i, progress }: { i: number; progress: MotionValue<number> }) {
 export default function WarpTunnel() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-  const twist = useTransform(scrollYProgress, [0, 1], [0, 34])
+  const twist = useTransform(scrollYProgress, [0, 1], [0, 90])
   const titleScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1, 1.12])
 
   const rings = Array.from({ length: RING_COUNT })
