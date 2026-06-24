@@ -1,3 +1,5 @@
+import { contactModal } from './useContactModal'
+
 const groups = [
   { title: 'Services', links: ['Meta Ads', 'Google My Business', 'Website Development', 'Social Media', 'Voice AI Caller'] },
   { title: 'Company', links: ['About', 'Why us', 'Packages', 'Results'] },
@@ -30,7 +32,18 @@ export default function Footer() {
             <ul className="mt-4 space-y-2.5">
               {g.links.map((l) => (
                 <li key={l}>
-                  <a href="#" className="text-sm text-white/50 transition-colors hover:text-cyber-cyan">
+                  <a
+                    href="#"
+                    onClick={
+                      l === 'Contact'
+                        ? (e) => {
+                            e.preventDefault()
+                            contactModal.open()
+                          }
+                        : undefined
+                    }
+                    className="text-sm text-white/50 transition-colors hover:text-cyber-cyan"
+                  >
                     {l}
                   </a>
                 </li>

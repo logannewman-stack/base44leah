@@ -11,6 +11,7 @@ import Packages from './components/Pricing'
 import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
+import ContactModal from './components/ContactModal'
 
 const ImmersiveBg = lazy(() => import('./components/ImmersiveBg'))
 
@@ -51,6 +52,7 @@ export default function App() {
         <CTA />
       </main>
       <Footer />
+      <ContactModal />
     </div>
   )
 }
