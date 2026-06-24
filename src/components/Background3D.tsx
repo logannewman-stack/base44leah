@@ -1,77 +1,144 @@
-import { useRef, useMemo } from 'react'
+import { useMemo, useRef } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { PointMaterial, Points } from '@react-three/drei'
 import * as THREE from 'three'
 
+/** Shared, lerped scroll progress (0..1) read inside the render loop. */
+const scrollState = { target: 0, current: 0 }
+
+function updateScroll() {
+  const max = document.documentElement.scrollHeight - window.innerHeight
+  scrollState.target = max > 0 ? window.scrollY / max : 0
+}
+
 /**
- * A GPU-driven particle field that gently drifts and reacts to the pointer.
- * This is the "depth" layer that makes the page feel three-dimensional.
+ * A neon spiral tunnel: two helical strands of points wound around a tube that
+ * recedes into the distance. As you scroll, the whole tube rotates and flies
+ * toward the camera — the sensation of spiralling downward through the screen.
  */
-function ParticleField({ count = 5500 }: { count?: number }) {
-  const ref = useRef<THREE.Points>(null)
+function SpiralTunnel() {
+  const group = useRef<THREE.Group>(null)
+  const COUNT = 1400
+  const TURNS = 9
+  const DEPTH = 60
+  const RADIUS = 3.2
 
-  const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3)
-    for (let i = 0; i < count; i++) {
-      // Distribute in a soft sphere shell for a galaxy-like depth
-      const r = 4 + Math.random() * 9
-      const theta = Math.random() * Math.PI * 2
-      const phi = Math.acos(2 * Math.random() - 1)
-      arr[i * 3] = r * Math.sin(phi) * Math.cos(theta)
-      arr[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta) * 0.6
-      arr[i * 3 + 2] = r * Math.cos(phi)
+  const { positions, colors } = useMemo(() => {
+    const positions = new Float32Array(COUNT * 3)
+    const colors = new Float32Array(COUNT * 3)
+    const blue = new THREE.Color('#38bdf8')
+    const violet = new THREE.Color('#a855f7')
+    for (let i = 0; i < COUNT; i++) {
+      const t = i / COUNT
+      const strand = i % 2 // two interleaved strands -> double helix tube
+      const angle = t * TURNS * Math.PI * 2 + strand * Math.PI
+      // gentle radius pulse so the tube breathes
+      const r = RADIUS * (0.85 + 0.15 * Math.sin(t * Math.PI * 6))
+      positions[i * 3] = Math.cos(angle) * r
+      positions[i * 3 + 1] = Math.sin(angle) * r
+      positions[i * 3 + 2] = -t * DEPTH
+      const c = blue.clone().lerp(violet, (Math.sin(t * Math.PI * 3) + 1) / 2)
+      colors[i * 3] = c.r
+      colors[i * 3 + 1] = c.g
+      colors[i * 3 + 2] = c.b
     }
-    return arr
-  }, [count])
+    return { positions, colors }
+  }, [])
 
-  useFrame((state, delta) => {
-    if (!ref.current) return
-    ref.current.rotation.y += delta * 0.03
-    ref.current.rotation.x += delta * 0.008
-    // Subtle parallax toward the pointer
-    const { x, y } = state.pointer
-    ref.current.rotation.y += (x * 0.0008)
-    ref.current.rotation.x += (-y * 0.0008)
+  useFrame((_, delta) => {
+    if (!group.current) return
+    // smooth the scroll value
+    scrollState.current += (scrollState.target - scrollState.current) * Math.min(1, delta * 4)
+    const p = scrollState.current
+    // rotate around the view axis (the spiral) + idle drift
+    group.current.rotation.z = p * Math.PI * 2 * 3 + performance.now() * 0.00004
+    // fly down the tube as you scroll (move tube toward camera)
+    group.current.position.z = p * (DEPTH - 14)
   })
 
+  const rings = useMemo(() => {
+    const blue = new THREE.Color('#22d3ee')
+    const violet = new THREE.Color('#a855f7')
+    return Array.from({ length: 16 }, (_, i) => ({
+      z: -i * (DEPTH / 16),
+      color: blue.clone().lerp(violet, (i % 8) / 8).getStyle(),
+      r: RADIUS * (0.85 + 0.15 * Math.sin(i)),
+    }))
+  }, [])
+
   return (
-    <Points ref={ref} positions={positions} stride={3} frustumCulled={false}>
-      <PointMaterial
-        transparent
-        color="#7cdcff"
-        size={0.026}
-        sizeAttenuation
-        depthWrite={false}
-        opacity={1}
-        blending={THREE.AdditiveBlending}
-      />
-    </Points>
+    <group ref={group}>
+      <points>
+        <bufferGeometry>
+          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+          <bufferAttribute attach="attributes-color" args={[colors, 3]} />
+        </bufferGeometry>
+        <pointsMaterial
+          size={0.085}
+          vertexColors
+          transparent
+          opacity={1}
+          sizeAttenuation
+          depthWrite={false}
+          blending={THREE.AdditiveBlending}
+        />
+      </points>
+
+      {/* glowing tunnel rings to fly through */}
+      {rings.map((ring, i) => (
+        <mesh key={i} position={[0, 0, ring.z]} rotation={[0, 0, i * 0.4]}>
+          <torusGeometry args={[ring.r, 0.018, 8, 64]} />
+          <meshBasicMaterial
+            color={ring.color}
+            transparent
+            opacity={0.5}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
+        </mesh>
+      ))}
+    </group>
   )
 }
 
-function FloatingOrb() {
-  const ref = useRef<THREE.Mesh>(null)
-  useFrame((state) => {
-    if (!ref.current) return
-    const t = state.clock.elapsedTime
-    ref.current.position.y = Math.sin(t * 0.5) * 0.3
-    ref.current.rotation.y = t * 0.15
-    ref.current.rotation.z = t * 0.05
+/** Soft ambient star dust for extra depth behind the tunnel. */
+function Dust({ count = 1600 }: { count?: number }) {
+  const ref = useRef<THREE.Points>(null)
+  const positions = useMemo(() => {
+    const arr = new Float32Array(count * 3)
+    for (let i = 0; i < count; i++) {
+      arr[i * 3] = (Math.random() - 0.5) * 26
+      arr[i * 3 + 1] = (Math.random() - 0.5) * 26
+      arr[i * 3 + 2] = -Math.random() * 50
+    }
+    return arr
+  }, [count])
+  useFrame((_, delta) => {
+    if (ref.current) ref.current.rotation.z += delta * 0.01
   })
   return (
-    <mesh ref={ref} position={[0, 0, -2]}>
-      <icosahedronGeometry args={[1.6, 6]} />
-      <meshStandardMaterial
-        color="#3b82f6"
-        emissive="#8b5cf6"
-        emissiveIntensity={0.7}
-        roughness={0.15}
-        metalness={0.9}
-        wireframe
-        transparent
-        opacity={0.28}
-      />
-    </mesh>
+    <points ref={ref}>
+      <bufferGeometry>
+        <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+      </bufferGeometry>
+      <pointsMaterial color="#5fd6ff" size={0.03} transparent opacity={0.5} sizeAttenuation depthWrite={false} blending={THREE.AdditiveBlending} />
+    </points>
+  )
+}
+
+function Scene() {
+  // wire scroll listener once
+  const ref = useRef(false)
+  if (!ref.current && typeof window !== 'undefined') {
+    ref.current = true
+    updateScroll()
+    window.addEventListener('scroll', updateScroll, { passive: true })
+    window.addEventListener('resize', updateScroll)
+  }
+  return (
+    <>
+      <Dust />
+      <SpiralTunnel />
+    </>
   )
 }
 
@@ -79,20 +146,16 @@ export default function Background3D() {
   return (
     <div className="fixed inset-0 -z-10">
       <Canvas
-        camera={{ position: [0, 0, 9], fov: 60 }}
+        camera={{ position: [0, 0, 8], fov: 70 }}
         dpr={[1, 2]}
         gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
       >
-        <ambientLight intensity={0.4} />
-        <pointLight position={[10, 10, 10]} intensity={1.2} color="#22d3ee" />
-        <pointLight position={[-10, -6, -4]} intensity={0.8} color="#e23bd2" />
-        <FloatingOrb />
-        <ParticleField />
+        <Scene />
       </Canvas>
-      {/* Color wash + vignette layered on top of the canvas */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.18),_transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(139,92,246,0.20),_transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-ink-900" />
+      {/* Color wash + vignette so the tunnel melts into the page */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(4,6,15,0.45)_80%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.16),_transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(139,92,246,0.18),_transparent_55%)]" />
     </div>
   )
 }
