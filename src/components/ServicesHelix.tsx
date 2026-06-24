@@ -162,36 +162,54 @@ export default function ServicesHelix() {
         </div>
 
         {/* LEFT — what it does */}
-        <div className="absolute left-6 top-1/2 z-20 hidden max-w-[260px] -translate-y-1/2 sm:block lg:left-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyber-cyan">What it does</p>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={cur.key}
-              initial={{ opacity: 0, x: -20, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, x: -12, filter: 'blur(6px)' }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <h3 className="mt-3 font-display text-2xl font-bold text-white">{cur.name}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-white/65">{cur.what}</p>
-            </motion.div>
-          </AnimatePresence>
+        <div className="absolute left-5 top-1/2 z-20 hidden w-[330px] -translate-y-1/2 md:block lg:left-12">
+          <div className="glow-border rounded-3xl border border-white/10 bg-white/[0.05] p-7 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-cyber-cyan">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyber-cyan shadow-glow" />
+              <p className="text-xs font-semibold uppercase tracking-[0.28em]">What it does</p>
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={cur.key}
+                initial={{ opacity: 0, x: -24, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, x: -14, filter: 'blur(8px)' }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <div className="mt-5 flex items-center gap-3">
+                  <span className={`flex h-11 w-11 items-center justify-center rounded-xl bg-gradient-to-br ${cur.color}`}>
+                    <svg viewBox="0 0 24 24" className="h-5 w-5 text-white" fill={cur.key === 'web' || cur.key === 'social' ? 'none' : 'currentColor'} stroke={cur.key === 'web' || cur.key === 'social' ? 'currentColor' : 'none'} strokeWidth="2">
+                      <path d={cur.icon} />
+                    </svg>
+                  </span>
+                  <h3 className="font-display text-2xl font-bold leading-tight text-white">{cur.name}</h3>
+                </div>
+                <p className="mt-4 text-[15px] leading-relaxed text-white/70">{cur.what}</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* RIGHT — why it matters */}
-        <div className="absolute right-6 top-1/2 z-20 hidden max-w-[260px] -translate-y-1/2 text-right sm:block lg:right-12">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-cyber-magenta">Why it matters</p>
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={cur.key}
-              initial={{ opacity: 0, x: 20, filter: 'blur(6px)' }}
-              animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
-              exit={{ opacity: 0, x: 12, filter: 'blur(6px)' }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <p className="mt-3 text-base leading-relaxed text-white/80">{cur.why}</p>
-            </motion.div>
-          </AnimatePresence>
+        <div className="absolute right-5 top-1/2 z-20 hidden w-[330px] -translate-y-1/2 md:block lg:right-12">
+          <div className="glow-border rounded-3xl border border-white/10 bg-white/[0.05] p-7 text-right backdrop-blur-md">
+            <div className="flex items-center justify-end gap-2 text-cyber-magenta">
+              <p className="text-xs font-semibold uppercase tracking-[0.28em]">Why it matters</p>
+              <span className="h-1.5 w-1.5 rounded-full bg-cyber-magenta shadow-glow-violet" />
+            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={cur.key}
+                initial={{ opacity: 0, x: 24, filter: 'blur(8px)' }}
+                animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                exit={{ opacity: 0, x: 14, filter: 'blur(8px)' }}
+                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="mt-5 font-display text-xl font-semibold leading-snug text-white">{cur.name}</p>
+                <p className="mt-4 text-[15px] leading-relaxed text-white/75">{cur.why}</p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* shared 3D stage: DNA axis + tiles orbiting around it */}
