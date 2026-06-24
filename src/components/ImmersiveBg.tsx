@@ -59,22 +59,22 @@ const fragmentShader = /* glsl */ `
     float f = fbm(p + 4.0*r);
     float n = smoothstep(0.25, 0.95, f);
 
-    // deep field that only blooms colour in the dense "veins"
+    // deep field that only blooms colour in the dense "veins" (kept dark/moody)
     vec3 col = BASE;
-    col = mix(col, BLUE,    smoothstep(0.30, 0.62, f) * 0.9);
-    col = mix(col, VIOLET,  smoothstep(0.55, 0.80, f) * 0.85);
-    col = mix(col, MAGENTA, smoothstep(0.74, 0.93, f) * 0.7);
-    col += CYAN * pow(smoothstep(0.82, 1.0, r.y), 2.0) * 0.45;   // iridescent glints
-    col += (BLUE+VIOLET)*0.5 * pow(n, 3.0) * 0.3;                // soft inner bloom
+    col = mix(col, BLUE,    smoothstep(0.42, 0.70, f) * 0.7);
+    col = mix(col, VIOLET,  smoothstep(0.62, 0.86, f) * 0.7);
+    col = mix(col, MAGENTA, smoothstep(0.80, 0.97, f) * 0.6);
+    col += CYAN * pow(smoothstep(0.88, 1.0, r.y), 2.0) * 0.32;   // iridescent glints
+    col += (BLUE+VIOLET)*0.5 * pow(n, 4.0) * 0.18;               // soft inner bloom
 
     // pointer breathes a little light into the field
-    float m = smoothstep(0.85, 0.0, distance(uv, uMouse));
-    col += mix(CYAN, MAGENTA, uMouse.x) * m * 0.18;
+    float m = smoothstep(0.8, 0.0, distance(uv, uMouse));
+    col += mix(CYAN, MAGENTA, uMouse.x) * m * 0.14;
 
-    // moody vignette keeps foreground text legible
-    float vig = smoothstep(1.3, 0.35, length(uv-0.5));
-    col *= mix(0.4, 1.0, vig);
-    col *= 0.82; // overall exposure
+    // strong moody vignette keeps foreground text legible
+    float vig = smoothstep(1.25, 0.45, length(uv-0.5));
+    col *= mix(0.28, 0.92, vig);
+    col *= 0.62; // overall exposure — darker
 
     gl_FragColor = vec4(col, 1.0);
   }
