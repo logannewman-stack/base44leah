@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Eyebrow, MagneticButton, Reveal } from './ui'
+import { Depth3D, Eyebrow, MagneticButton, Reveal } from './ui'
 
 const packages = [
   {
@@ -49,8 +49,8 @@ export default function Packages() {
         </Reveal>
 
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {packages.map((plan, i) => (
-            <Reveal key={plan.name} delay={i * 0.1}>
+          {packages.map((plan) => (
+            <Depth3D key={plan.name} className="h-full">
               <motion.div
                 whileHover={{ y: -8 }}
                 className={`relative flex h-full flex-col rounded-3xl p-7 ${
@@ -80,7 +80,7 @@ export default function Packages() {
                   </MagneticButton>
                 </div>
               </motion.div>
-            </Reveal>
+            </Depth3D>
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-white/40">

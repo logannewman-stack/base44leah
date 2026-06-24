@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Eyebrow, Reveal } from './ui'
+import { Depth3D, Eyebrow, Reveal } from './ui'
 
 const quotes = [
   {
@@ -36,8 +36,8 @@ export default function Testimonials() {
         </Reveal>
 
         <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {quotes.map((q, i) => (
-            <Reveal key={q.name} delay={i * 0.1}>
+          {quotes.map((q) => (
+            <Depth3D key={q.name} className="h-full">
               <motion.figure
                 whileHover={{ y: -6 }}
                 className="glass flex h-full flex-col justify-between rounded-3xl p-7"
@@ -56,7 +56,7 @@ export default function Testimonials() {
                   </div>
                 </figcaption>
               </motion.figure>
-            </Reveal>
+            </Depth3D>
           ))}
         </div>
       </div>

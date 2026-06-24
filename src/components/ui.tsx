@@ -1,5 +1,25 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState, type ReactNode, type MouseEvent } from 'react'
+
+/**
+ * Scroll-driven 3D depth: children fly up from deep in the scene, settle flat
+ * when centred, then push forward toward the viewer as they leave — an immersive
+ * "coming out of the screen" feel. Each instance is its own perspective scene.
+ */
+export function Depth3D({ children, className = '' }: { children: ReactNode; className?: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const z = useTransform(scrollYProgress, [0, 0.45, 0.8, 1], [-460, 0, 30, 150])
+  const rotateX = useTransform(scrollYProgress, [0, 0.45, 1], [24, 0, -11])
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.9, 1], [0, 1, 1, 0.72])
+  return (
+    <div ref={ref} className={className} style={{ perspective: 1100 }}>
+      <motion.div className="will-change-transform" style={{ z, rotateX, opacity, transformStyle: 'preserve-3d' }}>
+        {children}
+      </motion.div>
+    </div>
+  )
+}
 
 /** Reveals children with a spring as they scroll into view. */
 export function Reveal({

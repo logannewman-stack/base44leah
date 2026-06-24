@@ -1,6 +1,6 @@
 import { animate, motion, useInView } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
-import { Reveal } from './ui'
+import { Depth3D } from './ui'
 
 function Counter({ to, suffix = '', prefix = '', decimals = 0 }: { to: number; suffix?: string; prefix?: string; decimals?: number }) {
   const ref = useRef(null)
@@ -38,8 +38,8 @@ export default function Stats() {
     <section className="relative py-16">
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((s, i) => (
-            <Reveal key={s.label} delay={i * 0.08}>
+          {stats.map((s) => (
+            <Depth3D key={s.label}>
               <motion.div
                 whileHover={{ y: -6 }}
                 className="glass relative overflow-hidden rounded-2xl p-6"
@@ -51,7 +51,7 @@ export default function Stats() {
                 <p className="mt-2 font-semibold text-white">{s.label}</p>
                 <p className="text-sm text-white/50">{s.sub}</p>
               </motion.div>
-            </Reveal>
+            </Depth3D>
           ))}
         </div>
       </div>
