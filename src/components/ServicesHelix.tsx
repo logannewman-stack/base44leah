@@ -66,26 +66,30 @@ const N = services.length
 const ANGLE = 360 / N // 72°
 const RADIUS = 300
 
-/** One twisting rung of the background DNA strand. */
+/** One twisting rung of the DNA double helix: two glowing nucleotide nodes
+ *  (the strands) joined by a base-pair rung, rotated around the vertical axis. */
 function Rung({ i, rotate, total }: { i: number; rotate: MotionValue<number>; total: number }) {
-  const ry = useTransform(rotate, (r) => i * 30 + r)
+  const ry = useTransform(rotate, (r) => i * 34 + r)
   return (
     <motion.div
-      className="absolute left-1/2 h-px w-40"
+      className="absolute left-1/2 h-4 w-48"
       style={{ top: `${(i / total) * 100}%`, rotateY: ry, transformStyle: 'preserve-3d', x: '-50%' }}
     >
-      <span className="absolute inset-0 bg-gradient-to-r from-cyber-cyan/50 via-white/10 to-cyber-violet/50" />
-      <span className="absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyber-cyan shadow-glow" />
-      <span className="absolute right-0 top-1/2 h-2 w-2 -translate-y-1/2 translate-x-1/2 rounded-full bg-cyber-violet shadow-glow-violet" />
+      {/* base-pair rung */}
+      <span className="absolute left-3 right-3 top-1/2 h-[2px] -translate-y-1/2 bg-gradient-to-r from-cyber-cyan/60 via-white/20 to-cyber-magenta/60" />
+      {/* strand A node (cyan) */}
+      <span className="absolute left-0 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-300 shadow-[0_0_16px_5px_rgba(34,211,238,0.75)]" />
+      {/* strand B node (magenta) */}
+      <span className="absolute right-0 top-1/2 h-3 w-3 -translate-y-1/2 translate-x-1/2 rounded-full bg-fuchsia-400 shadow-[0_0_16px_5px_rgba(226,59,210,0.75)]" />
     </motion.div>
   )
 }
 
 function DnaHelix({ rotate }: { rotate: MotionValue<number> }) {
-  const rungs = Array.from({ length: 26 })
+  const rungs = Array.from({ length: 36 })
   return (
-    <div className="pointer-events-none absolute inset-0 flex items-center justify-center [perspective:900px]">
-      <div className="relative h-[120vh] w-40" style={{ transformStyle: 'preserve-3d', transform: 'rotateX(6deg)' }}>
+    <div className="pointer-events-none absolute inset-0 flex items-center justify-center [perspective:1100px]">
+      <div className="relative h-[125vh] w-48" style={{ transformStyle: 'preserve-3d', transform: 'rotateX(8deg)' }}>
         {rungs.map((_, i) => (
           <Rung key={i} i={i} rotate={rotate} total={rungs.length} />
         ))}
