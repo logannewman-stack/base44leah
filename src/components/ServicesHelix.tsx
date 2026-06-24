@@ -1,6 +1,7 @@
 import { AnimatePresence, motion, useMotionValueEvent, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import { useRef, useState } from 'react'
 import { Eyebrow } from './ui'
+import { useIsMobile } from './useIsMobile'
 
 const services = [
   {
@@ -100,13 +101,15 @@ function DnaStrand({ rotate }: { rotate: MotionValue<number> }) {
 
 /* --------------------------- Orbiting service tile ------------------------- */
 
-function Tile({ service, i, progress }: { service: (typeof services)[number]; i: number; progress: MotionValue<number> }) {
+function Tile({ service, i, progress, isMobile }: { service: (typeof services)[number]; i: number; progress: MotionValue<number>; isMobile: boolean }) {
+  // On phones the orbit tightens so cards stay on-screen instead of spilling off the edges.
+  const r = isMobile ? 96 : R
   // faces point radially OUTWARD (rotateY = phi) so they never flip toward the axis
   const transform = useTransform(progress, (p) => {
     const d = i - p * (N - 1)
     const phi = d * STEP_ANGLE
     const rad = (phi * Math.PI) / 180
-    const x = Math.sin(rad) * R
+    const x = Math.sin(rad) * r
     const z = Math.cos(rad) * 110 // shallow depth: focused card sits near the screen plane → crisp text
     const y = d * STEP_Y
     const depth = (z / 110 + 1) / 2
@@ -120,14 +123,14 @@ function Tile({ service, i, progress }: { service: (typeof services)[number]; i:
   })
   const stroke = service.key === 'web' || service.key === 'social'
   return (
-    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[300px]">
-      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/80 px-8 py-9 text-center backdrop-blur-md">
-        <span className={`mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color}`}>
-          <svg viewBox="0 0 24 24" className="h-10 w-10 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
+    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[230px] sm:w-[300px]">
+      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/80 px-6 py-7 text-center backdrop-blur-md sm:px-8 sm:py-9">
+        <span className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br sm:h-20 sm:w-20 ${service.color}`}>
+          <svg viewBox="0 0 24 24" className="h-8 w-8 text-white sm:h-10 sm:w-10" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
             <path d={service.icon} />
           </svg>
         </span>
-        <h3 className="mt-6 font-display text-[1.7rem] font-bold leading-tight text-neutral-900">{service.name}</h3>
+        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-neutral-900 sm:mt-6 sm:text-[1.7rem]">{service.name}</h3>
         <p className="mt-2.5 text-[0.8rem] uppercase tracking-[0.2em] text-cyber-cyan">{service.label}</p>
       </div>
     </motion.div>
@@ -144,6 +147,7 @@ function ProgressDot({ i, progress }: { i: number; progress: MotionValue<number>
 
 export default function ServicesHelix() {
   const ref = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const helixRotate = useTransform(scrollYProgress, [0, 1], [0, 720])
   const [active, setActive] = useState(0)
@@ -153,7 +157,7 @@ export default function ServicesHelix() {
   const cur = services[active]
 
   return (
-    <section ref={ref} id="services" className="relative" style={{ height: `${N * 92}vh` }}>
+    <section ref={ref} id="services" className="relative overflow-x-clip" style={{ height: `${N * 92}vh` }}>
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1600px]">
         {/* heading */}
         <div className="absolute top-[8%] left-1/2 z-20 -translate-x-1/2 text-center">
@@ -218,7 +222,7 @@ export default function ServicesHelix() {
         <motion.div className="absolute inset-0" style={{ transformStyle: 'preserve-3d', rotateX: 6 }}>
           <DnaStrand rotate={helixRotate} />
           {services.map((s, i) => (
-            <Tile key={s.key} service={s} i={i} progress={scrollYProgress} />
+            <Tile key={s.key} service={s} i={i} progress={scrollYProgress} isMobile={isMobile} />
           ))}
         </motion.div>
 

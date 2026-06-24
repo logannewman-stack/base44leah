@@ -59,15 +59,15 @@ function RollCard({ f, i, progress }: { f: (typeof features)[number]; i: number;
     return Math.max(0.04, 1 - d * 0.82) // focused card dominates, neighbours fade fast
   })
   return (
-    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[min(92vw,540px)]">
-      <div className="glow-border rounded-[2rem] border border-black/10 bg-white/80 p-10 backdrop-blur-md shadow-glow-violet">
-        <span className={`inline-flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${f.color}`}>
-          <svg viewBox="0 0 24 24" className="h-10 w-10 text-white" fill="currentColor">
+    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[min(88vw,540px)]">
+      <div className="glow-border rounded-[2rem] border border-black/10 bg-white/80 p-6 backdrop-blur-md shadow-glow-violet sm:p-10">
+        <span className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br sm:h-20 sm:w-20 ${f.color}`}>
+          <svg viewBox="0 0 24 24" className="h-8 w-8 text-white sm:h-10 sm:w-10" fill="currentColor">
             <path d={f.icon} />
           </svg>
         </span>
-        <h3 className="mt-7 font-display text-4xl font-bold leading-tight text-neutral-900">{f.title}</h3>
-        <p className="mt-4 text-xl leading-relaxed text-neutral-600">{f.body}</p>
+        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-neutral-900 sm:mt-7 sm:text-4xl">{f.title}</h3>
+        <p className="mt-3 text-base leading-relaxed text-neutral-600 sm:mt-4 sm:text-xl">{f.body}</p>
       </div>
     </motion.div>
   )
@@ -78,7 +78,7 @@ export default function Features() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
 
   return (
-    <section ref={ref} id="why" className="relative" style={{ height: `${M * 75}vh` }}>
+    <section ref={ref} id="why" className="relative overflow-x-clip" style={{ height: `${M * 75}vh` }}>
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1600px]">
         <div className="absolute top-[5%] left-1/2 z-20 -translate-x-1/2 px-6 text-center">
           <Eyebrow>Why Front Desk AI</Eyebrow>

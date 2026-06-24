@@ -24,7 +24,7 @@ const quotes = [
 
 export default function Testimonials() {
   return (
-    <section id="results" className="relative py-20">
+    <section id="results" className="relative overflow-x-clip py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
           <div className="flex justify-center">

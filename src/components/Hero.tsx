@@ -87,7 +87,7 @@ function FloatChip({ className, delay, label, value, icon }: { className: string
         scale: { delay, duration: 0.6 },
         y: { duration: 4 + delay, repeat: Infinity, ease: 'easeInOut' },
       }}
-      className={`absolute z-20 flex items-center gap-2.5 rounded-2xl glass-strong px-3.5 py-2.5 shadow-glow ${className}`}
+      className={`absolute z-20 hidden items-center gap-2.5 rounded-2xl glass-strong px-3.5 py-2.5 shadow-glow sm:flex ${className}`}
     >
       <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-black/[0.06] text-neutral-700">
         <svg viewBox="0 0 24 24" className="h-4 w-4" fill="currentColor">
@@ -163,15 +163,15 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.74, duration: 0.8 }}
-            className="mt-9 flex flex-wrap items-center gap-4"
+            className="mt-9 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center"
           >
-            <MagneticButton href="#contact">
+            <MagneticButton href="#contact" className="w-full sm:w-auto">
               Speak with a representative
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </MagneticButton>
-            <MagneticButton href="#services" variant="ghost">
+            <MagneticButton href="#services" variant="ghost" className="w-full sm:w-auto">
               Explore our services
             </MagneticButton>
           </motion.div>

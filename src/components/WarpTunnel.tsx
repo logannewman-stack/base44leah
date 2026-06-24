@@ -120,7 +120,7 @@ export default function WarpTunnel() {
   const rings = Array.from({ length: RING_COUNT })
 
   return (
-    <section ref={ref} className="relative" style={{ height: `${COUNT * 11}vh` }}>
+    <section ref={ref} className="relative overflow-x-clip" style={{ height: `${COUNT * 11}vh` }}>
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden" style={{ perspective: `${PERSP}px` }}>
         {/* heading — flat & crisp above the tunnel */}
         <motion.div style={{ scale: titleScale }} className="absolute top-[8%] left-1/2 z-20 -translate-x-1/2 px-6 text-center">
