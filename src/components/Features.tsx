@@ -4,30 +4,30 @@ import { Eyebrow, Reveal } from './ui'
 
 const features = [
   {
-    title: '24/7 Voice Reception',
-    body: 'A natural-sounding AI answers every call instantly, any hour, in a voice trained on your brand.',
-    icon: 'M12 3a9 9 0 0 0-9 9v5a3 3 0 0 0 3 3h2v-7H6v-1a6 6 0 1 1 12 0v1h-2v7h2a3 3 0 0 0 3-3v-5a9 9 0 0 0-9-9z',
+    title: 'One team, every channel',
+    body: 'Ads, Google presence, website, social, and AI call handling — all run by one team that actually talks to each other, so nothing falls through the cracks.',
+    icon: 'M4 5h16v4H4V5zm0 6h16v4H4v-4zm0 6h10v2H4v-2z',
     span: 'sm:col-span-2',
   },
   {
-    title: 'Smart Appointment Booking',
-    body: 'Reads your live calendar, offers open slots, books, and sends confirmations automatically.',
-    icon: 'M7 2v2H5a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2V2h-2v2H9V2H7zM5 9h14v10H5V9z',
+    title: 'Fully managed',
+    body: 'We do the work — strategy, build, and optimization. You just get the results.',
+    icon: 'M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1.4 13L7 11.4 8.4 10l2.2 2.2L15.6 7 17 8.4 10.6 15z',
   },
   {
-    title: 'Instant Lead Capture',
-    body: 'Names, numbers, and intent logged to your CRM the second the call ends.',
+    title: 'Every lead captured',
+    body: 'Your ads, site, and AI receptionist feed one pipeline — no missed calls, no lost leads.',
     icon: 'M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-8 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3 0-8 1.5-8 4.5V20h9v-2.5c0-1.2.5-2.3 1.3-3.2A13 13 0 0 0 8 13zm8 0a13 13 0 0 0-2.3.2A5.6 5.6 0 0 1 15 17.5V20h9v-2.5c0-3-5-4.5-8-4.5z',
   },
   {
-    title: 'Call Summaries & Transcripts',
-    body: 'Every conversation transcribed and summarized, delivered by text and email.',
-    icon: 'M4 4h16v2H4V4zm0 5h16v2H4V9zm0 5h10v2H4v-2zm0 5h10v2H4v-2z',
+    title: 'Built for local',
+    body: 'Local SEO, Google Maps, and the 3-pack — we make you the obvious choice in your area.',
+    icon: 'M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z',
   },
   {
-    title: 'Spam & Robocall Filtering',
-    body: 'Junk calls screened out so only real customers reach your pipeline.',
-    icon: 'M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1.4 13L7 11.4 8.4 10l2.2 2.2L15.6 7 17 8.4 10.6 15z',
+    title: 'Real results, tracked',
+    body: 'Live dashboards and reporting show exactly where your leads and revenue come from.',
+    icon: 'M4 13h3v7H4v-7zm6.5-5h3v12h-3V8zM17 3h3v17h-3V3z',
     span: 'sm:col-span-2',
   },
 ]
@@ -81,18 +81,18 @@ function TiltCard({ feature, i }: { feature: (typeof features)[number]; i: numbe
 
 export default function Features() {
   return (
-    <section id="features" className="relative py-20">
+    <section id="why" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
-            <Eyebrow>Capabilities</Eyebrow>
+            <Eyebrow>Why Front Desk AI</Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
-            Everything a great receptionist does. <span className="gradient-text">Never off the clock.</span>
+            Your entire growth team, <span className="gradient-text">under one roof.</span>
           </h2>
           <p className="mt-5 text-white/60">
-            One AI front desk replaces the missed calls, the voicemail tag, and the lost leads —
-            with capabilities no human team can match.
+            Most businesses juggle an ad agency, a web guy, a social manager, and a phone they can't
+            always answer. We replace all of it with one accountable team.
           </p>
         </Reveal>
 

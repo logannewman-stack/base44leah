@@ -1,5 +1,5 @@
-import { motion, useMotionValue, useScroll, useSpring } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { AnimatePresence, motion, useMotionValue, useScroll, useSpring } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
 /** Thin gradient bar at the very top tracking scroll progress. */
 export function ScrollProgress() {
@@ -13,70 +13,96 @@ export function ScrollProgress() {
   )
 }
 
+type Ripple = { id: number; x: number; y: number; hue: 'blue' | 'purple' }
+
 /**
- * A neon blue→purple cursor glow built from several layers that each follow the
- * pointer with progressively softer springs, producing a trailing "comet" lag.
+ * Neon "echo" cursor: a tight glowing core follows the pointer, and as it moves
+ * it emits expanding blue/purple rings that wash outward and fade — a sonar-like
+ * echo rather than a static glow.
  */
-const TRAIL = [
-  { size: 360, stiffness: 220, color: 'rgba(56,140,255,0.30)', blur: 0 },
-  { size: 320, stiffness: 130, color: 'rgba(80,120,255,0.24)', blur: 0 },
-  { size: 280, stiffness: 80, color: 'rgba(139,92,246,0.22)', blur: 0 },
-  { size: 220, stiffness: 48, color: 'rgba(168,85,247,0.18)', blur: 0 },
-  { size: 150, stiffness: 28, color: 'rgba(192,90,255,0.16)', blur: 0 },
-]
-
-function TrailLayer({
-  mx,
-  my,
-  layer,
-}: {
-  mx: ReturnType<typeof useMotionValue<number>>
-  my: ReturnType<typeof useMotionValue<number>>
-  layer: (typeof TRAIL)[number]
-}) {
-  const cfg = { stiffness: layer.stiffness, damping: 24, mass: 0.6 }
-  const x = useSpring(mx, cfg)
-  const y = useSpring(my, cfg)
-  return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none fixed left-0 top-0 rounded-full"
-      style={{
-        x,
-        y,
-        width: layer.size,
-        height: layer.size,
-        marginLeft: -layer.size / 2,
-        marginTop: -layer.size / 2,
-        background: `radial-gradient(circle, ${layer.color}, transparent 68%)`,
-        mixBlendMode: 'screen',
-      }}
-    />
-  )
-}
-
 export function CursorGlow() {
   const [fine, setFine] = useState(true)
-  const mx = useMotionValue(-400)
-  const my = useMotionValue(-400)
+  const [ripples, setRipples] = useState<Ripple[]>([])
+
+  const cx = useMotionValue(-200)
+  const cy = useMotionValue(-200)
+  const sx = useSpring(cx, { stiffness: 600, damping: 30, mass: 0.4 })
+  const sy = useSpring(cy, { stiffness: 600, damping: 30, mass: 0.4 })
+
+  const idRef = useRef(0)
+  const lastSpawn = useRef(0)
+  const toggle = useRef(false)
 
   useEffect(() => {
     setFine(window.matchMedia('(pointer: fine)').matches)
+    let frame = 0
     const move = (e: PointerEvent) => {
-      mx.set(e.clientX)
-      my.set(e.clientY)
+      cx.set(e.clientX)
+      cy.set(e.clientY)
+      const now = e.timeStamp
+      if (now - lastSpawn.current > 95) {
+        lastSpawn.current = now
+        toggle.current = !toggle.current
+        const r: Ripple = {
+          id: idRef.current++,
+          x: e.clientX,
+          y: e.clientY,
+          hue: toggle.current ? 'blue' : 'purple',
+        }
+        // keep the array small
+        setRipples((prev) => [...prev.slice(-8), r])
+      }
+      cancelAnimationFrame(frame)
     }
     window.addEventListener('pointermove', move)
-    return () => window.removeEventListener('pointermove', move)
-  }, [mx, my])
+    return () => {
+      window.removeEventListener('pointermove', move)
+      cancelAnimationFrame(frame)
+    }
+  }, [cx, cy])
 
   if (!fine) return null
 
+  const ring = (hue: Ripple['hue']) =>
+    hue === 'blue'
+      ? '0 0 24px 2px rgba(34,211,238,0.55), inset 0 0 18px rgba(34,211,238,0.35)'
+      : '0 0 24px 2px rgba(168,85,247,0.55), inset 0 0 18px rgba(168,85,247,0.35)'
+
   return (
-    <div className="pointer-events-none fixed inset-0 z-[55]">
-      {TRAIL.map((layer, i) => (
-        <TrailLayer key={i} mx={mx} my={my} layer={layer} />
-      ))}
+    <div className="pointer-events-none fixed inset-0 z-[55] overflow-hidden" aria-hidden>
+      {/* expanding echo rings */}
+      <AnimatePresence>
+        {ripples.map((r) => (
+          <motion.span
+            key={r.id}
+            className="absolute rounded-full"
+            initial={{ width: 26, height: 26, x: r.x - 13, y: r.y - 13, opacity: 0.7 }}
+            animate={{ width: 320, height: 320, x: r.x - 160, y: r.y - 160, opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.1, ease: 'easeOut' }}
+            onAnimationComplete={() => setRipples((prev) => prev.filter((p) => p.id !== r.id))}
+            style={{
+              border: `1.5px solid ${r.hue === 'blue' ? 'rgba(34,211,238,0.6)' : 'rgba(168,85,247,0.6)'}`,
+              boxShadow: ring(r.hue),
+              mixBlendMode: 'screen',
+            }}
+          />
+        ))}
+      </AnimatePresence>
+
+      {/* neon core */}
+      <motion.span
+        className="absolute h-4 w-4 rounded-full"
+        style={{
+          x: sx,
+          y: sy,
+          marginLeft: -8,
+          marginTop: -8,
+          background: 'radial-gradient(circle, rgba(120,210,255,0.95), rgba(168,85,247,0.5) 60%, transparent 72%)',
+          boxShadow: '0 0 18px 4px rgba(56,140,255,0.7), 0 0 30px 8px rgba(168,85,247,0.4)',
+          mixBlendMode: 'screen',
+        }}
+      />
     </div>
   )
 }

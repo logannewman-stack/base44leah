@@ -1,27 +1,23 @@
-import { AnimatePresence, motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion } from 'framer-motion'
 import { Eyebrow, MagneticButton, Reveal } from './ui'
 
-const plans = [
+const packages = [
   {
-    name: 'Starter',
-    monthly: 49,
-    tagline: 'For solo operators & new businesses',
-    features: ['200 call minutes / mo', '24/7 AI call answering', 'Smart call summaries by text', 'Spam & robocall filtering', 'Email support'],
-    featured: false,
-  },
-  {
-    name: 'Growth',
-    monthly: 99,
-    tagline: 'For busy teams that live on the phone',
-    features: ['600 call minutes / mo', 'Everything in Starter', 'Calendar booking & confirmations', 'CRM lead sync', 'Custom voice & scripts', 'Priority support'],
+    name: 'Full Growth Suite',
+    tagline: 'The complete done-for-you system',
+    includes: ['Google My Business', 'Custom Website', 'CRM Build-Out', 'Voice AI Receptionist', 'Meta & Google Ads'],
     featured: true,
   },
   {
-    name: 'Scale',
-    monthly: 249,
-    tagline: 'For multi-location & high volume',
-    features: ['Unlimited minutes', 'Everything in Growth', 'Multiple numbers & locations', 'Advanced analytics dashboard', 'API & workflow automations', 'Dedicated success manager'],
+    name: 'Local Presence Suite',
+    tagline: 'Dominate local search & automate',
+    includes: ['Google My Business', 'CRM Build-Out', 'Voice AI Receptionist', 'Meta & Google Ads'],
+    featured: false,
+  },
+  {
+    name: 'Digital Launch Suite',
+    tagline: 'A new web presence, fully automated',
+    includes: ['Custom Website', 'CRM Build-Out', 'Voice AI Receptionist', 'Meta & Google Ads'],
     featured: false,
   },
 ]
@@ -34,112 +30,62 @@ function Check() {
   )
 }
 
-export default function Pricing() {
-  const [annual, setAnnual] = useState(true)
-
+export default function Packages() {
   return (
-    <section id="pricing" className="relative py-20">
+    <section id="packages" className="relative py-20">
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-cyber-violet/10 blur-[120px]" />
       <div className="mx-auto max-w-6xl px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
-            <Eyebrow>Pricing</Eyebrow>
+            <Eyebrow>Packages</Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
-            Less than a day of wages. <span className="gradient-text">Working every day.</span>
+            Built around your business. <span className="gradient-text">Fully managed.</span>
           </h2>
           <p className="mt-5 text-white/60">
-            One missed call can cost more than a month of FrontDeskAI. Start free — no card required.
+            Bundle everything or pick the services you need — every package is done-for-you and
+            tailored to your goals. Let's map out the right fit on a quick call.
           </p>
-
-          <div className="mt-8 inline-flex items-center gap-1 rounded-full glass p-1">
-            {(['monthly', 'annual'] as const).map((opt) => {
-              const active = (opt === 'annual') === annual
-              return (
-                <button
-                  key={opt}
-                  onClick={() => setAnnual(opt === 'annual')}
-                  className={`relative rounded-full px-5 py-2 text-sm font-medium capitalize transition-colors ${
-                    active ? 'text-ink-900' : 'text-white/70'
-                  }`}
-                >
-                  {active && (
-                    <motion.span
-                      layoutId="pricing-pill"
-                      className="absolute inset-0 rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet"
-                    />
-                  )}
-                  <span className="relative">{opt}</span>
-                  {opt === 'annual' && (
-                    <span className={`relative ml-1.5 text-xs ${active ? 'text-ink-900/70' : 'text-cyber-cyan'}`}>−20%</span>
-                  )}
-                </button>
-              )
-            })}
-          </div>
         </Reveal>
 
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {plans.map((plan, i) => {
-            const price = annual ? Math.round(plan.monthly * 0.8) : plan.monthly
-            return (
-              <Reveal key={plan.name} delay={i * 0.1}>
-                <motion.div
-                  whileHover={{ y: -8 }}
-                  className={`relative flex h-full flex-col rounded-3xl p-7 ${
-                    plan.featured ? 'glass-strong glow-border shadow-glow-violet' : 'glass'
-                  }`}
-                >
-                  {plan.featured && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink-900">
-                      Most popular
-                    </span>
-                  )}
-                  <h3 className="font-display text-xl font-semibold text-white">{plan.name}</h3>
-                  <p className="mt-1 text-sm text-white/50">{plan.tagline}</p>
+          {packages.map((plan, i) => (
+            <Reveal key={plan.name} delay={i * 0.1}>
+              <motion.div
+                whileHover={{ y: -8 }}
+                className={`relative flex h-full flex-col rounded-3xl p-7 ${
+                  plan.featured ? 'glass-strong glow-border shadow-glow-violet' : 'glass'
+                }`}
+              >
+                {plan.featured && (
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink-900">
+                    Most popular
+                  </span>
+                )}
+                <h3 className="font-display text-xl font-semibold text-white">{plan.name}</h3>
+                <p className="mt-1 text-sm text-white/50">{plan.tagline}</p>
 
-                  <div className="mt-6 flex items-end gap-1">
-                    <span className="text-2xl font-medium text-white/60">$</span>
-                    <AnimatePresence mode="popLayout">
-                      <motion.span
-                        key={price}
-                        initial={{ y: 16, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        exit={{ y: -16, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="font-display text-5xl font-bold gradient-text"
-                      >
-                        {price}
-                      </motion.span>
-                    </AnimatePresence>
-                    <span className="mb-2 text-sm text-white/50">/mo</span>
-                  </div>
+                <ul className="mt-6 space-y-3 text-sm text-white/75">
+                  {plan.includes.map((f) => (
+                    <li key={f} className="flex gap-2.5">
+                      <Check />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
 
-                  <ul className="mt-6 space-y-3 text-sm text-white/70">
-                    {plan.features.map((f) => (
-                      <li key={f} className="flex gap-2.5">
-                        <Check />
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="mt-8 pt-2">
-                    <MagneticButton
-                      href="#cta"
-                      variant={plan.featured ? 'primary' : 'ghost'}
-                      className="w-full"
-                    >
-                      Start free trial
-                    </MagneticButton>
-                  </div>
-                </motion.div>
-              </Reveal>
-            )
-          })}
+                <div className="mt-8 pt-2">
+                  <MagneticButton href="#contact" variant={plan.featured ? 'primary' : 'ghost'} className="w-full">
+                    Speak with a representative
+                  </MagneticButton>
+                </div>
+              </motion.div>
+            </Reveal>
+          ))}
         </div>
         <p className="mt-8 text-center text-sm text-white/40">
-          14-day free trial · Cancel anytime · Setup in under 10 minutes
+          Prefer just one service? We offer Meta Ads, Google My Business, Websites, Social Media, and
+          the Voice AI Caller individually too — just ask.
         </p>
       </div>
     </section>

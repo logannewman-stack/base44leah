@@ -3,9 +3,9 @@ import { useState } from 'react'
 import { MagneticButton } from './ui'
 
 const links = [
-  { label: 'How it works', href: '#how' },
-  { label: 'Features', href: '#features' },
-  { label: 'Pricing', href: '#pricing' },
+  { label: 'Services', href: '#services' },
+  { label: 'Why us', href: '#why' },
+  { label: 'Packages', href: '#packages' },
   { label: 'Results', href: '#results' },
 ]
 
@@ -53,8 +53,8 @@ export default function Navbar() {
         </div>
 
         <div className="hidden md:block">
-          <MagneticButton href="#pricing" className="px-5 py-2.5 text-xs">
-            Get started
+          <MagneticButton href="#contact" className="px-5 py-2.5 text-xs">
+            Speak with a rep
           </MagneticButton>
         </div>
 
@@ -86,11 +86,11 @@ export default function Navbar() {
             </a>
           ))}
           <a
-            href="#pricing"
+            href="#contact"
             onClick={() => setOpen(false)}
             className="mt-2 block rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet px-4 py-3 text-center font-semibold text-ink-900"
           >
-            Get started
+            Speak with a representative
           </a>
         </motion.div>
       )}

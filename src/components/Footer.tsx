@@ -1,7 +1,7 @@
 const groups = [
-  { title: 'Product', links: ['How it works', 'Features', 'Pricing', 'Integrations'] },
-  { title: 'Company', links: ['About', 'Careers', 'Blog', 'Contact'] },
-  { title: 'Legal', links: ['Privacy', 'Terms', 'Security', 'Status'] },
+  { title: 'Services', links: ['Meta Ads', 'Google My Business', 'Website Development', 'Social Media', 'Voice AI Caller'] },
+  { title: 'Company', links: ['About', 'Why us', 'Packages', 'Results'] },
+  { title: 'Legal', links: ['Privacy', 'Terms', 'Contact'] },
 ]
 
 export default function Footer() {
@@ -20,7 +20,7 @@ export default function Footer() {
             </span>
           </a>
           <p className="mt-4 max-w-xs text-sm text-white/50">
-            The AI receptionist that answers every call, books every job, and never misses a lead.
+            Your all-in-one growth agency — ads, Google presence, websites, social, and AI call handling, fully managed.
           </p>
         </div>
 

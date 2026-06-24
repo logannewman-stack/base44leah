@@ -23,8 +23,14 @@ body {
   background: #04060f;
   color: #e6ebff;
   font-family: 'Inter', system-ui, sans-serif;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Prevent sideways scroll from decorative glows WITHOUT creating a scroll
+   container on the body (which would disable position: sticky). overflow:clip
+   on a non-scrolling root is safe for sticky descendants. */
+html {
+  overflow-x: clip;
 }
 
 #root {
