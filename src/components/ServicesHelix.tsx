@@ -120,15 +120,15 @@ function Tile({ service, i, progress }: { service: (typeof services)[number]; i:
   })
   const stroke = service.key === 'web' || service.key === 'social'
   return (
-    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[248px]">
-      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/80 px-6 py-7 text-center backdrop-blur-md">
-        <span className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color}`}>
-          <svg viewBox="0 0 24 24" className="h-8 w-8 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
+    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[300px]">
+      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/80 px-8 py-9 text-center backdrop-blur-md">
+        <span className={`mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color}`}>
+          <svg viewBox="0 0 24 24" className="h-10 w-10 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
             <path d={service.icon} />
           </svg>
         </span>
-        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-neutral-900">{service.name}</h3>
-        <p className="mt-2 text-xs uppercase tracking-[0.2em] text-cyber-cyan">{service.label}</p>
+        <h3 className="mt-6 font-display text-[1.7rem] font-bold leading-tight text-neutral-900">{service.name}</h3>
+        <p className="mt-2.5 text-[0.8rem] uppercase tracking-[0.2em] text-cyber-cyan">{service.label}</p>
       </div>
     </motion.div>
   )
