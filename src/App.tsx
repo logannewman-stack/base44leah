@@ -1,4 +1,5 @@
 import { lazy, Suspense } from 'react'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import { CursorGlow, ScrollProgress } from './components/Effects'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
@@ -18,11 +19,17 @@ export default function App() {
     <div className="relative min-h-screen overflow-hidden">
       {/* Static gradient base shows instantly; WebGL field streams in over it. */}
       <div className="fixed inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.10),_transparent_55%),radial-gradient(ellipse_at_bottom_right,_rgba(139,92,246,0.12),_transparent_55%)] bg-ink-900" />
-      <Suspense fallback={null}>
-        <Background3D />
-      </Suspense>
-      <ScrollProgress />
-      <CursorGlow />
+      <ErrorBoundary>
+        <Suspense fallback={null}>
+          <Background3D />
+        </Suspense>
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <ScrollProgress />
+      </ErrorBoundary>
+      <ErrorBoundary>
+        <CursorGlow />
+      </ErrorBoundary>
       <Navbar />
       <main className="relative z-10">
         <Hero />
