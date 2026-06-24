@@ -25,7 +25,9 @@ export function Depth3D({
   const opacity = useTransform(scrollYProgress, [0, 0.18, 0.9, 1], [0, 1, 1, 0.45])
   return (
     <div ref={ref} className={className} style={{ perspective: 1300 }}>
-      <motion.div style={{ z, rotateX, opacity, transformStyle: 'preserve-3d' }}>{children}</motion.div>
+      <motion.div className="h-full" style={{ z, rotateX, opacity, transformStyle: 'preserve-3d' }}>
+        {children}
+      </motion.div>
     </div>
   )
 }
