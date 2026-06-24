@@ -57,7 +57,7 @@ export default function ContactModal() {
             <div className="flex items-start justify-between gap-4 px-6 pt-6 sm:px-8">
               <div>
                 <p className="font-display text-2xl font-bold leading-none text-neutral-900">
-                  Virsa <span className="bg-gradient-to-r from-[#4f7cff] to-[#8f86ef] bg-clip-text text-transparent">Labs</span>
+                  FrontDesk <span className="bg-gradient-to-r from-[#4f7cff] to-[#8f86ef] bg-clip-text text-transparent">AI</span>
                 </p>
                 <p className="mt-2 text-sm font-medium text-neutral-500">Let&apos;s Talk Growth</p>
               </div>
