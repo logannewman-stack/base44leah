@@ -4,95 +4,85 @@ import * as THREE from 'three'
 
 /** Shared, lerped scroll progress (0..1) read inside the render loop. */
 const scrollState = { target: 0, current: 0 }
-
 function updateScroll() {
   const max = document.documentElement.scrollHeight - window.innerHeight
   scrollState.target = max > 0 ? window.scrollY / max : 0
 }
 
-/**
- * A neon spiral tunnel: two helical strands of points wound around a tube that
- * recedes into the distance. As you scroll, the whole tube rotates and flies
- * toward the camera — the sensation of spiralling downward through the screen.
- */
-function SpiralTunnel() {
-  const group = useRef<THREE.Group>(null)
-  const COUNT = 1400
-  const TURNS = 9
-  const DEPTH = 60
-  const RADIUS = 3.2
+const PALETTE = ['#22d3ee', '#3b82f6', '#8b5cf6', '#e23bd2', '#2dd4bf', '#eaf6ff']
+const COUNT = 92
+const TURNS = 6
+const DEPTH = 52
+const BASE_R = 3.1
+const LOOPS = 1.4 // how many full vortex cycles across the whole page scroll
 
-  const { positions, colors } = useMemo(() => {
-    const positions = new Float32Array(COUNT * 3)
-    const colors = new Float32Array(COUNT * 3)
-    const blue = new THREE.Color('#38bdf8')
-    const violet = new THREE.Color('#a855f7')
-    for (let i = 0; i < COUNT; i++) {
-      const t = i / COUNT
-      const strand = i % 2 // two interleaved strands -> double helix tube
-      const angle = t * TURNS * Math.PI * 2 + strand * Math.PI
-      // gentle radius pulse so the tube breathes
-      const r = RADIUS * (0.85 + 0.15 * Math.sin(t * Math.PI * 6))
-      positions[i * 3] = Math.cos(angle) * r
-      positions[i * 3 + 1] = Math.sin(angle) * r
-      positions[i * 3 + 2] = -t * DEPTH
-      const c = blue.clone().lerp(violet, (Math.sin(t * Math.PI * 3) + 1) / 2)
-      colors[i * 3] = c.r
-      colors[i * 3 + 1] = c.g
-      colors[i * 3 + 2] = c.b
-    }
-    return { positions, colors }
-  }, [])
+type ObjData = { phase0: number; offset: number; rMul: number; scale: number; shape: 'ico' | 'oct' | 'ring'; spin: number; color: string }
+
+/**
+ * An endless, dominant vortex of glowing multi-colour 3D objects orbiting the
+ * central axis. Each object continuously wraps from far to near, so the spiral
+ * stays full at every scroll position; scrolling spins it and pulls it toward
+ * you — descending through the spiral.
+ */
+function SpiralObjects() {
+  const group = useRef<THREE.Group>(null)
+  const shapes: ObjData['shape'][] = ['ico', 'oct', 'ring']
+
+  const objects = useMemo<ObjData[]>(
+    () =>
+      Array.from({ length: COUNT }, (_, i) => ({
+        phase0: i / COUNT,
+        offset: (i % 2) * Math.PI + (i % 3) * 0.4,
+        rMul: 0.9 + 0.3 * Math.sin(i * 1.7),
+        scale: 0.42 + (i % 5) * 0.1,
+        shape: shapes[i % 3],
+        spin: 0.15 + (i % 4) * 0.12,
+        color: PALETTE[i % PALETTE.length],
+      })),
+    [],
+  )
 
   useFrame((_, delta) => {
-    if (!group.current) return
-    // smooth the scroll value
+    const g = group.current
+    if (!g) return
     scrollState.current += (scrollState.target - scrollState.current) * Math.min(1, delta * 4)
     const p = scrollState.current
-    // rotate around the view axis (the spiral) + idle drift
-    group.current.rotation.z = p * Math.PI * 2 * 3 + performance.now() * 0.00004
-    // fly down the tube as you scroll (move tube toward camera)
-    group.current.position.z = p * (DEPTH - 14)
+    const idle = performance.now() * 0.00004
+    for (let i = 0; i < g.children.length; i++) {
+      const m = g.children[i] as THREE.Mesh
+      const o = objects[i]
+      if (!o) continue
+      // phase 0 = right at camera, 1 = far away; scrolling decreases phase => approach
+      const phase = THREE.MathUtils.euclideanModulo(o.phase0 - p * LOOPS, 1)
+      const angle = phase * TURNS * Math.PI * 2 + o.offset + p * Math.PI * 2 * 1.2 + idle
+      const r = BASE_R * o.rMul
+      m.position.set(Math.cos(angle) * r, Math.sin(angle) * r, -phase * DEPTH + 6)
+      const near = 1 - phase
+      m.scale.setScalar(o.scale * (0.8 + near * 2.8))
+      m.rotation.x += delta * o.spin
+      m.rotation.y += delta * (o.spin * 1.3)
+      const mat = m.material as THREE.MeshBasicMaterial
+      // always visible (floor of 0.35), brightest mid-distance, eases out as it passes
+      mat.opacity = 0.35 + 0.65 * Math.sin(phase * Math.PI)
+    }
   })
-
-  const rings = useMemo(() => {
-    const blue = new THREE.Color('#22d3ee')
-    const violet = new THREE.Color('#a855f7')
-    return Array.from({ length: 16 }, (_, i) => ({
-      z: -i * (DEPTH / 16),
-      color: blue.clone().lerp(violet, (i % 8) / 8).getStyle(),
-      r: RADIUS * (0.85 + 0.15 * Math.sin(i)),
-    }))
-  }, [])
 
   return (
     <group ref={group}>
-      <points>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-          <bufferAttribute attach="attributes-color" args={[colors, 3]} />
-        </bufferGeometry>
-        <pointsMaterial
-          size={0.085}
-          vertexColors
-          transparent
-          opacity={1}
-          sizeAttenuation
-          depthWrite={false}
-          blending={THREE.AdditiveBlending}
-        />
-      </points>
-
-      {/* glowing tunnel rings to fly through */}
-      {rings.map((ring, i) => (
-        <mesh key={i} position={[0, 0, ring.z]} rotation={[0, 0, i * 0.4]}>
-          <torusGeometry args={[ring.r, 0.018, 8, 64]} />
-          <meshBasicMaterial
-            color={ring.color}
+      {objects.map((o, i) => (
+        <mesh key={i}>
+          {o.shape === 'ico' && <icosahedronGeometry args={[1, 0]} />}
+          {o.shape === 'oct' && <octahedronGeometry args={[1, 0]} />}
+          {o.shape === 'ring' && <torusGeometry args={[1, 0.3, 12, 32]} />}
+          <meshStandardMaterial
+            color={o.color}
+            emissive={o.color}
+            emissiveIntensity={1.3}
+            roughness={0.2}
+            metalness={0.5}
+            flatShading
             transparent
-            opacity={0.5}
-            blending={THREE.AdditiveBlending}
-            depthWrite={false}
+            opacity={0.92}
           />
         </mesh>
       ))}
@@ -100,33 +90,40 @@ function SpiralTunnel() {
   )
 }
 
-/** Soft ambient star dust for extra depth behind the tunnel. */
-function Dust({ count = 1600 }: { count?: number }) {
+/** Slowly rotating multi-colour star dust for depth behind the vortex. */
+function AmbientDust({ count = 1400 }: { count?: number }) {
   const ref = useRef<THREE.Points>(null)
-  const positions = useMemo(() => {
-    const arr = new Float32Array(count * 3)
+  const { positions, colors } = useMemo(() => {
+    const positions = new Float32Array(count * 3)
+    const colors = new Float32Array(count * 3)
     for (let i = 0; i < count; i++) {
-      arr[i * 3] = (Math.random() - 0.5) * 26
-      arr[i * 3 + 1] = (Math.random() - 0.5) * 26
-      arr[i * 3 + 2] = -Math.random() * 50
+      const r = 6 + Math.random() * 12
+      const a = Math.random() * Math.PI * 2
+      positions[i * 3] = Math.cos(a) * r
+      positions[i * 3 + 1] = Math.sin(a) * r
+      positions[i * 3 + 2] = -Math.random() * 50
+      const c = new THREE.Color(PALETTE[i % PALETTE.length])
+      colors[i * 3] = c.r
+      colors[i * 3 + 1] = c.g
+      colors[i * 3 + 2] = c.b
     }
-    return arr
+    return { positions, colors }
   }, [count])
   useFrame((_, delta) => {
-    if (ref.current) ref.current.rotation.z += delta * 0.01
+    if (ref.current) ref.current.rotation.z += delta * 0.02
   })
   return (
     <points ref={ref}>
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+        <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
-      <pointsMaterial color="#5fd6ff" size={0.03} transparent opacity={0.5} sizeAttenuation depthWrite={false} blending={THREE.AdditiveBlending} />
+      <pointsMaterial size={0.05} vertexColors transparent opacity={0.65} sizeAttenuation depthWrite={false} blending={THREE.AdditiveBlending} />
     </points>
   )
 }
 
 function Scene() {
-  // wire scroll listener once
   const ref = useRef(false)
   if (!ref.current && typeof window !== 'undefined') {
     ref.current = true
@@ -136,8 +133,12 @@ function Scene() {
   }
   return (
     <>
-      <Dust />
-      <SpiralTunnel />
+      <ambientLight intensity={0.5} />
+      <pointLight position={[6, 4, 8]} intensity={2.4} color="#38bdf8" />
+      <pointLight position={[-6, -3, 4]} intensity={2} color="#e23bd2" />
+      <pointLight position={[0, 2, 6]} intensity={1.6} color="#8b5cf6" />
+      <AmbientDust />
+      <SpiralObjects />
     </>
   )
 }
@@ -145,17 +146,13 @@ function Scene() {
 export default function Background3D() {
   return (
     <div className="fixed inset-0 -z-10">
-      <Canvas
-        camera={{ position: [0, 0, 8], fov: 70 }}
-        dpr={[1, 2]}
-        gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}
-      >
+      <Canvas camera={{ position: [0, 0, 8], fov: 72 }} dpr={[1, 2]} gl={{ antialias: true, alpha: true, powerPreference: 'high-performance' }}>
         <Scene />
       </Canvas>
-      {/* Color wash + vignette so the tunnel melts into the page */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_40%,_rgba(4,6,15,0.45)_80%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.16),_transparent_55%)]" />
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(139,92,246,0.18),_transparent_55%)]" />
+      {/* soft vignette so text stays readable while the spiral stays dominant */}
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_transparent_50%,_rgba(4,6,15,0.55)_92%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,_rgba(34,211,238,0.12),_transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_rgba(226,59,210,0.12),_transparent_55%)]" />
     </div>
   )
 }
