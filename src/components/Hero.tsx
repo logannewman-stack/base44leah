@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
+import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import { MagneticButton } from './ui'
 
 const channels = [
@@ -12,13 +12,26 @@ const channels = [
 
 /** A glassy "command center" showing every channel the agency runs for you. */
 function CommandCard() {
+  // live mouse-driven 3D tilt so the hero reads as dimensional immediately
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-16, 16]), { stiffness: 120, damping: 16 })
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [14, -14]), { stiffness: 120, damping: 16 })
+  useEffect(() => {
+    const h = (e: PointerEvent) => {
+      mx.set(e.clientX / window.innerWidth - 0.5)
+      my.set(e.clientY / window.innerHeight - 0.5)
+    }
+    window.addEventListener('pointermove', h)
+    return () => window.removeEventListener('pointermove', h)
+  }, [mx, my])
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.9, rotateX: 16 }}
-      animate={{ opacity: 1, scale: 1, rotateX: 0 }}
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
       transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
       className="glow-border relative w-full max-w-sm rounded-3xl glass-strong p-6 shadow-glow-violet"
-      style={{ transformStyle: 'preserve-3d' }}
+      style={{ transformStyle: 'preserve-3d', rotateX, rotateY }}
     >
       <div className="flex items-center justify-between">
         <div>
@@ -177,7 +190,7 @@ export default function Hero() {
           </motion.div>
         </motion.div>
 
-        <motion.div style={{ y: yCard }} className="relative flex justify-center lg:justify-end">
+        <motion.div style={{ y: yCard }} className="relative flex justify-center [perspective:1200px] lg:justify-end">
           <div className="pointer-events-none absolute inset-0 -z-10 animate-float rounded-full bg-gradient-to-br from-cyber-cyan/15 to-cyber-violet/20 blur-3xl" />
           <motion.div
             animate={{ rotate: 360 }}

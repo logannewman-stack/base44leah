@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Depth3D, Eyebrow, MagneticButton, Reveal } from './ui'
+import { Depth3D, Eyebrow, MagneticButton } from './ui'
 
 const packages = [
   {
@@ -35,7 +35,7 @@ export default function Packages() {
     <section id="packages" className="relative py-20">
       <div className="pointer-events-none absolute left-1/2 top-1/3 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-cyber-violet/10 blur-[120px]" />
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
           <div className="flex justify-center">
             <Eyebrow>Packages</Eyebrow>
           </div>
@@ -46,7 +46,7 @@ export default function Packages() {
             Bundle everything or pick the services you need — every package is done-for-you and
             tailored to your goals. Let's map out the right fit on a quick call.
           </p>
-        </Reveal>
+        </Depth3D>
 
         <div className="mt-14 grid gap-5 lg:grid-cols-3">
           {packages.map((plan) => (

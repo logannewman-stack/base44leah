@@ -154,7 +154,7 @@ export default function ServicesHelix() {
 
   return (
     <section ref={ref} id="services" className="relative" style={{ height: `${N * 92}vh` }}>
-      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1500px]">
+      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1000px]">
         {/* heading */}
         <div className="absolute top-[8%] left-1/2 z-20 -translate-x-1/2 text-center">
           <Eyebrow>What we do</Eyebrow>

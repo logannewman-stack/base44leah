@@ -79,7 +79,7 @@ export default function Features() {
 
   return (
     <section ref={ref} id="why" className="relative" style={{ height: `${M * 75}vh` }}>
-      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1500px]">
+      <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1100px]">
         <div className="absolute top-[5%] left-1/2 z-20 -translate-x-1/2 px-6 text-center">
           <Eyebrow>Why Front Desk AI</Eyebrow>
           <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">

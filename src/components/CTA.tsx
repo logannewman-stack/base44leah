@@ -1,24 +1,15 @@
-import { motion, useScroll, useTransform } from 'framer-motion'
-import { useRef } from 'react'
-import { MagneticButton, Reveal } from './ui'
+import { Depth3D, MagneticButton } from './ui'
 
 export default function CTA() {
-  const ref = useRef<HTMLDivElement>(null)
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const scale = useTransform(scrollYProgress, [0, 0.5], [0.9, 1])
-
   return (
-    <section id="contact" ref={ref} className="relative py-20">
+    <section id="contact" className="relative py-24">
       <div className="mx-auto max-w-5xl px-6">
-        <motion.div
-          style={{ scale }}
-          className="glow-border relative overflow-hidden rounded-[2.5rem] glass-strong px-8 py-16 text-center sm:px-16"
-        >
-          <div className="pointer-events-none absolute inset-0 grid-overlay opacity-60" />
-          <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-cyber-cyan/20 blur-[100px]" />
-          <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-cyber-violet/20 blur-[100px]" />
+        <Depth3D power={0.9}>
+          <div className="glow-border relative overflow-hidden rounded-[2.5rem] glass-strong px-8 py-16 text-center sm:px-16">
+            <div className="pointer-events-none absolute inset-0 grid-overlay opacity-60" />
+            <div className="pointer-events-none absolute -left-20 top-0 h-72 w-72 rounded-full bg-cyber-cyan/20 blur-[100px]" />
+            <div className="pointer-events-none absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-cyber-violet/20 blur-[100px]" />
 
-          <Reveal>
             <h2 className="relative font-display text-4xl font-bold leading-tight sm:text-6xl">
               Let's build your <span className="gradient-text">growth engine.</span>
             </h2>
@@ -38,8 +29,8 @@ export default function CTA() {
               </MagneticButton>
             </div>
             <p className="relative mt-6 text-sm text-white/40">Fully managed · Tailored to your business</p>
-          </Reveal>
-        </motion.div>
+          </div>
+        </Depth3D>
       </div>
     </section>
   )

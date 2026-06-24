@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Depth3D, Eyebrow, Reveal } from './ui'
+import { Depth3D, Eyebrow } from './ui'
 
 const quotes = [
   {
@@ -26,14 +26,14 @@ export default function Testimonials() {
   return (
     <section id="results" className="relative py-20">
       <div className="mx-auto max-w-6xl px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
           <div className="flex justify-center">
             <Eyebrow>Results</Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
             Businesses that stopped <span className="gradient-text">missing calls.</span>
           </h2>
-        </Reveal>
+        </Depth3D>
 
         <div className="mt-14 grid gap-5 md:grid-cols-3">
           {quotes.map((q) => (
