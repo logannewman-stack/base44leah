@@ -14,7 +14,7 @@ import FloatingChatButton from './components/FloatingChatButton'
 // time the user scrolls to them.
 const ServicesHelix = lazy(() => import('./components/ServicesHelix'))
 const Features = lazy(() => import('./components/Features'))
-const WarpTunnel = lazy(() => import('./components/WarpTunnel'))
+const CoverFlow = lazy(() => import('./components/CoverFlow'))
 const Packages = lazy(() => import('./components/Pricing'))
 const Testimonials = lazy(() => import('./components/Testimonials'))
 const CTA = lazy(() => import('./components/CTA'))
@@ -22,7 +22,7 @@ const CTA = lazy(() => import('./components/CTA'))
 const lazyChunks = [
   () => import('./components/ServicesHelix'),
   () => import('./components/Features'),
-  () => import('./components/WarpTunnel'),
+  () => import('./components/CoverFlow'),
   () => import('./components/Pricing'),
   () => import('./components/Testimonials'),
   () => import('./components/CTA'),
@@ -90,7 +90,7 @@ export default function App() {
           <Features />
         </Defer>
         <Defer minH="80vh">
-          <WarpTunnel />
+          <CoverFlow />
         </Defer>
         <Defer>
           <Packages />
