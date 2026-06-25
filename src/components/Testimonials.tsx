@@ -1,64 +1,93 @@
-import { motion } from 'framer-motion'
-import { Depth3D, Eyebrow } from './ui'
+import { Reveal } from './ui'
 
-const quotes = [
+const reviews = [
   {
-    quote:
-      'Booked Sunday night, and my car was spotless in my own driveway by Monday lunch. Months later the ceramic coating still beads water like day one. Unreal.',
+    text: 'Booked Sunday night and my car was spotless in my own driveway by Monday lunch. Months later the ceramic coating still beads water like day one. Unreal.',
     name: 'Jordan M.',
-    role: 'Tesla Model 3 owner',
+    car: 'Tesla Model 3',
   },
   {
-    quote:
-      'Two years of swirl marks and scratches — gone in a single visit. It honestly looks better than the day I drove it off the lot. Worth every penny.',
+    text: 'Two years of swirl marks and scratches — gone in a single visit. It honestly looks better than the day I drove it off the lot. Worth every penny.',
     name: 'Priya S.',
-    role: 'BMW X5 owner',
+    car: 'BMW X5',
   },
   {
-    quote:
-      'I never have to leave the house and the truck comes back showroom-clean every single time. They handle our whole family’s cars now.',
+    text: 'I never have to leave the house and the truck comes back showroom-clean every single time. They handle our whole family’s cars now.',
     name: 'Mike T.',
-    role: 'Ford F-150 owner',
+    car: 'Ford F-150',
+  },
+  {
+    text: 'Professional, on time, and the interior looked and smelled brand new. The steam clean got out stains I thought were permanent.',
+    name: 'Alyssa R.',
+    car: 'Audi Q7',
+  },
+  {
+    text: 'The ceramic coating package is worth every dollar. Rain just sheets right off and washing it takes me ten minutes now.',
+    name: 'Devon K.',
+    car: 'Corvette C8',
+  },
+  {
+    text: 'Easiest booking I’ve ever done — 60 seconds online, clear price, no surprises. The finish on my black paint is absolutely flawless.',
+    name: 'Sophia L.',
+    car: 'Mercedes C300',
   },
 ]
 
-export default function Testimonials() {
+function GoogleG() {
   return (
-    <section id="results" className="relative py-20">
-      <div className="mx-auto max-w-6xl px-6">
-        <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
-          <div className="flex justify-center">
-            <Eyebrow>Reviews</Eyebrow>
-          </div>
-          <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
-            Drivers who'll never go back to <span className="gradient-text">a drive-thru wash.</span>
-          </h2>
-        </Depth3D>
+    <svg viewBox="0 0 24 24" className="h-5 w-5" aria-label="Google">
+      <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z" />
+      <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z" />
+      <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z" />
+      <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" />
+    </svg>
+  )
+}
 
-        <div className="mt-14 grid gap-5 md:grid-cols-3">
-          {quotes.map((q) => (
-            <Depth3D key={q.name} className="h-full">
-              <motion.figure
-                whileHover={{ y: -6 }}
-                className="glass flex h-full flex-col justify-between rounded-3xl p-7"
-              >
+export default function Reviews() {
+  return (
+    <section id="reviews" className="bg-white py-28 text-black">
+      <div className="mx-auto max-w-7xl px-6">
+        <Reveal className="text-center">
+          <p className="text-xs font-bold uppercase tracking-widest2 text-black/50">What drivers say</p>
+          <h2 className="mt-5 h-display text-6xl text-black sm:text-7xl">
+            5-star <span className="text-gold">reviews</span>
+          </h2>
+        </Reveal>
+
+        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {reviews.map((r) => (
+            <Reveal key={r.name} className="h-full">
+              <figure className="flex h-full flex-col justify-between border border-black/10 bg-white p-7 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.25)]">
                 <div>
-                  <div className="text-cyber-cyan">★★★★★</div>
-                  <blockquote className="mt-4 text-white/80">“{q.quote}”</blockquote>
+                  <div className="flex items-center justify-between">
+                    <div className="text-lg tracking-widest text-gold">★★★★★</div>
+                    <GoogleG />
+                  </div>
+                  <blockquote className="mt-4 text-sm leading-relaxed text-black/75">“{r.text}”</blockquote>
                 </div>
-                <figcaption className="mt-6 flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-to-br from-cyber-cyan to-cyber-violet font-display font-bold text-ink-900">
-                    {q.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-black/10 pt-5">
+                  <span className="flex h-10 w-10 items-center justify-center bg-black text-xs font-bold uppercase text-gold">
+                    {r.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}
                   </span>
                   <div>
-                    <p className="font-semibold text-white">{q.name}</p>
-                    <p className="text-sm text-white/50">{q.role}</p>
+                    <p className="text-sm font-bold uppercase tracking-wide text-black">{r.name}</p>
+                    <p className="text-xs text-black/50">{r.car}</p>
                   </div>
                 </figcaption>
-              </motion.figure>
-            </Depth3D>
+              </figure>
+            </Reveal>
           ))}
         </div>
+
+        <Reveal className="mt-14 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
+          <GoogleG />
+          <p className="text-sm font-semibold text-black/70">
+            <span className="font-display text-2xl tracking-tightest text-black">4.9</span> of 5 ·
+            <span className="ml-1 text-gold">★★★★★</span>
+            <span className="ml-2 text-black/50">based on 500+ Google reviews</span>
+          </p>
+        </Reveal>
       </div>
     </section>
   )

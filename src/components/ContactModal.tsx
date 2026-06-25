@@ -5,14 +5,12 @@ import { useContactModal } from './useContactModal'
 const FORM_SRC = 'https://link.virsalabs.io/widget/form/gobc1SHBoXDUXsieNLL9'
 
 /**
- * Full-screen "Book your detail" modal for the dark site.
- * Dark card, chrome-blue accent bar, embeds the booking form via iframe.
- * Closes on ESC, backdrop click, or the X button.
+ * Full-screen "Book your detail" modal. Black card, gold accent bar, embeds the
+ * booking form via iframe. Closes on ESC, backdrop click, or the X button.
  */
 export default function ContactModal() {
   const { isOpen, close } = useContactModal()
 
-  // ESC to close + lock background scroll while open.
   useEffect(() => {
     if (!isOpen) return
     const onKey = (e: KeyboardEvent) => {
@@ -32,7 +30,7 @@ export default function ContactModal() {
       {isOpen && (
         <motion.div
           className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto p-4 sm:items-center sm:p-6"
-          style={{ background: 'rgba(0,0,0,0.85)' }}
+          style={{ background: 'rgba(0,0,0,0.88)' }}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -43,32 +41,29 @@ export default function ContactModal() {
           aria-label="Book your detail"
         >
           <motion.div
-            className="relative my-auto w-full max-w-[600px] overflow-hidden rounded-3xl border border-white/10 bg-[#070b18] shadow-glow-violet"
-            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            className="relative my-auto w-full max-w-[600px] overflow-hidden border border-white/15 bg-black"
+            initial={{ opacity: 0, y: 24, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 24, scale: 0.96 }}
+            exit={{ opacity: 0, y: 24, scale: 0.97 }}
             transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Chrome-blue accent bar — ice → electric → azure */}
-            <div className="h-1.5 w-full bg-gradient-to-r from-[#38bdf8] via-[#2563eb] to-[#0ea5e9]" />
+            {/* Gold accent bar */}
+            <div className="h-1.5 w-full bg-gold" />
 
             {/* Header */}
             <div className="flex items-start justify-between gap-4 px-6 pt-6 sm:px-8">
               <div>
-                <p className="font-display text-2xl font-bold leading-none text-white">
-                  Detail on{' '}
-                  <span className="bg-gradient-to-r from-[#38bdf8] via-[#2563eb] to-[#0ea5e9] bg-clip-text text-transparent">
-                    Demand
-                  </span>
+                <p className="font-display text-3xl uppercase tracking-tightest text-white">
+                  Detail on <span className="text-gold">Demand</span>
                 </p>
-                <p className="mt-2 text-sm font-medium text-white/60">Book your detail</p>
+                <p className="mt-2 text-xs font-bold uppercase tracking-widest2 text-white/55">Book your detail</p>
               </div>
               <button
                 type="button"
                 onClick={close}
                 aria-label="Close"
-                className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-colors hover:bg-white/10"
+                className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center text-white transition-colors hover:text-gold"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <line x1="6" y1="6" x2="18" y2="18" />
@@ -77,12 +72,12 @@ export default function ContactModal() {
               </button>
             </div>
 
-            {/* GHL form — kept on a white panel so the embedded form is readable */}
+            {/* Booking form — kept on a white panel so the embedded form is readable */}
             <div className="px-2 pb-4 pt-4 sm:px-4">
               <iframe
                 src={FORM_SRC}
                 title="Book your detail"
-                style={{ width: '100%', height: 700, border: 'none', borderRadius: 12, background: '#fff' }}
+                style={{ width: '100%', height: 700, border: 'none', background: '#fff' }}
               />
             </div>
           </motion.div>

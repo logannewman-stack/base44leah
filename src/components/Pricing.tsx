@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion'
-import { Depth3D, Eyebrow, MagneticButton } from './ui'
+import { Button, Eyebrow, Reveal } from './ui'
+import { contactModal } from './useContactModal'
 
 const packages = [
   {
@@ -17,7 +17,7 @@ const packages = [
     featured: true,
   },
   {
-    name: 'The Ultimate Ceramic',
+    name: 'Ultimate Ceramic',
     price: '$899',
     tagline: 'Correction + multi-year ceramic',
     includes: ['Everything in The Showroom', 'Multi-stage paint correction', 'Multi-year ceramic coating', 'Wheel-face ceramic coating', 'Hydrophobic glass coating', '5-year protection warranty'],
@@ -25,9 +25,9 @@ const packages = [
   },
 ]
 
-function Check() {
+function Check({ dark = false }: { dark?: boolean }) {
   return (
-    <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-cyber-cyan" fill="none" stroke="currentColor" strokeWidth="3">
+    <svg viewBox="0 0 24 24" className={`mt-0.5 h-4 w-4 shrink-0 ${dark ? 'text-black' : 'text-gold'}`} fill="none" stroke="currentColor" strokeWidth="3">
       <path d="M5 13l4 4L19 7" />
     </svg>
   )
@@ -35,63 +35,78 @@ function Check() {
 
 export default function Packages() {
   return (
-    <section id="packages" className="relative py-20">
-      <div className="pointer-events-none absolute left-1/2 top-1/3 h-[40rem] w-[40rem] -translate-x-1/2 rounded-full bg-cyber-violet/10 blur-[120px]" />
-      <div className="mx-auto max-w-6xl px-6">
-        <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
+    <section id="packages" className="bg-black py-28">
+      <div className="mx-auto max-w-7xl px-6">
+        <Reveal className="text-center">
           <div className="flex justify-center">
             <Eyebrow>Packages</Eyebrow>
           </div>
-          <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
-            Pick your shine. <span className="gradient-text">We bring it to you.</span>
+          <h2 className="mt-5 h-display text-6xl text-white sm:text-7xl">
+            Pick your <span className="text-gold">shine</span>
           </h2>
-          <p className="mt-5 text-white/60">
-            Every package is fully mobile and performed right at your home or office. Upfront pricing,
-            no hidden fees — book online in 60 seconds and we handle the rest.
+          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/60">
+            Every package is fully mobile and performed at your home or office. Upfront pricing, no
+            hidden fees — book online in 60 seconds and we handle the rest.
           </p>
-        </Depth3D>
+        </Reveal>
 
-        <div className="mt-14 grid gap-5 lg:grid-cols-3">
-          {packages.map((plan) => (
-            <Depth3D key={plan.name} className="h-full">
-              <motion.div
-                whileHover={{ y: -8 }}
-                className={`relative flex h-full flex-col rounded-3xl p-7 ${
-                  plan.featured ? 'glass-strong glow-border shadow-glow-violet' : 'glass'
-                }`}
-              >
-                {plan.featured && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet px-3 py-1 text-xs font-bold uppercase tracking-wider text-ink-900">
-                    Most popular
-                  </span>
-                )}
-                <h3 className="font-display text-xl font-semibold text-white">{plan.name}</h3>
-                <p className="mt-1 text-sm text-white/50">{plan.tagline}</p>
+        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+          {packages.map((plan) => {
+            const featured = plan.featured
+            return (
+              <Reveal key={plan.name} className="h-full">
+                <div
+                  className={`flex h-full flex-col p-9 ${
+                    featured ? 'bg-gold text-black' : 'border border-white/12 bg-ink-900 text-white'
+                  }`}
+                >
+                  {featured && (
+                    <span className="mb-5 inline-block w-fit bg-black px-3 py-1 text-[0.65rem] font-bold uppercase tracking-widest2 text-gold">
+                      Most popular
+                    </span>
+                  )}
+                  <h3 className="font-display text-4xl uppercase leading-none tracking-tightest">{plan.name}</h3>
+                  <p className={`mt-2 text-sm ${featured ? 'text-black/70' : 'text-white/50'}`}>{plan.tagline}</p>
 
-                <p className="mt-5 flex items-baseline gap-1.5">
-                  <span className="text-xs uppercase tracking-wider text-white/40">from</span>
-                  <span className="font-display text-4xl font-bold gradient-text">{plan.price}</span>
-                </p>
+                  <p className="mt-6 flex items-baseline gap-2">
+                    <span className={`text-xs font-bold uppercase tracking-wider2 ${featured ? 'text-black/60' : 'text-white/45'}`}>from</span>
+                    <span className="font-display text-5xl uppercase tracking-tightest">{plan.price}</span>
+                  </p>
 
-                <ul className="mt-6 space-y-3 text-sm text-white/75">
-                  {plan.includes.map((f) => (
-                    <li key={f} className="flex gap-2.5">
-                      <Check />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+                  <ul className={`mt-8 space-y-3 text-sm ${featured ? 'text-black/85' : 'text-white/75'}`}>
+                    {plan.includes.map((f) => (
+                      <li key={f} className="flex gap-2.5">
+                        <Check dark={featured} />
+                        {f}
+                      </li>
+                    ))}
+                  </ul>
 
-                <div className="mt-8 pt-2">
-                  <MagneticButton href="#contact" variant={plan.featured ? 'primary' : 'ghost'} className="w-full">
-                    Book this package
-                  </MagneticButton>
+                  <div className="mt-9 pt-2">
+                    {featured ? (
+                      <a
+                        href="#contact"
+                        onClick={(e) => {
+                          e.preventDefault()
+                          contactModal.open()
+                        }}
+                        className="flex w-full items-center justify-center gap-2 bg-black px-7 py-3.5 text-sm font-bold uppercase tracking-wider2 text-gold transition-colors hover:bg-ink-800"
+                      >
+                        Book this package
+                      </a>
+                    ) : (
+                      <Button href="#contact" variant="outline" className="w-full">
+                        Book this package
+                      </Button>
+                    )}
+                  </div>
                 </div>
-              </motion.div>
-            </Depth3D>
-          ))}
+              </Reveal>
+            )
+          })}
         </div>
-        <p className="mt-8 text-center text-sm text-white/40">
+
+        <p className="mt-10 text-center text-xs leading-relaxed text-white/40">
           Mobile service included free within 25 miles. SUVs, trucks, and heavily-soiled vehicles may
           vary — your exact price is confirmed at booking. Fleet &amp; recurring plans available too.
         </p>

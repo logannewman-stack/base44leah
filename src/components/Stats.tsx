@@ -1,59 +1,20 @@
-import { animate, motion, useInView } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
-import { Depth3D } from './ui'
-
-function Counter({ to, suffix = '', prefix = '', decimals = 0 }: { to: number; suffix?: string; prefix?: string; decimals?: number }) {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-60px' })
-  const [val, setVal] = useState(0)
-
-  useEffect(() => {
-    if (!inView) return
-    const controls = animate(0, to, {
-      duration: 1.8,
-      ease: [0.22, 1, 0.36, 1],
-      onUpdate: (v) => setVal(v),
-    })
-    return () => controls.stop()
-  }, [inView, to])
-
-  return (
-    <span ref={ref}>
-      {prefix}
-      {val.toFixed(decimals)}
-      {suffix}
-    </span>
-  )
-}
-
 const stats = [
-  { to: 2000, suffix: '+', label: 'Cars detailed', sub: 'And counting, every season' },
-  { to: 4.9, suffix: '★', decimals: 1, label: 'Average rating', sub: 'From 500+ verified reviews' },
-  { to: 60, suffix: 's', label: 'To book online', sub: 'Pick a time, we come to you' },
-  { to: 100, suffix: '%', label: 'Satisfaction guarantee', sub: "We don't leave until it shines" },
+  { value: '2,000+', label: 'Cars detailed' },
+  { value: '4.9★', label: '500+ 5-star reviews' },
+  { value: '60 sec', label: 'To book online' },
+  { value: '100%', label: 'Satisfaction guarantee' },
 ]
 
 export default function Stats() {
   return (
-    <section className="relative py-16">
-      <div className="mx-auto max-w-6xl px-6">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((s) => (
-            <Depth3D key={s.label}>
-              <motion.div
-                whileHover={{ y: -6 }}
-                className="glass relative overflow-hidden rounded-2xl p-6"
-              >
-                <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-cyber-cyan/10 blur-2xl" />
-                <p className="font-display text-4xl font-bold gradient-text sm:text-5xl">
-                  <Counter to={s.to} suffix={s.suffix} decimals={s.decimals} />
-                </p>
-                <p className="mt-2 font-semibold text-white">{s.label}</p>
-                <p className="text-sm text-white/50">{s.sub}</p>
-              </motion.div>
-            </Depth3D>
-          ))}
-        </div>
+    <section className="border-y border-white/10 bg-black">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 divide-x divide-white/10 lg:grid-cols-4">
+        {stats.map((s) => (
+          <div key={s.label} className="px-6 py-10 text-center">
+            <p className="font-display text-4xl uppercase tracking-tightest text-gold sm:text-5xl">{s.value}</p>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-widest2 text-white/55">{s.label}</p>
+          </div>
+        ))}
       </div>
     </section>
   )

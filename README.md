@@ -1,28 +1,33 @@
 # Detail on Demand — Marketing Site
 
-A modern, immersive marketing website for **Detail on Demand**, a premium mobile auto
-detailing service that brings ceramic coatings, paint correction, and showroom-shine
-detailing right to your driveway — booked in 60 seconds.
+A premium, luxury marketing website for **Detail on Demand**, a mobile auto-detailing
+service offering ceramic coatings, paint correction, and showroom-shine detailing
+delivered to your driveway.
 
-Built to feel premium and alive: a GPU-rendered aurora background, scroll-driven
-storytelling, parallax depth, and motion throughout.
+The design follows a clean, photographic **black / white / gold** luxury aesthetic
+(inspired by high-end detailing brands) — heavy condensed all-caps headings, generous
+spacing, and a single gold accent. No WebGL, no particle effects; just crisp layout
+and subtle scroll reveals.
 
 ## Tech stack
 
 - **React + Vite + TypeScript** — fast, typed SPA
-- **Tailwind CSS** — design system (chrome-blue palette, glassmorphism)
-- **Framer Motion** — scroll-linked animation, reveals, magnetic buttons
-- **Three.js / @react-three/fiber** — live WebGL aurora field (code-split & lazy-loaded)
+- **Tailwind CSS** — black/white/gold design system, Anton (display) + Inter (body)
+- **Framer Motion** — subtle fade-up reveals and the thin scroll-progress bar
 
-## Key experiences
+## Sections
 
-- **Live WebGL background** — a flowing, chrome-blue aurora field that reacts to the pointer
-- **Hero** — parallax headline with an animated "mobile detail booked" card
-- **Services** — a sticky 3D helix walking through Ceramic, Correction, PPF, Interior & Mobile
-- **Why us** — a vertical 3D wheel of reasons drivers choose us
-- **Packages** — three transparent-priced mobile detailing tiers
-- **Cursor glow + scroll progress bar** for an "inside the screen" feel
-- Fully responsive, with `prefers-reduced-motion` support
+1. **Navbar** — pure black, centered logo with links split left/right, gold **Book Now**, sticky
+2. **Hero** — full-viewport dark studio scene with a stylized top-down luxury car and a bold all-caps headline *(placeholder SVG — swap for real photography)*
+3. **Stats** — compact trust strip (cars detailed, rating, booking speed, guarantee)
+4. **Services** — horizontal-scroll black cards with gold **Book →** CTAs
+5. **The Shine Club** — white feature band (membership)
+6. **Ceramic Coatings** — left heading + copy with a photo gallery grid
+7. **Packages** — three transparent-priced tiers (gold "Most Popular")
+8. **Reviews** — white Google-style review cards with star ratings
+9. **Gallery** — Instagram-style grid of video/photo thumbnails
+10. **CTA** — full-bleed gold "Request a free quote" band
+11. **Footer** — black 4-column (brand + socials / quick links / inquire / services)
 
 ## Develop
 
@@ -33,21 +38,10 @@ npm run build    # type-check + production build
 npm run preview  # preview the production build
 ```
 
-## Structure
+## Customizing
 
-```
-src/
-  App.tsx                  # composition of all sections
-  index.css                # Tailwind layers + custom utilities
-  components/
-    ImmersiveBg.tsx         # WebGL aurora field (lazy-loaded)
-    Effects.tsx             # scroll progress bar + cursor glow
-    Navbar.tsx  Hero.tsx  Marquee.tsx  Stats.tsx
-    ServicesHelix.tsx  Features.tsx  Pricing.tsx
-    Testimonials.tsx  CTA.tsx  Footer.tsx
-    ContactModal.tsx        # booking modal (embedded form)
-    ui.tsx                  # shared Reveal / MagneticButton / Eyebrow
-```
-
-> Copy, pricing, and the booking-form embed are illustrative starting points — swap in your
-> real packages, service area, and booking link before going live.
+- **Hero photo:** replace `<CarTopDown/>` in `src/components/Hero.tsx` with an `<img>` of a real dark-studio car photo.
+- **Gallery / Ceramics tiles:** the gradient placeholder tiles are ready to swap for real detailing photos.
+- **Colors:** the whole palette lives in `tailwind.config.js` (`gold`, `ink`).
+- **Booking form:** `ContactModal.tsx` embeds a placeholder form URL — point it at your real booking link.
+- Prices, phone, email, social handles, and the 25-mile service area are placeholders — update before launch.

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,23 +14,17 @@
 
 html {
   scroll-behavior: smooth;
+  overflow-x: clip;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: #05070e;
-  color: #e6ebff;
+  background: #000000;
+  color: #ffffff;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-/* Prevent sideways scroll from decorative glows WITHOUT creating a scroll
-   container on the body (which would disable position: sticky). overflow:clip
-   on a non-scrolling root is safe for sticky descendants. */
-html {
-  overflow-x: clip;
 }
 
 #root {
@@ -39,67 +33,59 @@ html {
 }
 
 ::selection {
-  background: rgba(56, 189, 248, 0.3);
-  color: #fff;
+  background: #f5c518;
+  color: #000;
 }
 
 ::-webkit-scrollbar {
   width: 10px;
+  height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #05070e;
+  background: #000;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #38bdf8, #2563eb);
-  border-radius: 999px;
+  background: #f5c518;
+  border-radius: 0;
 }
 
 @layer components {
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(100deg, #7dd3fc 0%, #38bdf8 32%, #2563eb 68%, #0ea5e9 100%);
+  /* Big condensed all-caps heading */
+  .h-display {
+    @apply font-display uppercase leading-[0.92] tracking-tightest;
   }
 
-  .glass {
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+  /* Solid gold CTA */
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 bg-gold px-7 py-3.5 text-sm font-bold uppercase tracking-wider2 text-black transition-colors duration-200 hover:bg-gold-400;
   }
 
-  .glass-strong {
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+  /* Outlined (ghost) button */
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border border-white/30 bg-transparent px-7 py-3.5 text-sm font-bold uppercase tracking-wider2 text-white transition-colors duration-200 hover:border-gold hover:text-gold;
+  }
+
+  /* Thin gold link-button used inside dark cards */
+  .btn-book {
+    @apply inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest2 text-gold transition-all duration-200 hover:gap-3;
   }
 }
 
-.glow-border {
-  position: relative;
+/* Hide scrollbar on horizontal scrollers while keeping it scrollable */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
-.glow-border::before {
-  content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(120deg, #38bdf8, #2563eb, #0ea5e9, #38bdf8);
-  background-size: 300% 300%;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: shimmer 6s linear infinite;
-  pointer-events: none;
-  opacity: 0.7;
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
 }
 
-.grid-overlay {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
+/* Subtle film grain / studio vignette helper for photographic dark sections */
+.studio-vignette {
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.06), transparent 55%),
+    radial-gradient(100% 100% at 50% 60%, rgba(245, 197, 24, 0.05), transparent 60%),
+    #000;
 }
 
 @media (prefers-reduced-motion: reduce) {
