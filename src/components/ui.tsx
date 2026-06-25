@@ -1,4 +1,4 @@
-import { motion, useInView, useScroll, useTransform } from 'framer-motion'
+import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState, type ReactNode, type MouseEvent } from 'react'
 import { contactModal } from './useContactModal'
 
@@ -18,12 +18,15 @@ export function Depth3D({
   power?: number
 }) {
   const ref = useRef<HTMLDivElement>(null)
+  const reduceMotion = useReducedMotion()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
   // Flat & crisp through the whole reading band (z=0, rotateX=0); the 3D fly-in
   // and fly-out only happen at the edges, so text is never blurry while you read.
   const z = useTransform(scrollYProgress, [0, 0.4, 0.66, 1], [-560 * power, 0, 0, 220 * power])
   const rotateX = useTransform(scrollYProgress, [0, 0.4, 0.66, 1], [30, 0, 0, -18])
   const opacity = useTransform(scrollYProgress, [0, 0.18, 0.9, 1], [0, 1, 1, 0.45])
+  // Respect reduced-motion: skip the 3D fly-in entirely, render flat & static.
+  if (reduceMotion) return <div className={className}>{children}</div>
   return (
     <div ref={ref} className={className} style={{ perspective: 1300 }}>
       <motion.div className="h-full" style={{ z, rotateX, opacity, transformStyle: 'preserve-3d' }}>

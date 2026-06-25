@@ -1,18 +1,37 @@
+import { lazy, Suspense, useEffect, type ReactNode } from 'react'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { CursorGlow, ScrollProgress } from './components/Effects'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
 import Stats from './components/Stats'
-import ServicesHelix from './components/ServicesHelix'
-import Features from './components/Features'
-import WarpTunnel from './components/WarpTunnel'
-import Packages from './components/Pricing'
-import Testimonials from './components/Testimonials'
-import CTA from './components/CTA'
 import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
 import FloatingChatButton from './components/FloatingChatButton'
+
+// Below-the-fold sections are code-split so the initial bundle only carries the
+// hero + above-the-fold UI. They're prefetched on idle so they're ready by the
+// time the user scrolls to them.
+const ServicesHelix = lazy(() => import('./components/ServicesHelix'))
+const Features = lazy(() => import('./components/Features'))
+const WarpTunnel = lazy(() => import('./components/WarpTunnel'))
+const Packages = lazy(() => import('./components/Pricing'))
+const Testimonials = lazy(() => import('./components/Testimonials'))
+const CTA = lazy(() => import('./components/CTA'))
+
+const lazyChunks = [
+  () => import('./components/ServicesHelix'),
+  () => import('./components/Features'),
+  () => import('./components/WarpTunnel'),
+  () => import('./components/Pricing'),
+  () => import('./components/Testimonials'),
+  () => import('./components/CTA'),
+]
+
+// Reserves vertical space so a not-yet-loaded chunk doesn't cause layout shift.
+function Defer({ children, minH = '60vh' }: { children: ReactNode; minH?: string }) {
+  return <Suspense fallback={<div style={{ minHeight: minH }} aria-hidden />}>{children}</Suspense>
+}
 
 // Clean light backdrop: soft grey blooms + a faint grid on near-white.
 function LightBg() {
@@ -27,6 +46,28 @@ function LightBg() {
 }
 
 export default function App() {
+  // Warm the split chunks once the main thread is idle after first paint.
+  useEffect(() => {
+    let cancelled = false
+    const run = () => {
+      if (cancelled) return
+      lazyChunks.forEach((load) => load())
+    }
+    const w = window as typeof window & {
+      requestIdleCallback?: (cb: () => void) => number
+      cancelIdleCallback?: (id: number) => void
+    }
+    let idleId: number | undefined
+    let timeoutId: ReturnType<typeof setTimeout> | undefined
+    if (w.requestIdleCallback) idleId = w.requestIdleCallback(run)
+    else timeoutId = setTimeout(run, 1500)
+    return () => {
+      cancelled = true
+      if (idleId !== undefined && w.cancelIdleCallback) w.cancelIdleCallback(idleId)
+      if (timeoutId !== undefined) clearTimeout(timeoutId)
+    }
+  }, [])
+
   return (
     <div className="relative min-h-screen">
       <LightBg />
@@ -42,12 +83,24 @@ export default function App() {
         <Hero />
         <Marquee />
         <Stats />
-        <ServicesHelix />
-        <Features />
-        <WarpTunnel />
-        <Packages />
-        <Testimonials />
-        <CTA />
+        <Defer minH="100vh">
+          <ServicesHelix />
+        </Defer>
+        <Defer minH="100vh">
+          <Features />
+        </Defer>
+        <Defer minH="80vh">
+          <WarpTunnel />
+        </Defer>
+        <Defer>
+          <Packages />
+        </Defer>
+        <Defer>
+          <Testimonials />
+        </Defer>
+        <Defer minH="50vh">
+          <CTA />
+        </Defer>
       </main>
       <Footer />
       <ContactModal />

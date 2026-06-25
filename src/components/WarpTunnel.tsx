@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import { useRef } from 'react'
 import { Eyebrow } from './ui'
+import { useIsMobile } from './useIsMobile'
 
 // 50 unique, futuristic statements — each card appears exactly once.
 const statements = [
@@ -111,7 +112,37 @@ function Ring({ i, progress }: { i: number; progress: MotionValue<number> }) {
   return <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 h-[60vmin] w-[88vmin] rounded-[2.5rem] border-2 border-neutral-900/20" />
 }
 
+/* ----------------- Mobile: lightweight static statement chips -------------- */
+
+function WarpTunnelMobile() {
+  // A representative selection — the full 50-card 3D tunnel is desktop-only.
+  const picks = statements.slice(0, 16)
+  return (
+    <section className="relative overflow-x-clip py-20">
+      <div className="mx-auto max-w-md px-6 text-center">
+        <Eyebrow>Why we're different</Eyebrow>
+        <h2 className="mt-3 font-display text-3xl font-bold">
+          Work that <span className="gradient-text">breaks the mold.</span>
+        </h2>
+        <div className="mt-8 flex flex-wrap justify-center gap-2.5">
+          {picks.map((t) => (
+            <span key={t} className="rounded-full glass px-4 py-2 text-sm font-medium text-neutral-700">
+              {t}
+            </span>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function WarpTunnel() {
+  const isMobile = useIsMobile()
+  if (isMobile) return <WarpTunnelMobile />
+  return <WarpTunnelDesktop />
+}
+
+function WarpTunnelDesktop() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const twist = useTransform(scrollYProgress, [0, 1], [0, 90])

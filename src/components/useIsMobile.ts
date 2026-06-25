@@ -6,7 +6,9 @@ import { useEffect, useState } from 'react'
  * screen instead of spilling off the edges. Desktop is untouched.
  */
 export function useIsMobile(query = '(max-width: 640px)') {
-  const [isMobile, setIsMobile] = useState(false)
+  // Initialise synchronously so the heavy 3D sections never mount on mobile,
+  // even for the first paint (avoids a flash + a wasted expensive mount).
+  const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches)
 
   useEffect(() => {
     const mql = window.matchMedia(query)
