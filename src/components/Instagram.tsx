@@ -1,33 +1,25 @@
-import { Chip, Reveal } from './ui'
+import { Reveal } from './ui'
 import { Photo } from './Photo'
 import { IMAGES } from '../images'
 
-// Varied aspect ratios create the masonry rhythm.
-const aspects = ['aspect-[3/4]', 'aspect-square', 'aspect-[4/5]', 'aspect-square', 'aspect-[4/3]', 'aspect-[3/4]']
-
 export default function Gallery() {
   return (
-    <section id="gallery" className="bg-white py-24">
+    <section id="gallery" className="bg-brand-grey py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="max-w-2xl">
-          <Chip>Our work</Chip>
-          <h2 className="mt-5 display text-4xl text-brand-ink sm:text-5xl">See the shine for yourself.</h2>
-          <p className="mt-5 text-lg text-slate-600">
-            A look at recent details — coatings, corrections, and full transformations.
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <h2 className="h-section">Our Work</h2>
+          <p className="mx-auto mt-4 max-w-xl text-[17px] leading-[1.7] text-gray-700">
+            Every car that leaves our hands is showroom ready.
           </p>
         </Reveal>
 
-        <div className="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3">
+        <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-3">
           {IMAGES.gallery.map((src, i) => (
-            <div key={i} className="mb-5 break-inside-avoid">
-              <Reveal>
-                <Photo
-                  src={src}
-                  alt={`Detailed vehicle ${i + 1}`}
-                  className={`${aspects[i % aspects.length]} w-full rounded-card shadow-card transition-transform duration-500 hover:scale-[1.02]`}
-                />
-              </Reveal>
-            </div>
+            <Reveal key={i}>
+              <div className="overflow-hidden rounded-xl shadow-md">
+                <Photo src={src} alt={`Detailed vehicle ${i + 1}`} className="aspect-[4/3] w-full transition-transform duration-500 hover:scale-105" />
+              </div>
+            </Reveal>
           ))}
         </div>
       </div>

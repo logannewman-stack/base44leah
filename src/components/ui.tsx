@@ -29,15 +29,19 @@ export function Reveal({
   )
 }
 
-/** Small light-blue pill chip used above section headings. */
+/** Uppercase pill label. */
 export function Chip({ children }: { children: ReactNode }) {
   return <span className="chip">{children}</span>
 }
 
-/**
- * Button. Variants: 'primary' (light-blue), 'dark' (ink), 'ghost' (outline).
- * Any href of "#contact" opens the booking modal instead of navigating.
- */
+const VARIANTS: Record<string, string> = {
+  primary: 'btn-primary',
+  outlineSky: 'btn-outline-sky',
+  outlineDark: 'btn-outline-dark',
+  white: 'btn-white',
+}
+
+/** Button. Any href of "#contact" opens the booking modal instead of navigating. */
 export function Button({
   children,
   href = '#',
@@ -46,7 +50,7 @@ export function Button({
 }: {
   children: ReactNode
   href?: string
-  variant?: 'primary' | 'dark' | 'ghost'
+  variant?: keyof typeof VARIANTS
   className?: string
 }) {
   const onClick = (e: MouseEvent) => {
@@ -55,9 +59,8 @@ export function Button({
       contactModal.open()
     }
   }
-  const cls = variant === 'primary' ? 'btn-primary' : variant === 'dark' ? 'btn-dark' : 'btn-ghost'
   return (
-    <a href={href} onClick={onClick} className={`${cls} ${className}`}>
+    <a href={href} onClick={onClick} className={`${VARIANTS[variant] ?? VARIANTS.primary} ${className}`}>
       {children}
     </a>
   )

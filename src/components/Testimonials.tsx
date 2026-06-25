@@ -1,50 +1,40 @@
-import { Chip, Reveal } from './ui'
+import { Reveal } from './ui'
 
 const reviews = [
   {
-    text: 'Booked Sunday night and my car was spotless in my own driveway by Monday lunch. The ceramic coating still beads water months later. Absolutely worth it.',
-    name: 'Jordan Mercer',
-    city: 'Austin, TX',
+    text: 'I was skeptical about mobile detailing but Detail on Demand blew me away. My 2022 BMW looks better than it did when I drove it off the lot. Worth every penny.',
+    name: 'Marcus T.',
+    city: 'Dallas, TX',
   },
   {
-    text: 'Two years of swirl marks gone in a single visit. The paint correction made my black sedan look better than the day I bought it. I won’t go anywhere else.',
-    name: 'Priya Shah',
-    city: 'San Diego, CA',
+    text: "Booked online in under a minute. They showed up exactly on time, worked for 3 hours straight, and I genuinely couldn't believe how clean my SUV was. Five stars isn't enough.",
+    name: 'Jennifer R.',
+    city: 'Plano, TX',
   },
   {
-    text: 'They come to my office, detail the truck in the lot, and I drive home gleaming. The interior deep clean got out stains I thought were permanent. 10/10.',
-    name: 'Marcus Trent',
-    city: 'Denver, CO',
+    text: "Got the ceramic coating package. It's been 8 months and water still beads off perfectly. The paint looks showroom new. Best investment I've made for my car.",
+    name: 'Derek M.',
+    city: 'Frisco, TX',
   },
 ]
 
 export default function Testimonials() {
   return (
-    <section id="reviews" className="bg-brand-grey py-24">
+    <section id="reviews" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <div className="flex justify-center">
-            <Chip>Reviews</Chip>
-          </div>
-          <h2 className="mt-5 display text-4xl text-brand-ink sm:text-5xl">What Our Customers Say</h2>
+          <h2 className="h-section">What Our Customers Say</h2>
         </Reveal>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {reviews.map((r) => (
             <Reveal key={r.name} className="h-full">
-              <figure className="flex h-full flex-col justify-between rounded-card bg-white p-7 shadow-card">
-                <div>
-                  <div className="text-lg tracking-wide text-brand-blue">★★★★★</div>
-                  <blockquote className="mt-4 text-sm leading-relaxed text-slate-700">“{r.text}”</blockquote>
-                </div>
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand-blue text-sm font-bold text-white">
-                    {r.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}
-                  </span>
-                  <div>
-                    <p className="text-sm font-semibold text-brand-ink">{r.name}</p>
-                    <p className="text-xs text-slate-500">{r.city}</p>
-                  </div>
+              <figure className="flex h-full flex-col rounded-2xl border border-gray-100 bg-white p-8 shadow-md">
+                <div className="text-lg tracking-wide text-brand-blue">★★★★★</div>
+                <blockquote className="mt-4 flex-1 text-[18px] italic leading-relaxed text-gray-700">“{r.text}”</blockquote>
+                <figcaption className="mt-6">
+                  <p className="text-base font-bold text-brand-ink">{r.name}</p>
+                  <p className="text-sm text-gray-500">{r.city}</p>
                 </figcaption>
               </figure>
             </Reveal>

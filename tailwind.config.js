@@ -4,18 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Light, airy palette — white space, near-black text, sky-blue accent
         brand: {
-          blue: '#0ea5e9', // primary accent
-          blueDark: '#0369a1', // hover / strong CTA
-          sky: '#38bdf8', // light accent
-          tint: '#e0f2fe', // soft fills
-          ink: '#0a0a0a', // near-black text
-          grey: '#f8f9fa', // section alternation
+          blue: '#0ea5e9', // sky-500 accent
+          blueDark: '#0369a1', // sky-700 — hover / strong CTA / heading accent
+          sky: '#38bdf8', // sky-400 light accent
+          badge: '#e0f4ff', // hero/eyebrow pill bg
+          tint: '#e0f4ff',
+          ink: '#0a0a0a', // near-black text (high contrast)
+          grey: '#f0f7ff', // light blue-tinted section alternation
+          line: '#e0f0ff', // hairline dividers
         },
       },
       fontFamily: {
-        // Clean modern sans throughout (SaaS/agency feel)
         display: ['Inter', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
@@ -23,9 +23,9 @@ export default {
         card: '16px',
       },
       boxShadow: {
-        soft: '0 18px 50px -20px rgba(2,32,71,0.18)',
+        soft: '0 18px 50px -20px rgba(2,32,71,0.20)',
         card: '0 6px 24px -10px rgba(2,32,71,0.12)',
-        blue: '0 16px 40px -16px rgba(14,165,233,0.45)',
+        blue: '0 14px 32px -12px rgba(14,165,233,0.5)',
       },
       keyframes: {
         fadeUp: {

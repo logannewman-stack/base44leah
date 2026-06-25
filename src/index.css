@@ -24,6 +24,8 @@ body {
   background: #ffffff;
   color: #0a0a0a;
   font-family: 'Inter', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -50,28 +52,37 @@ body {
 }
 
 @layer components {
-  .display {
-    @apply font-display font-extrabold tracking-[-0.025em];
+  /* Headings */
+  .h-hero {
+    @apply font-extrabold leading-[1.1] tracking-[-0.02em] text-brand-ink;
+  }
+  .h-section {
+    @apply text-3xl font-bold tracking-[-0.01em] text-brand-ink sm:text-[40px] sm:leading-[1.15];
   }
 
-  /* Primary sky-blue CTA */
-  .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-7 py-3.5 text-sm font-semibold text-white shadow-blue transition-all duration-200 hover:bg-brand-blueDark hover:shadow-soft;
-  }
-
-  /* Ghost / outline button */
-  .btn-ghost {
-    @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-sm font-semibold text-brand-ink transition-colors duration-200 hover:border-brand-blue hover:text-brand-blue;
-  }
-
-  /* White button used on blue/dark backgrounds */
-  .btn-white {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand-blueDark shadow-soft transition-colors duration-200 hover:bg-slate-50;
-  }
-
-  /* Small light-blue chip / eyebrow */
+  /* Uppercase label/eyebrow pill */
   .chip {
-    @apply inline-flex items-center gap-2 rounded-full bg-brand-tint px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-blueDark;
+    @apply inline-flex items-center gap-2 rounded-full bg-brand-badge px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.08em] text-brand-blueDark;
+  }
+
+  /* Solid sky CTA with drop shadow */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-7 py-3.5 text-sm font-semibold text-white shadow-blue transition-all duration-200 hover:bg-brand-blueDark;
+  }
+
+  /* Outline (sky) — pricing Starter/Ceramic */
+  .btn-outline-sky {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-brand-blue bg-white px-7 py-3.5 text-sm font-semibold text-brand-blue transition-colors duration-200 hover:bg-brand-blue hover:text-white;
+  }
+
+  /* Outline (dark) — hero secondary */
+  .btn-outline-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border-2 border-gray-900 bg-transparent px-7 py-3.5 text-sm font-semibold text-gray-900 transition-colors duration-200 hover:bg-gray-900 hover:text-white;
+  }
+
+  /* White button on blue/dark backgrounds */
+  .btn-white {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand-blueDark shadow-lg transition-transform duration-200 hover:scale-[1.03];
   }
 }
 
