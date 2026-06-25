@@ -21,7 +21,8 @@ const vertexShader = /* glsl */ `
   }
 `
 
-// Flowing, domain-warped iridescent aurora — a living holographic field.
+// Flowing, domain-warped iridescent field — wet glass, drifting soap-suds and
+// rising bubble glints: the living water backdrop behind the whole site.
 const fragmentShader = /* glsl */ `
   precision highp float;
   varying vec2 vUv;
@@ -41,12 +42,12 @@ const fragmentShader = /* glsl */ `
     for(int i=0;i<6;i++){ v += a*noise(p); p = p*2.0 + 7.3; a *= 0.5; }
     return v;
   }
-  // on-brand neon stops
-  const vec3 BASE   = vec3(0.012, 0.018, 0.045);  // near-black navy
-  const vec3 BLUE   = vec3(0.10, 0.42, 0.95);
-  const vec3 VIOLET = vec3(0.52, 0.26, 0.96);
-  const vec3 MAGENTA= vec3(0.90, 0.22, 0.80);
-  const vec3 CYAN   = vec3(0.16, 0.84, 0.92);
+  // wet-detailing stops — deep water, ceramic gloss, bubble sheen
+  const vec3 BASE   = vec3(0.010, 0.020, 0.040);  // near-black wet charcoal
+  const vec3 BLUE   = vec3(0.10, 0.46, 0.98);     // deep ceramic gloss
+  const vec3 VIOLET = vec3(0.48, 0.42, 1.0);      // thin-film bubble sheen
+  const vec3 MAGENTA= vec3(0.90, 0.24, 0.82);     // bubble rainbow edge
+  const vec3 CYAN   = vec3(0.20, 0.88, 0.92);     // clean water
 
   void main(){
     vec2 uv = vUv;
@@ -66,6 +67,15 @@ const fragmentShader = /* glsl */ `
     col = mix(col, MAGENTA, smoothstep(0.80, 0.97, f) * 0.6);
     col += CYAN * pow(smoothstep(0.88, 1.0, r.y), 2.0) * 0.32;   // iridescent glints
     col += (BLUE+VIOLET)*0.5 * pow(n, 4.0) * 0.18;               // soft inner bloom
+
+    // slow rising soap bubbles — faint drifting specks of light
+    vec2 bp = vec2(uv.x*uAspect, uv.y) * 9.0;
+    bp.y += uTime*0.06 + uScroll*1.5;
+    vec2 bid = floor(bp);
+    float br = hash(bid);
+    vec2 bf = fract(bp) - vec2(0.5 + (br-0.5)*0.6, 0.5);
+    float bub = smoothstep(0.16+0.1*br, 0.0, length(bf));
+    col += bub * step(0.86, br) * mix(CYAN, VIOLET, br) * 0.5;
 
     // pointer breathes a little light into the field
     float m = smoothstep(0.8, 0.0, distance(uv, uMouse));
@@ -94,13 +104,16 @@ function AuroraPlane() {
   )
 
   useFrame((_, delta) => {
-    if (!mat.current) return
+    // Write through the live material's uniforms so values actually reach the
+    // shader (the prop object can be copied by three on assignment).
+    const u = mat.current?.uniforms
+    if (!u) return
     state.scroll += (state.scrollTarget - state.scroll) * Math.min(1, delta * 3)
-    uniforms.uTime.value += delta
-    uniforms.uScroll.value = state.scroll
-    uniforms.uAspect.value = size.width / size.height
+    u.uTime.value += delta
+    u.uScroll.value = state.scroll
+    u.uAspect.value = size.width / size.height
     // ease pointer
-    const mu = uniforms.uMouse.value
+    const mu = u.uMouse.value as THREE.Vector2
     mu.x += (state.mx - mu.x) * Math.min(1, delta * 5)
     mu.y += (1 - state.my - mu.y) * Math.min(1, delta * 5)
   })

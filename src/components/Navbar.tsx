@@ -4,11 +4,22 @@ import { MagneticButton } from './ui'
 import { contactModal } from './useContactModal'
 
 const links = [
+  { label: 'Process', href: '#process' },
   { label: 'Services', href: '#services' },
   { label: 'Why us', href: '#why' },
   { label: 'Packages', href: '#packages' },
-  { label: 'Results', href: '#results' },
+  { label: 'Reviews', href: '#results' },
 ]
+
+/** Sud Buds water-drop mark. */
+function DropMark({ className = '' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M12 2.5c3 3.6 6.5 7.9 6.5 11.5a6.5 6.5 0 0 1-13 0C5.5 10.4 9 6.1 12 2.5z" />
+      <ellipse cx="9.6" cy="13.4" rx="1.1" ry="1.8" fill="#fff" opacity="0.7" transform="rotate(-18 9.6 13.4)" />
+    </svg>
+  )
+}
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
@@ -29,14 +40,13 @@ export default function Navbar() {
         }`}
       >
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyber-cyan to-cyber-violet">
+          <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyber-cyan to-cyber-blue">
             <span className="absolute inset-0 rounded-xl bg-cyber-cyan/40 blur-md" />
-            <svg viewBox="0 0 24 24" className="relative h-5 w-5 text-ink-900" fill="currentColor">
-              <path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z" />
-            </svg>
+            <DropMark className="relative h-5 w-5 text-ink-900" />
           </span>
           <span className="font-display text-lg font-semibold tracking-tight">
-            Front<span className="gradient-text">Desk</span>AI
+            Sud<span className="gradient-text"> Buds</span>
+            <span className="ml-1 text-white/60">Detailing</span>
           </span>
         </a>
 
@@ -55,7 +65,7 @@ export default function Navbar() {
 
         <div className="hidden md:block">
           <MagneticButton href="#contact" className="px-5 py-2.5 text-xs">
-            Speak with a rep
+            Book my detail
           </MagneticButton>
         </div>
 
@@ -93,9 +103,9 @@ export default function Navbar() {
               setOpen(false)
               contactModal.open()
             }}
-            className="mt-2 block rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet px-4 py-3 text-center font-semibold text-ink-900"
+            className="mt-2 block rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-blue px-4 py-3 text-center font-semibold text-ink-900"
           >
-            Speak with a representative
+            Book my detail
           </a>
         </motion.div>
       )}

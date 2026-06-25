@@ -2,78 +2,61 @@ import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'fram
 import { useEffect, useRef } from 'react'
 import { MagneticButton } from './ui'
 
-const channels = [
-  { name: 'Meta Ads', icon: 'M3 11l18-7-7 18-2.5-7.5L3 11z', tone: 'from-sky-400 to-blue-600' },
-  { name: 'Google My Business', icon: 'M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z', tone: 'from-emerald-400 to-teal-600' },
-  { name: 'Website', icon: 'M3 5h18v14H3V5zm0 4h18', tone: 'from-cyan-400 to-indigo-600' },
-  { name: 'Social Media', icon: 'M18 8a3 3 0 1 0-2.8-4 3 3 0 0 0 .2 1.1L8.9 8.5a3 3 0 1 0 0 7l6.3 3.4A3 3 0 1 0 18 16a3 3 0 0 0-2.1.9', tone: 'from-fuchsia-400 to-violet-600' },
-  { name: 'Voice AI Caller', icon: 'M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z', tone: 'from-cyan-400 to-purple-600' },
-]
-
-/** A glassy "command center" showing every channel the agency runs for you. */
-function CommandCard() {
-  // live mouse-driven 3D tilt so the hero reads as dimensional immediately
-  const mx = useMotionValue(0)
-  const my = useMotionValue(0)
-  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-16, 16]), { stiffness: 120, damping: 16 })
-  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [14, -14]), { stiffness: 120, damping: 16 })
-  useEffect(() => {
-    const h = (e: PointerEvent) => {
-      mx.set(e.clientX / window.innerWidth - 0.5)
-      my.set(e.clientY / window.innerHeight - 0.5)
-    }
-    window.addEventListener('pointermove', h)
-    return () => window.removeEventListener('pointermove', h)
-  }, [mx, my])
+/* A glossy, spinning chrome wheel rendered entirely in CSS — the hero's
+   centerpiece. Conic gradients fake the brushed-metal lip, spokes and hub. */
+function ChromeWheel() {
   return (
-    <motion.div
-      initial={{ opacity: 0, scale: 0.9 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={{ delay: 0.5, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-      className="glow-border relative w-full max-w-sm rounded-3xl glass-strong p-6 shadow-glow-violet"
-      style={{ transformStyle: 'preserve-3d', rotateX, rotateY }}
-    >
-      <div className="flex items-center justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-widest text-cyber-cyan">Growth engine</p>
-          <p className="text-sm font-semibold text-white">All channels · Live</p>
-        </div>
-        <span className="flex items-center gap-1.5 rounded-full bg-emerald-400/15 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-emerald-300">
-          <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-emerald-400" /> Running
-        </span>
-      </div>
+    <div className="relative h-[19rem] w-[19rem] sm:h-[23rem] sm:w-[23rem]">
+      {/* wet halo */}
+      <div className="absolute inset-0 -z-10 animate-float rounded-full bg-gradient-to-br from-cyber-cyan/25 to-cyber-violet/25 blur-3xl" />
 
-      <div className="mt-5 space-y-2.5">
-        {channels.map((c, i) => (
-          <motion.div
-            key={c.name}
-            initial={{ opacity: 0, x: 16 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.7 + i * 0.12 }}
-            className="flex items-center gap-3 rounded-xl bg-white/5 px-3 py-2.5"
-          >
-            <span className={`flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br ${c.tone}`}>
-              <svg viewBox="0 0 24 24" className="h-4 w-4 text-white" fill={c.name === 'Website' || c.name === 'Social Media' ? 'none' : 'currentColor'} stroke={c.name === 'Website' || c.name === 'Social Media' ? 'currentColor' : 'none'} strokeWidth="2">
-                <path d={c.icon} />
-              </svg>
-            </span>
-            <span className="flex-1 text-sm font-medium text-white/85">{c.name}</span>
-            <span className="text-[10px] uppercase tracking-wider text-emerald-300">Active</span>
-          </motion.div>
-        ))}
-      </div>
+      {/* tire */}
+      <div className="absolute inset-0 rounded-full bg-[radial-gradient(circle,#0a0d12_60%,#1a1f26_72%,#05070a_82%,#000_100%)] shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]" />
 
-      <div className="mt-5 grid grid-cols-2 gap-2 text-center">
-        <div className="rounded-xl bg-white/5 py-2.5">
-          <p className="text-sm font-bold gradient-text">+38%</p>
-          <p className="text-[10px] uppercase tracking-wider text-white/50">More booked</p>
-        </div>
-        <div className="rounded-xl bg-white/5 py-2.5">
-          <p className="text-sm font-bold gradient-text">0</p>
-          <p className="text-[10px] uppercase tracking-wider text-white/50">Leads missed</p>
-        </div>
-      </div>
-    </motion.div>
+      {/* spinning rim assembly */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 9, repeat: Infinity, ease: 'linear' }}
+        className="absolute inset-[9%] rounded-full"
+        style={{
+          background:
+            'conic-gradient(from 0deg, #e9f2fb, #6f8294, #cfdded, #50616f, #f4f9ff, #6f8294, #c3d3e2, #46566a, #e9f2fb)',
+          boxShadow: 'inset 0 0 0 3px rgba(255,255,255,0.5), inset 0 0 40px rgba(0,0,0,0.55), 0 0 1px rgba(0,0,0,0.6)',
+        }}
+      >
+        {/* spokes — five chrome blades via repeating cones masked into a ring */}
+        <div
+          className="absolute inset-[12%] rounded-full"
+          style={{
+            background:
+              'repeating-conic-gradient(from 0deg, #cddcea 0deg 14deg, #3f4f5e 14deg 22deg, #eef5fc 22deg 36deg, #566472 36deg 40deg, #2c3a48 40deg 72deg)',
+            WebkitMask: 'radial-gradient(circle, transparent 22%, #000 24%, #000 92%, transparent 94%)',
+            mask: 'radial-gradient(circle, transparent 22%, #000 24%, #000 92%, transparent 94%)',
+          }}
+        />
+        {/* brake disc behind */}
+        <div className="absolute inset-[26%] rounded-full bg-[radial-gradient(circle,#1c2128,#0c1015)] shadow-[inset_0_0_20px_rgba(0,0,0,0.8)]" />
+        {/* center hub cap */}
+        <div className="absolute inset-[40%] rounded-full bg-[radial-gradient(circle_at_38%_32%,#ffffff,#aab9c8_45%,#3d4d5c)] shadow-[0_2px_8px_rgba(0,0,0,0.6),inset_0_1px_2px_rgba(255,255,255,0.8)]" />
+      </motion.div>
+
+      {/* static specular gleam sweeping the rim (doesn't spin) */}
+      <div className="sheen-sweep pointer-events-none absolute inset-[9%] rounded-full" />
+
+      {/* a few water beads clinging to the rim */}
+      {[
+        { t: '14%', l: '30%', s: 10 },
+        { t: '62%', l: '20%', s: 7 },
+        { t: '30%', l: '74%', s: 8 },
+        { t: '72%', l: '66%', s: 6 },
+      ].map((b, i) => (
+        <span
+          key={i}
+          className="absolute rounded-full bg-[radial-gradient(circle_at_35%_30%,#fff,#bfe0f5_45%,#5b8fb0)] shadow-[0_1px_3px_rgba(0,0,0,0.5)]"
+          style={{ top: b.t, left: b.l, height: b.s, width: b.s }}
+        />
+      ))}
+    </div>
   )
 }
 
@@ -110,13 +93,27 @@ export default function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.7], [1, 0])
   const scale = useTransform(scrollYProgress, [0, 1], [1, 0.92])
 
+  // subtle parallax tilt of the wheel toward the cursor
+  const mx = useMotionValue(0)
+  const my = useMotionValue(0)
+  const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-12, 12]), { stiffness: 120, damping: 16 })
+  const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [10, -10]), { stiffness: 120, damping: 16 })
+  useEffect(() => {
+    const h = (e: PointerEvent) => {
+      mx.set(e.clientX / window.innerWidth - 0.5)
+      my.set(e.clientY / window.innerHeight - 0.5)
+    }
+    window.addEventListener('pointermove', h)
+    return () => window.removeEventListener('pointermove', h)
+  }, [mx, my])
+
   return (
     <section ref={ref} id="top" className="relative flex min-h-screen items-center pt-28 pb-12">
       <div className="absolute inset-0 grid-overlay" />
       <motion.div
         animate={{ opacity: [0.5, 0.85, 0.5], scale: [1, 1.15, 1] }}
         transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
-        className="pointer-events-none absolute -left-32 top-24 h-[28rem] w-[28rem] rounded-full bg-cyber-blue/25 blur-[120px]"
+        className="pointer-events-none absolute -left-32 top-24 h-[28rem] w-[28rem] rounded-full bg-cyber-cyan/25 blur-[120px]"
       />
       <motion.div
         animate={{ opacity: [0.45, 0.8, 0.45], scale: [1.1, 1, 1.1] }}
@@ -133,18 +130,15 @@ export default function Hero() {
             className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-cyber-cyan"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-cyber-cyan shadow-glow" />
-            Front Desk AI · Growth agency
+            Mobile detailing · We come to you
           </motion.span>
 
           <h1 className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.7rem]">
-            <motion.span className="block" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.8 }}>
-              The future of
+            <motion.span className="block chrome-text" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.8 }}>
+              Showroom shine.
             </motion.span>
-            <motion.span className="block gradient-text drop-shadow-[0_0_30px_rgba(99,102,241,0.45)]" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38, duration: 0.8 }}>
-              sales management
-            </motion.span>
-            <motion.span className="block" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.8 }}>
-              at your fingertips.
+            <motion.span className="block gradient-text drop-shadow-[0_0_30px_rgba(52,224,232,0.4)]" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.38, duration: 0.8 }}>
+              Every single time.
             </motion.span>
           </h1>
 
@@ -154,9 +148,9 @@ export default function Hero() {
             transition={{ delay: 0.62, duration: 0.8 }}
             className="mt-6 max-w-md text-lg leading-relaxed text-white/70"
           >
-            We run your Meta &amp; Google ads, build and optimize your Google Business profile,
-            design your website, manage your social media, and answer every call with AI — one
-            fully-managed growth team for your entire front desk.
+            Sud Buds Detailing brings the full studio to your driveway — rim &amp; wheel
+            restoration, a clinging snow-foam hand wash, a streak-free dry-down, and a
+            deep interior detail that makes your car feel brand new again.
           </motion.p>
 
           <motion.div
@@ -166,13 +160,13 @@ export default function Hero() {
             className="mt-9 flex flex-wrap items-center gap-4"
           >
             <MagneticButton href="#contact">
-              Speak with a representative
+              Book my detail
               <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M13 6l6 6-6 6" />
               </svg>
             </MagneticButton>
-            <MagneticButton href="#services" variant="ghost">
-              Explore our services
+            <MagneticButton href="#process" variant="ghost">
+              See the process
             </MagneticButton>
           </motion.div>
 
@@ -182,25 +176,21 @@ export default function Hero() {
             transition={{ delay: 1 }}
             className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-white/50"
           >
-            <span>★★★★★ <span className="text-white/70">4.9/5</span></span>
+            <span>★★★★★ <span className="text-white/70">5.0</span></span>
             <span className="hidden h-4 w-px bg-white/15 sm:block" />
-            <span>Trusted by 1,200+ businesses</span>
+            <span>600+ cars detailed</span>
             <span className="hidden h-4 w-px bg-white/15 sm:block" />
-            <span>Fully managed, done for you</span>
+            <span>Fully insured &amp; mobile</span>
           </motion.div>
         </motion.div>
 
         <motion.div style={{ y: yCard }} className="relative flex justify-center [perspective:1200px] lg:justify-end">
-          <div className="pointer-events-none absolute inset-0 -z-10 animate-float rounded-full bg-gradient-to-br from-cyber-cyan/15 to-cyber-violet/20 blur-3xl" />
-          <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
-            className="pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/5 [mask-image:linear-gradient(transparent,#000,transparent)]"
-          />
-          <CommandCard />
-          <FloatChip className="-left-4 top-6 sm:-left-10" delay={1} value="+38%" label="More booked" icon="M3 17l6-6 4 4 8-8M21 7v6h-6" />
-          <FloatChip className="-right-2 top-1/3 sm:-right-6" delay={1.3} value="5 channels" label="One team" icon="M4 5h16v4H4V5zm0 6h16v4H4v-4zm0 6h10v2H4v-2z" />
-          <FloatChip className="bottom-4 -left-2 sm:-left-8" delay={1.6} value="0 missed" label="Leads" icon="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z" />
+          <motion.div style={{ transformStyle: 'preserve-3d', rotateX, rotateY }}>
+            <ChromeWheel />
+          </motion.div>
+          <FloatChip className="-left-2 top-4 sm:-left-8" delay={1} value="Wheels" label="Restored" icon="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 4a6 6 0 1 1 0 12 6 6 0 0 1 0-12zm0 4a2 2 0 1 0 0 4 2 2 0 0 0 0-4z" />
+          <FloatChip className="-right-2 top-1/3 sm:-right-6" delay={1.3} value="Snow foam" label="Hand wash" icon="M7 10a5 5 0 0 1 9.6-2A4 4 0 1 1 18 16H8a4 4 0 0 1-1-7.9z" />
+          <FloatChip className="bottom-2 -left-1 sm:-left-6" delay={1.6} value="Interior" label="Deep clean" icon="M4 17v-5a4 4 0 0 1 4-4h3l3-3v15H8a4 4 0 0 1-4-3zm14-9h2v9h-2z" />
         </motion.div>
       </div>
 

@@ -27,10 +27,10 @@ function Counter({ to, suffix = '', prefix = '', decimals = 0 }: { to: number; s
 }
 
 const stats = [
-  { to: 100, suffix: '%', label: 'Calls answered', sub: 'Every call, day or night' },
-  { to: 0.2, suffix: 's', decimals: 1, label: 'Average pickup', sub: 'Faster than any human' },
-  { to: 38, suffix: '%', label: 'More booked jobs', sub: 'From captured leads' },
-  { to: 24, suffix: '/7', label: 'Always on', sub: 'No sick days, no holidays' },
+  { to: 600, suffix: '+', label: 'Cars detailed', sub: 'And counting every week' },
+  { to: 5.0, suffix: '★', decimals: 1, label: 'Average rating', sub: 'Across every review' },
+  { to: 0, suffix: '', label: 'Swirls added', sub: 'Scratch-free, every wash' },
+  { to: 100, suffix: '%', label: 'Mobile service', sub: 'We come to your driveway' },
 ]
 
 export default function Stats() {

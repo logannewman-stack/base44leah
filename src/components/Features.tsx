@@ -4,34 +4,34 @@ import { Eyebrow } from './ui'
 
 const features = [
   {
-    title: 'One team, every channel',
-    body: 'Ads, Google presence, website, social, and AI call handling — all run by one team that actually talks to each other, so nothing falls through the cracks.',
-    icon: 'M4 5h16v4H4V5zm0 6h16v4H4v-4zm0 6h10v2H4v-2z',
-    color: 'from-sky-400 to-blue-600',
+    title: 'We come to you',
+    body: 'Fully mobile — we bring our own water, power and pro-grade gear to your home or office. You never have to leave the driveway.',
+    icon: 'M3 13l2-5a3 3 0 0 1 2.8-2h8.4A3 3 0 0 1 19 8l2 5v5h-2a2 2 0 0 1-4 0H9a2 2 0 0 1-4 0H3v-5zm2 0h14l-1.3-3.3a1 1 0 0 0-.9-.7H7.2a1 1 0 0 0-.9.7L5 13z',
+    color: 'from-cyber-cyan to-cyber-blue',
   },
   {
-    title: 'Fully managed, done for you',
-    body: 'We handle the strategy, the build, and the ongoing optimization. You just show up to the booked appointments.',
+    title: 'Swirl-free, every time',
+    body: 'Foam-first pre-soak, two-bucket method, grit guards and plush microfiber. We protect your clear coat like it is our own.',
     icon: 'M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1.4 13L7 11.4 8.4 10l2.2 2.2L15.6 7 17 8.4 10.6 15z',
-    color: 'from-emerald-400 to-teal-600',
+    color: 'from-cyber-blue to-cyber-violet',
   },
   {
-    title: 'Every lead captured',
-    body: 'Your ads, your site, and your AI receptionist all feed one pipeline — no missed calls, no lost leads, no leaks.',
-    icon: 'M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-8 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3 0-8 1.5-8 4.5V20h9v-2.5c0-1.2.5-2.3 1.3-3.2A13 13 0 0 0 8 13zm8 0a13 13 0 0 0-2.3.2A5.6 5.6 0 0 1 15 17.5V20h9v-2.5c0-3-5-4.5-8-4.5z',
-    color: 'from-cyan-400 to-indigo-600',
+    title: 'Pro products & coatings',
+    body: 'pH-balanced soaps, dedicated iron removers, and certified ceramic coatings — the same products the best studios trust.',
+    icon: 'M9 2h6v3l2 4v11a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2V9l2-4V2zm0 9h6',
+    color: 'from-cyber-cyan to-cyber-violet',
   },
   {
-    title: 'Built to win local',
-    body: 'Local SEO, Google Maps, and the 3-pack — we make you the obvious, trusted choice in your area.',
-    icon: 'M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z',
-    color: 'from-fuchsia-400 to-violet-600',
+    title: 'Obsessive attention',
+    body: 'Shut-lines, emblems, vents, lug seats and stitching — we sweat the details most washes skip, because the details are the job.',
+    icon: 'M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18zm0 4a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 3a2 2 0 1 1 0 4 2 2 0 0 1 0-4z',
+    color: 'from-cyber-violet to-cyber-magenta',
   },
   {
-    title: 'Real results, tracked',
-    body: 'Live dashboards and clear reporting show exactly where your leads and revenue come from — no guesswork.',
-    icon: 'M4 13h3v7H4v-7zm6.5-5h3v12h-3V8zM17 3h3v17h-3V3z',
-    color: 'from-cyan-400 to-purple-600',
+    title: 'Satisfaction guaranteed',
+    body: 'If something is not right, we make it right — no questions asked. Fully insured, and backed by hundreds of 5-star reviews.',
+    icon: 'M12 2l2.4 4.8 5.3.8-3.8 3.7.9 5.3L12 14.9 7.2 16.4l.9-5.3L4.3 7.4l5.3-.8L12 2z',
+    color: 'from-chrome-light to-chrome-mid',
   },
 ]
 
@@ -81,9 +81,9 @@ export default function Features() {
     <section ref={ref} id="why" className="relative" style={{ height: `${M * 75}vh` }}>
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1100px]">
         <div className="absolute top-[5%] left-1/2 z-20 -translate-x-1/2 px-6 text-center">
-          <Eyebrow>Why Front Desk AI</Eyebrow>
+          <Eyebrow>Why Sud Buds</Eyebrow>
           <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
-            Your entire growth team, <span className="gradient-text">under one roof.</span>
+            Detailing done right, <span className="gradient-text">in your driveway.</span>
           </h2>
         </div>
 

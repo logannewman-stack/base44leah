@@ -1,15 +1,15 @@
 import { motion } from 'framer-motion'
 
 const items = [
-  'Dental Practices',
-  'Law Firms',
-  'Med Spas',
-  'Home Services',
-  'Real Estate',
-  'Auto Detailing',
-  'Salons',
-  'Clinics',
-  'Contractors',
+  'Daily Drivers',
+  'Luxury Sedans',
+  'Lifted Trucks',
+  'Exotics & Supercars',
+  'Classic Restorations',
+  'EVs & Hybrids',
+  'Boats & RVs',
+  'Fleet Vehicles',
+  'Motorcycles',
 ]
 
 export default function Marquee() {
@@ -17,7 +17,7 @@ export default function Marquee() {
   return (
     <section className="relative border-y border-white/5 py-8">
       <p className="mb-6 text-center text-xs uppercase tracking-[0.3em] text-white/40">
-        Powering front desks across every industry
+        Trusted with every kind of ride
       </p>
       <div className="relative flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_15%,#000_85%,transparent)]">
         <motion.div

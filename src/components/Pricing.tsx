@@ -3,21 +3,27 @@ import { Depth3D, Eyebrow, MagneticButton } from './ui'
 
 const packages = [
   {
-    name: 'Full Growth Suite',
-    tagline: 'The complete done-for-you system',
-    includes: ['Google My Business', 'Custom Website', 'CRM Build-Out', 'Voice AI Receptionist', 'Meta & Google Ads'],
-    featured: true,
-  },
-  {
-    name: 'Local Presence Suite',
-    tagline: 'Dominate local search & automate',
-    includes: ['Google My Business', 'CRM Build-Out', 'Voice AI Receptionist', 'Meta & Google Ads'],
+    name: 'Express Shine',
+    price: '$89',
+    unit: 'from',
+    tagline: 'The quick refresh that turns heads',
+    includes: ['Snow-foam hand wash', 'Wheels & tires cleaned', 'Streak-free hand dry', 'Windows in & out', 'Quick interior vacuum'],
     featured: false,
   },
   {
-    name: 'Digital Launch Suite',
-    tagline: 'A new web presence, fully automated',
-    includes: ['Custom Website', 'CRM Build-Out', 'Voice AI Receptionist', 'Meta & Google Ads'],
+    name: 'Full Detail',
+    price: '$249',
+    unit: 'from',
+    tagline: 'Inside and out, top to bottom',
+    includes: ['Everything in Express Shine', 'Iron decon & clay treatment', 'Wheel barrels & calipers', 'Deep interior extraction', 'Steam & surface dressing', 'Spray sealant gloss boost'],
+    featured: true,
+  },
+  {
+    name: 'Showroom Ceramic',
+    price: '$899',
+    unit: 'from',
+    tagline: 'Correction + years of protection',
+    includes: ['Everything in Full Detail', 'Multi-stage paint correction', 'Certified ceramic coating', 'Hydrophobic glass coating', 'Up to 5-year protection'],
     featured: false,
   },
 ]
@@ -40,11 +46,11 @@ export default function Packages() {
             <Eyebrow>Packages</Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
-            Built around your business. <span className="gradient-text">Fully managed.</span>
+            Simple packages. <span className="gradient-text">Showroom results.</span>
           </h2>
           <p className="mt-5 text-white/60">
-            Bundle everything or pick the services you need — every package is done-for-you and
-            tailored to your goals. Let's map out the right fit on a quick call.
+            Pricing starts here and is tailored to your vehicle's size and condition. Not sure
+            which fits? Tell us about your ride and we'll recommend the perfect detail.
           </p>
         </Depth3D>
 
@@ -65,6 +71,11 @@ export default function Packages() {
                 <h3 className="font-display text-xl font-semibold text-white">{plan.name}</h3>
                 <p className="mt-1 text-sm text-white/50">{plan.tagline}</p>
 
+                <p className="mt-5 flex items-baseline gap-1.5">
+                  <span className="text-xs uppercase tracking-widest text-white/40">{plan.unit}</span>
+                  <span className="font-display text-4xl font-bold gradient-text">{plan.price}</span>
+                </p>
+
                 <ul className="mt-6 space-y-3 text-sm text-white/75">
                   {plan.includes.map((f) => (
                     <li key={f} className="flex gap-2.5">
@@ -76,7 +87,7 @@ export default function Packages() {
 
                 <div className="mt-8 pt-2">
                   <MagneticButton href="#contact" variant={plan.featured ? 'primary' : 'ghost'} className="w-full">
-                    Speak with a representative
+                    Book this package
                   </MagneticButton>
                 </div>
               </motion.div>
@@ -84,8 +95,8 @@ export default function Packages() {
           ))}
         </div>
         <p className="mt-8 text-center text-sm text-white/40">
-          Prefer just one service? We offer Meta Ads, Google My Business, Websites, Social Media, and
-          the Voice AI Caller individually too — just ask.
+          Want à la carte? Wheels-only, engine bays, headlight restoration, pet-hair removal and
+          odor treatment are all available as add-ons — just ask.
         </p>
       </div>
     </section>

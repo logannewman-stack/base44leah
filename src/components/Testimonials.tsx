@@ -4,21 +4,21 @@ import { Depth3D, Eyebrow } from './ui'
 const quotes = [
   {
     quote:
-      'We were missing 40% of our calls after hours. FrontDeskAI books appointments while we sleep — it paid for itself in the first week.',
-    name: 'Dr. Amara Okafor',
-    role: 'Brightline Dental',
+      'My black truck had swirl marks everywhere. They corrected the paint and ceramic coated it — it looks better than the day I bought it. Water just rolls right off now.',
+    name: 'Marcus Delgado',
+    role: 'Ram 1500 · Ceramic',
   },
   {
     quote:
-      'Callers genuinely think they’re talking to our receptionist. It’s that natural. Our front desk team finally focuses on patients in the room.',
-    name: 'Marcus Reyes',
-    role: 'Apex Physical Therapy',
+      'They came to my office and detailed my car in the parking lot while I worked. The wheels were spotless and the interior smelled brand new. Unreal convenience.',
+    name: 'Priya Nair',
+    role: 'Audi Q5 · Full Detail',
   },
   {
     quote:
-      'Every lead now lands in our CRM with a summary. No more sticky notes, no more lost jobs. Our booked revenue is up 38%.',
+      'Three kids and a dog — the back seat was a disaster. The deep interior extraction pulled out things I forgot I lost. Cabin looks and feels showroom fresh again.',
     name: 'Jenna Holt',
-    role: 'Holt Home Services',
+    role: 'Honda Pilot · Interior',
   },
 ]
 
@@ -28,10 +28,10 @@ export default function Testimonials() {
       <div className="mx-auto max-w-6xl px-6">
         <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
           <div className="flex justify-center">
-            <Eyebrow>Results</Eyebrow>
+            <Eyebrow>Reviews</Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
-            Businesses that stopped <span className="gradient-text">missing calls.</span>
+            Drivers who never <span className="gradient-text">looked back.</span>
           </h2>
         </Depth3D>
 

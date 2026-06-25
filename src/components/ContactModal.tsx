@@ -5,7 +5,7 @@ import { useContactModal } from './useContactModal'
 const FORM_SRC = 'https://link.virsalabs.io/widget/form/gobc1SHBoXDUXsieNLL9'
 
 /**
- * Full-screen "Speak with a representative" modal for the neon (dark) site.
+ * Full-screen "Book your detail" modal for the dark site.
  * Dark card, neon cyan→violet→magenta accent bar, embeds the GoHighLevel form
  * via iframe. Closes on ESC, backdrop click, or the X button.
  */
@@ -40,7 +40,7 @@ export default function ContactModal() {
           onClick={close}
           role="dialog"
           aria-modal="true"
-          aria-label="Speak with a representative"
+          aria-label="Book your detail"
         >
           <motion.div
             className="relative my-auto w-full max-w-[600px] overflow-hidden rounded-3xl border border-white/10 bg-[#070b18] shadow-glow-violet"
@@ -57,12 +57,13 @@ export default function ContactModal() {
             <div className="flex items-start justify-between gap-4 px-6 pt-6 sm:px-8">
               <div>
                 <p className="font-display text-2xl font-bold leading-none text-white">
-                  FrontDesk{' '}
-                  <span className="bg-gradient-to-r from-[#22d3ee] via-[#3b82f6] to-[#8b5cf6] bg-clip-text text-transparent">
-                    AI
-                  </span>
+                  Sud{' '}
+                  <span className="bg-gradient-to-r from-[#34e0e8] via-[#2a8fff] to-[#7b6cff] bg-clip-text text-transparent">
+                    Buds
+                  </span>{' '}
+                  Detailing
                 </p>
-                <p className="mt-2 text-sm font-medium text-white/60">Let&apos;s Talk Growth</p>
+                <p className="mt-2 text-sm font-medium text-white/60">Book your detail</p>
               </div>
               <button
                 type="button"
@@ -81,7 +82,7 @@ export default function ContactModal() {
             <div className="px-2 pb-4 pt-4 sm:px-4">
               <iframe
                 src={FORM_SRC}
-                title="Speak with a representative"
+                title="Book your detail"
                 style={{ width: '100%', height: 700, border: 'none', borderRadius: 12, background: '#fff' }}
               />
             </div>

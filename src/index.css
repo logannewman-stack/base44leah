@@ -39,7 +39,7 @@ html {
 }
 
 ::selection {
-  background: rgba(34, 211, 238, 0.3);
+  background: rgba(52, 224, 232, 0.3);
   color: #fff;
 }
 
@@ -50,14 +50,30 @@ html {
   background: #04060f;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #22d3ee, #8b5cf6);
+  background: linear-gradient(180deg, #34e0e8, #7b6cff);
   border-radius: 999px;
 }
 
 @layer components {
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(100deg, #22d3ee 0%, #3b82f6 35%, #8b5cf6 70%, #e23bd2 100%);
+    background-image: linear-gradient(100deg, #34e0e8 0%, #2a8fff 35%, #7b6cff 70%, #e23bd2 100%);
+  }
+
+  /* Brushed-chrome lettering for the "showroom shine" headline accents. */
+  .chrome-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #cfe0ee 18%,
+      #8ea3b6 38%,
+      #f4f9ff 50%,
+      #8ea3b6 62%,
+      #5d6f80 82%,
+      #e8f1fa 100%
+    );
+    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
   }
 
   .glass {
@@ -84,7 +100,7 @@ html {
   inset: -1px;
   border-radius: inherit;
   padding: 1px;
-  background: linear-gradient(120deg, #22d3ee, #8b5cf6, #e23bd2, #22d3ee);
+  background: linear-gradient(120deg, #34e0e8, #7b6cff, #e23bd2, #34e0e8);
   background-size: 300% 300%;
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
@@ -100,6 +116,26 @@ html {
   background-size: 64px 64px;
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
   mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
+}
+
+/* Glossy "wet paint" reflection sheen used on dark detailing panels. */
+.wet-gloss {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 22%),
+    linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
+}
+
+/* A slow vertical highlight that drifts across a surface like light on a curved panel. */
+.sheen-sweep::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.16) 50%, transparent 65%);
+  background-size: 280% 280%;
+  animation: shimmer 7s linear infinite;
+  pointer-events: none;
+  mix-blend-mode: screen;
 }
 
 @media (prefers-reduced-motion: reduce) {
