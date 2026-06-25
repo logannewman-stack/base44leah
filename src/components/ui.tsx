@@ -2,11 +2,11 @@ import { motion, useInView } from 'framer-motion'
 import { useRef, type ReactNode, type MouseEvent } from 'react'
 import { contactModal } from './useContactModal'
 
-/** Subtle fade-up reveal as content scrolls into view (no 3D, no blur-heavy effects). */
+/** Subtle fade-up reveal as content scrolls into view. */
 export function Reveal({
   children,
   delay = 0,
-  y = 28,
+  y = 26,
   className = '',
 }: {
   children: ReactNode
@@ -29,32 +29,24 @@ export function Reveal({
   )
 }
 
-/** Small gold all-caps eyebrow label above headings. */
-export function Eyebrow({ children, light = false }: { children: ReactNode; light?: boolean }) {
-  return (
-    <span className={`inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-widest2 ${light ? 'text-black/60' : 'text-gold'}`}>
-      <span className="h-px w-7 bg-gold" />
-      {children}
-    </span>
-  )
+/** Small light-blue pill chip used above section headings. */
+export function Chip({ children }: { children: ReactNode }) {
+  return <span className="chip">{children}</span>
 }
 
 /**
- * Flat, premium button. Variants:
- *  - 'gold'    solid gold pill-less block (primary CTA)
- *  - 'outline' bordered ghost button
- *  - 'book'    inline gold "BOOK →" text link used inside cards
+ * Button. Variants: 'primary' (light-blue), 'dark' (ink), 'ghost' (outline).
  * Any href of "#contact" opens the booking modal instead of navigating.
  */
 export function Button({
   children,
   href = '#',
-  variant = 'gold',
+  variant = 'primary',
   className = '',
 }: {
   children: ReactNode
   href?: string
-  variant?: 'gold' | 'outline' | 'book'
+  variant?: 'primary' | 'dark' | 'ghost'
   className?: string
 }) {
   const onClick = (e: MouseEvent) => {
@@ -63,10 +55,19 @@ export function Button({
       contactModal.open()
     }
   }
-  const cls = variant === 'gold' ? 'btn-gold' : variant === 'outline' ? 'btn-outline' : 'btn-book'
+  const cls = variant === 'primary' ? 'btn-primary' : variant === 'dark' ? 'btn-dark' : 'btn-ghost'
   return (
     <a href={href} onClick={onClick} className={`${cls} ${className}`}>
       {children}
     </a>
+  )
+}
+
+/** Inline arrow → icon. */
+export function Arrow({ className = 'h-4 w-4' }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="none" stroke="currentColor" strokeWidth="2.5">
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
   )
 }

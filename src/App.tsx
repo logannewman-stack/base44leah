@@ -3,19 +3,19 @@ import { ScrollProgress } from './components/Effects'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Stats from './components/Stats'
-import ServicesRow from './components/ServicesRow'
-import ShineClub from './components/ShineClub'
-import Ceramics from './components/Ceramics'
+import Services from './components/ServicesRow'
+import About from './components/Ceramics'
+import Process from './components/ShineClub'
+import Gallery from './components/Instagram'
 import Packages from './components/Pricing'
 import Reviews from './components/Testimonials'
-import Instagram from './components/Instagram'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
 
 export default function App() {
   return (
-    <div className="relative min-h-screen bg-black">
+    <div className="relative min-h-screen bg-white">
       <ErrorBoundary>
         <ScrollProgress />
       </ErrorBoundary>
@@ -23,12 +23,12 @@ export default function App() {
       <main className="relative">
         <Hero />
         <Stats />
-        <ServicesRow />
-        <ShineClub />
-        <Ceramics />
+        <Services />
+        <About />
+        <Process />
+        <Gallery />
         <Packages />
         <Reviews />
-        <Instagram />
         <CTA />
       </main>
       <Footer />

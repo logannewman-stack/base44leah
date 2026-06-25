@@ -4,44 +4,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Pure black / white with a single gold accent — ShowCar luxury palette
-        gold: {
-          DEFAULT: '#f5c518',
-          400: '#ffd633',
-          500: '#f5c518',
-          600: '#d4a900',
-        },
-        ink: {
-          950: '#000000',
-          900: '#070707',
-          800: '#0e0e0e',
-          700: '#161616',
-          600: '#1f1f1f',
+        // Light, airy palette: white space, near-black ink, light-blue accent
+        brand: {
+          blue: '#0ea5e9', // sky-500 — primary accent
+          blueDark: '#0284c7', // sky-600 — hover
+          sky: '#38bdf8', // sky-400 — light accent
+          tint: '#e0f2fe', // sky-100 — soft fills
+          ink: '#0b1220', // near-black navy — headings / footer
         },
       },
       fontFamily: {
-        // Heavy condensed display for ALL-CAPS headings, Inter for body
-        display: ['Anton', 'Oswald', 'system-ui', 'sans-serif'],
+        display: ['Sora', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
-      letterSpacing: {
-        tightest: '-0.02em',
-        wider2: '0.12em',
-        widest2: '0.28em',
+      boxShadow: {
+        soft: '0 18px 50px -20px rgba(2,32,71,0.20)',
+        card: '0 8px 30px -12px rgba(2,32,71,0.14)',
+        blue: '0 16px 40px -16px rgba(14,165,233,0.45)',
       },
       keyframes: {
-        marquee: {
-          '0%': { transform: 'translateX(0)' },
-          '100%': { transform: 'translateX(-50%)' },
-        },
         fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(24px)' },
+          '0%': { opacity: '0', transform: 'translateY(22px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        float: {
+          '0%,100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
       },
       animation: {
-        marquee: 'marquee 30s linear infinite',
         fadeUp: 'fadeUp 0.7s ease forwards',
+        float: 'float 6s ease-in-out infinite',
       },
     },
   },

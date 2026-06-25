@@ -1,36 +1,12 @@
-import { Reveal } from './ui'
+import { Chip, Reveal } from './ui'
 
 const reviews = [
-  {
-    text: 'Booked Sunday night and my car was spotless in my own driveway by Monday lunch. Months later the ceramic coating still beads water like day one. Unreal.',
-    name: 'Jordan M.',
-    car: 'Tesla Model 3',
-  },
-  {
-    text: 'Two years of swirl marks and scratches — gone in a single visit. It honestly looks better than the day I drove it off the lot. Worth every penny.',
-    name: 'Priya S.',
-    car: 'BMW X5',
-  },
-  {
-    text: 'I never have to leave the house and the truck comes back showroom-clean every single time. They handle our whole family’s cars now.',
-    name: 'Mike T.',
-    car: 'Ford F-150',
-  },
-  {
-    text: 'Professional, on time, and the interior looked and smelled brand new. The steam clean got out stains I thought were permanent.',
-    name: 'Alyssa R.',
-    car: 'Audi Q7',
-  },
-  {
-    text: 'The ceramic coating package is worth every dollar. Rain just sheets right off and washing it takes me ten minutes now.',
-    name: 'Devon K.',
-    car: 'Corvette C8',
-  },
-  {
-    text: 'Easiest booking I’ve ever done — 60 seconds online, clear price, no surprises. The finish on my black paint is absolutely flawless.',
-    name: 'Sophia L.',
-    car: 'Mercedes C300',
-  },
+  { text: 'Booked Sunday night and my car was spotless in my own driveway by Monday lunch. Months later the ceramic coating still beads water like day one. Unreal.', name: 'Jordan M.', car: 'Tesla Model 3' },
+  { text: 'Two years of swirl marks and scratches — gone in a single visit. It honestly looks better than the day I drove it off the lot. Worth every penny.', name: 'Priya S.', car: 'BMW X5' },
+  { text: 'I never have to leave the house and the truck comes back showroom-clean every single time. They handle our whole family’s cars now.', name: 'Mike T.', car: 'Ford F-150' },
+  { text: 'Professional, on time, and the interior looked and smelled brand new. The steam clean got out stains I thought were permanent.', name: 'Alyssa R.', car: 'Audi Q7' },
+  { text: 'The ceramic coating package is worth every dollar. Rain just sheets right off and washing it takes me ten minutes now.', name: 'Devon K.', car: 'Corvette C8' },
+  { text: 'Easiest booking I’ve ever done — 60 seconds online, clear price, no surprises. The finish on my black paint is absolutely flawless.', name: 'Sophia L.', car: 'Mercedes C300' },
 ]
 
 function GoogleG() {
@@ -46,33 +22,35 @@ function GoogleG() {
 
 export default function Reviews() {
   return (
-    <section id="reviews" className="bg-white py-28 text-black">
+    <section id="reviews" className="bg-white py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="text-center">
-          <p className="text-xs font-bold uppercase tracking-widest2 text-black/50">What drivers say</p>
-          <h2 className="mt-5 h-display text-6xl text-black sm:text-7xl">
-            5-star <span className="text-gold">reviews</span>
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <div className="flex justify-center">
+            <Chip>Reviews</Chip>
+          </div>
+          <h2 className="mt-5 display text-4xl text-brand-ink sm:text-5xl">
+            Loved by <span className="text-brand-blue">500+ drivers.</span>
           </h2>
         </Reveal>
 
-        <div className="mt-16 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((r) => (
             <Reveal key={r.name} className="h-full">
-              <figure className="flex h-full flex-col justify-between border border-black/10 bg-white p-7 shadow-[0_10px_30px_-15px_rgba(0,0,0,0.25)]">
+              <figure className="flex h-full flex-col justify-between rounded-3xl border border-slate-200 bg-white p-7 shadow-card">
                 <div>
                   <div className="flex items-center justify-between">
-                    <div className="text-lg tracking-widest text-gold">★★★★★</div>
+                    <div className="text-base tracking-wide text-amber-400">★★★★★</div>
                     <GoogleG />
                   </div>
-                  <blockquote className="mt-4 text-sm leading-relaxed text-black/75">“{r.text}”</blockquote>
+                  <blockquote className="mt-4 text-sm leading-relaxed text-slate-700">“{r.text}”</blockquote>
                 </div>
-                <figcaption className="mt-6 flex items-center gap-3 border-t border-black/10 pt-5">
-                  <span className="flex h-10 w-10 items-center justify-center bg-black text-xs font-bold uppercase text-gold">
+                <figcaption className="mt-6 flex items-center gap-3 border-t border-slate-100 pt-5">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-blue text-xs font-bold text-white">
                     {r.name.split(' ').map((w) => w[0]).slice(0, 2).join('')}
                   </span>
                   <div>
-                    <p className="text-sm font-bold uppercase tracking-wide text-black">{r.name}</p>
-                    <p className="text-xs text-black/50">{r.car}</p>
+                    <p className="text-sm font-semibold text-brand-ink">{r.name}</p>
+                    <p className="text-xs text-slate-500">{r.car}</p>
                   </div>
                 </figcaption>
               </figure>
@@ -80,12 +58,12 @@ export default function Reviews() {
           ))}
         </div>
 
-        <Reveal className="mt-14 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-5">
+        <Reveal className="mt-12 flex items-center justify-center gap-3">
           <GoogleG />
-          <p className="text-sm font-semibold text-black/70">
-            <span className="font-display text-2xl tracking-tightest text-black">4.9</span> of 5 ·
-            <span className="ml-1 text-gold">★★★★★</span>
-            <span className="ml-2 text-black/50">based on 500+ Google reviews</span>
+          <p className="text-sm font-medium text-slate-600">
+            <span className="font-display text-xl font-bold text-brand-ink">4.9</span> / 5 ·
+            <span className="ml-1 text-amber-400">★★★★★</span>
+            <span className="ml-2 text-slate-400">based on 500+ Google reviews</span>
           </p>
         </Reveal>
       </div>

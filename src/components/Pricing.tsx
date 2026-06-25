@@ -1,4 +1,4 @@
-import { Button, Eyebrow, Reveal } from './ui'
+import { Button, Chip, Reveal } from './ui'
 import { contactModal } from './useContactModal'
 
 const packages = [
@@ -25,77 +25,79 @@ const packages = [
   },
 ]
 
-function Check({ dark = false }: { dark?: boolean }) {
+function Check({ light = false }: { light?: boolean }) {
   return (
-    <svg viewBox="0 0 24 24" className={`mt-0.5 h-4 w-4 shrink-0 ${dark ? 'text-black' : 'text-gold'}`} fill="none" stroke="currentColor" strokeWidth="3">
-      <path d="M5 13l4 4L19 7" />
-    </svg>
+    <span className={`mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${light ? 'bg-white/15 text-brand-sky' : 'bg-brand-tint text-brand-blueDark'}`}>
+      <svg viewBox="0 0 24 24" className="h-3 w-3" fill="none" stroke="currentColor" strokeWidth="3.5">
+        <path d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
   )
 }
 
 export default function Packages() {
   return (
-    <section id="packages" className="bg-black py-28">
+    <section id="packages" className="bg-slate-50 py-24">
       <div className="mx-auto max-w-7xl px-6">
-        <Reveal className="text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
-            <Eyebrow>Packages</Eyebrow>
+            <Chip>Packages</Chip>
           </div>
-          <h2 className="mt-5 h-display text-6xl text-white sm:text-7xl">
-            Pick your <span className="text-gold">shine</span>
+          <h2 className="mt-5 display text-4xl text-brand-ink sm:text-5xl">
+            Simple, upfront <span className="text-brand-blue">pricing.</span>
           </h2>
-          <p className="mx-auto mt-6 max-w-xl text-sm leading-relaxed text-white/60">
-            Every package is fully mobile and performed at your home or office. Upfront pricing, no
-            hidden fees — book online in 60 seconds and we handle the rest.
+          <p className="mt-5 text-lg text-slate-600">
+            Every package is fully mobile and performed at your home or office. No hidden fees — book
+            online in 60 seconds.
           </p>
         </Reveal>
 
-        <div className="mt-16 grid gap-6 lg:grid-cols-3">
+        <div className="mt-16 grid items-start gap-7 lg:grid-cols-3">
           {packages.map((plan) => {
-            const featured = plan.featured
+            const f = plan.featured
             return (
               <Reveal key={plan.name} className="h-full">
                 <div
-                  className={`flex h-full flex-col p-9 ${
-                    featured ? 'bg-gold text-black' : 'border border-white/12 bg-ink-900 text-white'
+                  className={`flex h-full flex-col rounded-3xl p-8 ${
+                    f ? 'bg-brand-ink text-white shadow-soft lg:-mt-4 lg:pb-12 lg:pt-12' : 'border border-slate-200 bg-white text-brand-ink shadow-card'
                   }`}
                 >
-                  {featured && (
-                    <span className="mb-5 inline-block w-fit bg-black px-3 py-1 text-[0.65rem] font-bold uppercase tracking-widest2 text-gold">
+                  {f && (
+                    <span className="mb-5 inline-block w-fit rounded-full bg-brand-blue px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
                       Most popular
                     </span>
                   )}
-                  <h3 className="font-display text-4xl uppercase leading-none tracking-tightest">{plan.name}</h3>
-                  <p className={`mt-2 text-sm ${featured ? 'text-black/70' : 'text-white/50'}`}>{plan.tagline}</p>
+                  <h3 className="font-display text-2xl font-bold">{plan.name}</h3>
+                  <p className={`mt-1 text-sm ${f ? 'text-white/60' : 'text-slate-500'}`}>{plan.tagline}</p>
 
                   <p className="mt-6 flex items-baseline gap-2">
-                    <span className={`text-xs font-bold uppercase tracking-wider2 ${featured ? 'text-black/60' : 'text-white/45'}`}>from</span>
-                    <span className="font-display text-5xl uppercase tracking-tightest">{plan.price}</span>
+                    <span className={`text-xs font-semibold uppercase tracking-wider ${f ? 'text-white/50' : 'text-slate-400'}`}>from</span>
+                    <span className="font-display text-5xl font-extrabold tracking-[-0.02em]">{plan.price}</span>
                   </p>
 
-                  <ul className={`mt-8 space-y-3 text-sm ${featured ? 'text-black/85' : 'text-white/75'}`}>
-                    {plan.includes.map((f) => (
-                      <li key={f} className="flex gap-2.5">
-                        <Check dark={featured} />
-                        {f}
+                  <ul className={`mt-8 space-y-3 text-sm ${f ? 'text-white/85' : 'text-slate-600'}`}>
+                    {plan.includes.map((item) => (
+                      <li key={item} className="flex gap-2.5">
+                        <Check light={f} />
+                        {item}
                       </li>
                     ))}
                   </ul>
 
                   <div className="mt-9 pt-2">
-                    {featured ? (
+                    {f ? (
                       <a
                         href="#contact"
                         onClick={(e) => {
                           e.preventDefault()
                           contactModal.open()
                         }}
-                        className="flex w-full items-center justify-center gap-2 bg-black px-7 py-3.5 text-sm font-bold uppercase tracking-wider2 text-gold transition-colors hover:bg-ink-800"
+                        className="btn-primary w-full"
                       >
                         Book this package
                       </a>
                     ) : (
-                      <Button href="#contact" variant="outline" className="w-full">
+                      <Button href="#contact" variant="ghost" className="w-full">
                         Book this package
                       </Button>
                     )}
@@ -106,7 +108,7 @@ export default function Packages() {
           })}
         </div>
 
-        <p className="mt-10 text-center text-xs leading-relaxed text-white/40">
+        <p className="mt-10 text-center text-sm text-slate-400">
           Mobile service included free within 25 miles. SUVs, trucks, and heavily-soiled vehicles may
           vary — your exact price is confirmed at booking. Fleet &amp; recurring plans available too.
         </p>

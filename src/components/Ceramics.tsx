@@ -1,77 +1,64 @@
-import { Button, Eyebrow, Reveal } from './ui'
+import { Button, Chip } from './ui'
+import { Photo } from './Photo'
+import { IMAGES } from '../images'
 
 const points = [
-  'Years of protection — not weeks',
-  'Deep, liquid-mirror gloss',
-  'Hydrophobic — water & dirt slide right off',
-  'UV, chemical & swirl resistance',
-  'Backed by a multi-year warranty',
+  { t: 'We come to you', d: 'Fully mobile — your driveway or office, with our own water and power.' },
+  { t: 'Certified & insured pros', d: 'Background-checked, trained detailers backed by full insurance.' },
+  { t: 'Pro-grade products', d: 'Dual-action polishers and certified ceramic coatings — shop quality at your curb.' },
+  { t: '100% satisfaction', d: "If it's not perfect, we make it right. No questions asked." },
 ]
 
-// Placeholder "photo" tiles — swap for real detailing photography when available.
-const gallery = [
-  { label: 'Gloss', grad: 'from-zinc-700 to-black' },
-  { label: 'Hydrophobic', grad: 'from-amber-900/40 to-black' },
-  { label: 'Paint correction', grad: 'from-neutral-700 to-black' },
-  { label: 'Wheels & trim', grad: 'from-zinc-800 to-black' },
-]
-
-const SHINE = 'M12 2l1.9 5a3 3 0 0 0 1.9 1.9L21 11l-5.2 2.1A3 3 0 0 0 13.9 15L12 20l-1.9-5a3 3 0 0 0-1.9-1.9L3 11l5.2-2.1A3 3 0 0 0 10.1 7z'
-
-function Check() {
+export default function About() {
   return (
-    <svg viewBox="0 0 24 24" className="mt-0.5 h-4 w-4 shrink-0 text-gold" fill="none" stroke="currentColor" strokeWidth="3">
-      <path d="M5 13l4 4L19 7" />
-    </svg>
-  )
-}
-
-export default function Ceramics() {
-  return (
-    <section id="ceramics" className="bg-black py-28">
+    <section id="about" className="bg-white py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-14 px-6 lg:grid-cols-2 lg:gap-20">
-        {/* left — heading + copy */}
-        <Reveal>
-          <Eyebrow>Signature Service</Eyebrow>
-          <h2 className="mt-5 h-display text-6xl text-white sm:text-7xl">
-            Ceramic
-            <br />
-            <span className="text-gold">Coatings</span>
+        {/* photo */}
+        <div className="relative">
+          <Photo
+            src={IMAGES.detailer}
+            alt="Professional detailer polishing a car to a flawless finish"
+            className="aspect-[4/3] w-full rounded-[2rem] shadow-soft"
+          />
+          <div className="absolute -bottom-6 -right-4 rounded-2xl bg-brand-blue px-6 py-5 text-white shadow-blue sm:right-6">
+            <p className="font-display text-3xl font-extrabold leading-none">5★</p>
+            <p className="mt-1 text-xs text-white/80">rated by 500+ drivers</p>
+          </div>
+        </div>
+
+        {/* copy */}
+        <div>
+          <Chip>Why Detail on Demand</Chip>
+          <h2 className="mt-5 display text-4xl text-brand-ink sm:text-5xl">
+            Detailing done right, <span className="text-brand-blue">without the hassle.</span>
           </h2>
-          <p className="mt-7 max-w-lg text-base leading-relaxed text-white/65">
-            Our flagship treatment. We decontaminate and machine-polish your paint to a flawless
-            finish, then bond a professional-grade 9H ceramic coating that transforms how your car
-            looks, feels, and protects itself — for years to come.
+          <p className="mt-5 text-lg text-slate-600">
+            Skip the drop-off, the waiting room, and the drive-thru wash. We bring a full professional
+            detailing setup to your door and leave your vehicle looking flawless.
           </p>
-          <ul className="mt-8 space-y-3">
+
+          <div className="mt-9 grid gap-6 sm:grid-cols-2">
             {points.map((p) => (
-              <li key={p} className="flex gap-3 text-sm font-medium text-white/80">
-                <Check />
-                {p}
-              </li>
+              <div key={p.t} className="flex gap-3">
+                <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-tint text-brand-blueDark">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="none" stroke="currentColor" strokeWidth="3">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+                <div>
+                  <p className="font-semibold text-brand-ink">{p.t}</p>
+                  <p className="mt-1 text-sm leading-relaxed text-slate-500">{p.d}</p>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
+
           <div className="mt-10">
-            <Button href="#contact" variant="gold" className="px-9 py-4">
-              Book a coating
+            <Button href="#contact" variant="primary" className="px-8 py-4 text-base">
+              Get a free quote
             </Button>
           </div>
-        </Reveal>
-
-        {/* right — photo gallery grid */}
-        <Reveal delay={0.1} className="grid grid-cols-2 gap-4">
-          {gallery.map((g) => (
-            <div
-              key={g.label}
-              className={`group relative flex aspect-square items-end overflow-hidden border border-white/10 bg-gradient-to-br ${g.grad}`}
-            >
-              <svg viewBox="0 0 24 24" className="absolute right-4 top-4 h-7 w-7 text-gold/40 transition-colors group-hover:text-gold" fill="currentColor">
-                <path d={SHINE} />
-              </svg>
-              <span className="p-4 text-xs font-bold uppercase tracking-widest2 text-white/70">{g.label}</span>
-            </div>
-          ))}
-        </Reveal>
+        </div>
       </div>
     </section>
   )

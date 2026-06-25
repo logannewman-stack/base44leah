@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Oswald:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 * {
@@ -21,8 +21,8 @@ html,
 body {
   margin: 0;
   padding: 0;
-  background: #000000;
-  color: #ffffff;
+  background: #ffffff;
+  color: #0b1220;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -33,8 +33,8 @@ body {
 }
 
 ::selection {
-  background: #f5c518;
-  color: #000;
+  background: #bae6fd;
+  color: #0b1220;
 }
 
 ::-webkit-scrollbar {
@@ -42,50 +42,45 @@ body {
   height: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #000;
+  background: #f1f5f9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #f5c518;
-  border-radius: 0;
+  background: #0ea5e9;
+  border-radius: 999px;
 }
 
 @layer components {
-  /* Big condensed all-caps heading */
-  .h-display {
-    @apply font-display uppercase leading-[0.92] tracking-tightest;
+  .display {
+    @apply font-display font-bold tracking-[-0.02em];
   }
 
-  /* Solid gold CTA */
-  .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 bg-gold px-7 py-3.5 text-sm font-bold uppercase tracking-wider2 text-black transition-colors duration-200 hover:bg-gold-400;
+  /* Primary light-blue CTA */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-7 py-3.5 text-sm font-semibold text-white shadow-blue transition-all duration-200 hover:bg-brand-blueDark hover:shadow-soft;
   }
 
-  /* Outlined (ghost) button */
-  .btn-outline {
-    @apply inline-flex items-center justify-center gap-2 border border-white/30 bg-transparent px-7 py-3.5 text-sm font-bold uppercase tracking-wider2 text-white transition-colors duration-200 hover:border-gold hover:text-gold;
+  /* Dark/ink button */
+  .btn-dark {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-ink px-7 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-slate-800;
   }
 
-  /* Thin gold link-button used inside dark cards */
-  .btn-book {
-    @apply inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-widest2 text-gold transition-all duration-200 hover:gap-3;
+  /* Ghost / outline button */
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-sm font-semibold text-brand-ink transition-colors duration-200 hover:border-brand-blue hover:text-brand-blue;
+  }
+
+  /* Small pill chip / eyebrow */
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full bg-brand-tint px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-blueDark;
   }
 }
 
-/* Hide scrollbar on horizontal scrollers while keeping it scrollable */
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
-}
-
-/* Subtle film grain / studio vignette helper for photographic dark sections */
-.studio-vignette {
-  background:
-    radial-gradient(120% 80% at 50% 0%, rgba(255, 255, 255, 0.06), transparent 55%),
-    radial-gradient(100% 100% at 50% 60%, rgba(245, 197, 24, 0.05), transparent 60%),
-    #000;
 }
 
 @media (prefers-reduced-motion: reduce) {
