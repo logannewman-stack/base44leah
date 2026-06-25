@@ -101,13 +101,15 @@ function DnaStrand({ rotate }: { rotate: MotionValue<number> }) {
 
 /* --------------------------- Orbiting service tile ------------------------- */
 
-function Tile({ service, i, progress }: { service: (typeof services)[number]; i: number; progress: MotionValue<number> }) {
+function Tile({ service, i, progress, isMobile }: { service: (typeof services)[number]; i: number; progress: MotionValue<number>; isMobile: boolean }) {
+  // On phones the orbit tightens so cards stay on-screen instead of spilling off the edges.
+  const r = isMobile ? 96 : R
   // faces point radially OUTWARD (rotateY = phi) so they never flip toward the axis
   const transform = useTransform(progress, (p) => {
     const d = i - p * (N - 1)
     const phi = d * STEP_ANGLE
     const rad = (phi * Math.PI) / 180
-    const x = Math.sin(rad) * R
+    const x = Math.sin(rad) * r
     const z = Math.cos(rad) * 110 // shallow depth: focused card sits near the screen plane → crisp text
     const y = d * STEP_Y
     const depth = (z / 110 + 1) / 2
@@ -121,14 +123,14 @@ function Tile({ service, i, progress }: { service: (typeof services)[number]; i:
   })
   const stroke = service.key === 'web' || service.key === 'social'
   return (
-    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[300px]">
-      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/80 px-8 py-9 text-center backdrop-blur-md">
-        <span className={`mx-auto flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br ${service.color}`}>
-          <svg viewBox="0 0 24 24" className="h-10 w-10 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
+    <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[230px] sm:w-[300px]">
+      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/80 px-6 py-7 text-center backdrop-blur-md sm:px-8 sm:py-9">
+        <span className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br sm:h-20 sm:w-20 ${service.color}`}>
+          <svg viewBox="0 0 24 24" className="h-8 w-8 text-white sm:h-10 sm:w-10" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
             <path d={service.icon} />
           </svg>
         </span>
-        <h3 className="mt-6 font-display text-[1.7rem] font-bold leading-tight text-neutral-900">{service.name}</h3>
+        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-neutral-900 sm:mt-6 sm:text-[1.7rem]">{service.name}</h3>
         <p className="mt-2.5 text-[0.8rem] uppercase tracking-[0.2em] text-cyber-cyan">{service.label}</p>
       </div>
     </motion.div>
@@ -143,56 +145,9 @@ function ProgressDot({ i, progress }: { i: number; progress: MotionValue<number>
 
 /* --------------------------------- Section -------------------------------- */
 
-/* --------------------- Mobile: lightweight stacked list -------------------- */
-
-function ServicesHelixMobile() {
-  return (
-    <section id="services" className="relative overflow-x-clip py-20">
-      <div className="mx-auto max-w-md px-6">
-        <div className="text-center">
-          <Eyebrow>What we do</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-bold">
-            Five services. <span className="gradient-text">One growth engine.</span>
-          </h2>
-        </div>
-        <div className="mt-10 space-y-4">
-          {services.map((s) => {
-            const stroke = s.key === 'web' || s.key === 'social'
-            return (
-              <div key={s.key} className="glow-border rounded-3xl border border-black/10 bg-white/80 p-6">
-                <div className="flex items-center gap-3">
-                  <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br ${s.color}`}>
-                    <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
-                      <path d={s.icon} />
-                    </svg>
-                  </span>
-                  <div>
-                    <h3 className="font-display text-xl font-bold leading-tight text-neutral-900">{s.name}</h3>
-                    <p className="text-[0.7rem] uppercase tracking-[0.2em] text-cyber-cyan">{s.label}</p>
-                  </div>
-                </div>
-                <p className="mt-4 text-sm leading-relaxed text-neutral-600">{s.what}</p>
-                <p className="mt-3 text-sm leading-relaxed text-neutral-500">
-                  <span className="font-semibold text-cyber-magenta">Why it matters — </span>
-                  {s.why}
-                </p>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 export default function ServicesHelix() {
-  const isMobile = useIsMobile()
-  if (isMobile) return <ServicesHelixMobile />
-  return <ServicesHelixDesktop />
-}
-
-function ServicesHelixDesktop() {
   const ref = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
   const helixRotate = useTransform(scrollYProgress, [0, 1], [0, 720])
   const [active, setActive] = useState(0)
@@ -267,7 +222,7 @@ function ServicesHelixDesktop() {
         <motion.div className="absolute inset-0" style={{ transformStyle: 'preserve-3d', rotateX: 6 }}>
           <DnaStrand rotate={helixRotate} />
           {services.map((s, i) => (
-            <Tile key={s.key} service={s} i={i} progress={scrollYProgress} />
+            <Tile key={s.key} service={s} i={i} progress={scrollYProgress} isMobile={isMobile} />
           ))}
         </motion.div>
 
