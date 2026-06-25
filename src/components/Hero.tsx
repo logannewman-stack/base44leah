@@ -1,65 +1,62 @@
-import { Button } from './ui'
+import { contactModal } from './useContactModal'
 import { Photo } from './Photo'
 import { IMAGES } from '../images'
 
 export default function Hero() {
+  const open = (e: React.MouseEvent) => {
+    e.preventDefault()
+    contactModal.open()
+  }
   return (
-    <section id="top" className="relative overflow-hidden bg-white">
-      {/* right-half full-bleed image */}
-      <div className="absolute inset-y-0 right-0 hidden w-1/2 lg:block">
-        <Photo src={IMAGES.hero} alt="Professional detailer washing and detailing a car" eager className="h-full w-full">
-          {/* white bleed on the left edge so it blends into the text half */}
-          <div className="absolute inset-0" style={{ background: 'linear-gradient(to right, #ffffff 0%, transparent 15%)' }} />
-          <div className="absolute inset-0 bg-brand-blue/5" />
+    <section id="top" className="relative flex min-h-[88vh] items-center justify-center overflow-hidden">
+      {/* full-bleed hero photo */}
+      <div className="absolute inset-0">
+        <Photo src={IMAGES.hero} alt="Professional detailer working on a luxury car" eager className="h-full w-full" gradient="from-slate-800 to-brand-ink">
+          {/* legibility overlay (navy → blue tint) */}
+          <div className="absolute inset-0 bg-gradient-to-b from-brand-ink/80 via-brand-ink/55 to-brand-ink/85" />
+          <div className="absolute inset-0 bg-brand-blueDark/15" />
         </Photo>
       </div>
 
-      <div className="relative mx-auto max-w-7xl px-6">
-        <div className="grid items-center lg:grid-cols-2">
-          <div className="py-20 lg:py-32 lg:pr-12">
-            <span className="chip">✦ Mobile Detailing · We Come to You</span>
+      <div className="relative z-10 mx-auto max-w-3xl px-6 py-28 text-center">
+        <p className="text-xs font-bold uppercase tracking-[0.28em] text-brand-sky">Mobile Detailing · We Come to You</p>
 
-            <h1 className="mt-6 h-hero text-5xl sm:text-6xl lg:text-[72px]">
-              Your Car Deserves a
-              <br />
-              <span className="text-brand-blue">Showroom Shine.</span>
-            </h1>
+        <h1 className="mt-6 text-4xl font-extrabold uppercase leading-[1.05] tracking-[-0.01em] text-white sm:text-6xl lg:text-7xl">
+          Showroom Shine,
+          <br />
+          <span className="text-brand-sky">Delivered to Your Door.</span>
+        </h1>
 
-            <p className="mt-6 max-w-lg text-[18px] leading-[1.7] text-gray-700">
-              We bring professional-grade detailing directly to your driveway, office, or anywhere you
-              are. Book in 60 seconds.
-            </p>
+        <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/85">
+          Premium mobile detailing, ceramic coatings, and paint correction — brought straight to your
+          driveway. Book in 60 seconds and we handle the rest.
+        </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Button href="#contact" variant="primary" className="px-8 py-4 text-base">
-                Book My Detail
-                <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
-              </Button>
-              <a href="#packages" className="btn-outline-dark px-8 py-4 text-base">
-                See Packages
-              </a>
-            </div>
-
-            <div className="mt-9 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm font-medium text-gray-700">
-              <span className="inline-flex items-center gap-1.5"><span className="text-amber-400">★</span> 4.9/5 Stars</span>
-              <span className="h-4 w-px bg-gray-300" />
-              <span>2,000+ Cars Detailed</span>
-              <span className="h-4 w-px bg-gray-300" />
-              <span>Fully Insured</span>
-            </div>
-          </div>
-
-          <div className="hidden lg:block" />
+        <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          <a
+            href="#contact"
+            onClick={open}
+            className="inline-flex items-center gap-2 rounded-full bg-brand-blue px-9 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white shadow-blue transition-colors hover:bg-brand-blueDark"
+          >
+            Book My Detail
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+          <a
+            href="#services"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-white/70 px-9 py-4 text-sm font-bold uppercase tracking-[0.12em] text-white transition-colors hover:bg-white hover:text-brand-ink"
+          >
+            View Services
+          </a>
         </div>
+      </div>
 
-        {/* image on mobile/tablet */}
-        <div className="pb-14 lg:hidden">
-          <Photo src={IMAGES.hero} alt="Professional detailer washing and detailing a car" className="aspect-[4/3] w-full rounded-card shadow-soft">
-            <div className="absolute inset-0 bg-brand-blue/5" />
-          </Photo>
-        </div>
+      {/* scroll cue */}
+      <div className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-white/60">
+        <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2">
+          <path d="M12 5v14M6 13l6 6 6-6" />
+        </svg>
       </div>
     </section>
   )
