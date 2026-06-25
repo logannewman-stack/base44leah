@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -22,7 +22,7 @@ body {
   margin: 0;
   padding: 0;
   background: #ffffff;
-  color: #0b1220;
+  color: #0a0a0a;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
@@ -34,7 +34,7 @@ body {
 
 ::selection {
   background: #bae6fd;
-  color: #0b1220;
+  color: #0a0a0a;
 }
 
 ::-webkit-scrollbar {
@@ -51,17 +51,12 @@ body {
 
 @layer components {
   .display {
-    @apply font-display font-bold tracking-[-0.02em];
+    @apply font-display font-extrabold tracking-[-0.025em];
   }
 
-  /* Primary light-blue CTA */
+  /* Primary sky-blue CTA */
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-7 py-3.5 text-sm font-semibold text-white shadow-blue transition-all duration-200 hover:bg-brand-blueDark hover:shadow-soft;
-  }
-
-  /* Dark/ink button */
-  .btn-dark {
-    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-ink px-7 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-slate-800;
   }
 
   /* Ghost / outline button */
@@ -69,7 +64,12 @@ body {
     @apply inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-7 py-3.5 text-sm font-semibold text-brand-ink transition-colors duration-200 hover:border-brand-blue hover:text-brand-blue;
   }
 
-  /* Small pill chip / eyebrow */
+  /* White button used on blue/dark backgrounds */
+  .btn-white {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand-blueDark shadow-soft transition-colors duration-200 hover:bg-slate-50;
+  }
+
+  /* Small light-blue chip / eyebrow */
   .chip {
     @apply inline-flex items-center gap-2 rounded-full bg-brand-tint px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-brand-blueDark;
   }

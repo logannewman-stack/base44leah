@@ -7,13 +7,13 @@ const socials = [
   { label: 'TikTok', href: 'https://tiktok.com', icon: 'M16 3c.3 2 1.6 3.6 3.6 3.9v2.6c-1.2.1-2.4-.2-3.5-.8v5.6a5.3 5.3 0 1 1-5.3-5.3c.3 0 .6 0 .9.08v2.7a2.6 2.6 0 1 0 1.8 2.5V3H16z' },
 ]
 
-const quickLinks = [
-  { label: 'Services', href: '#services' },
+const serviceLinks = ['Exterior Detail', 'Full Detail', 'Ceramic Coating', 'Paint Correction', 'Interior Deep Clean']
+const companyLinks = [
+  { label: 'How it works', href: '#how' },
   { label: 'Gallery', href: '#gallery' },
-  { label: 'Packages', href: '#packages' },
+  { label: 'Pricing', href: '#packages' },
   { label: 'Reviews', href: '#reviews' },
 ]
-const serviceLinks = ['Ceramic Coating', 'Paint Correction', 'Paint Protection Film', 'Interior Detailing', 'Mobile Wash']
 
 export default function Footer() {
   const open = (e: React.MouseEvent) => {
@@ -21,13 +21,13 @@ export default function Footer() {
     contactModal.open()
   }
   return (
-    <footer className="bg-brand-ink pt-20 pb-10 text-white">
+    <footer className="border-t border-slate-200 bg-white pt-16 pb-10">
       <div className="mx-auto grid max-w-7xl gap-12 px-6 md:grid-cols-2 lg:grid-cols-4">
         <div>
-          <Logo dark />
-          <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/55">
-            Premium mobile auto detailing, ceramic coatings, and paint correction — brought right to
-            your driveway.
+          <Logo />
+          <p className="mt-5 max-w-xs text-sm leading-relaxed text-slate-500">
+            Premium mobile auto detailing brought right to your driveway. Showroom results, zero
+            hassle.
           </p>
           <div className="mt-6 flex gap-3">
             {socials.map((s) => (
@@ -37,7 +37,7 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={s.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white/70 transition-colors hover:bg-brand-blue hover:text-white"
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 text-slate-500 transition-colors hover:bg-brand-blue hover:text-white"
               >
                 <svg viewBox="0 0 24 24" className="h-5 w-5" fill="currentColor">
                   <path d={s.icon} />
@@ -48,24 +48,11 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-sm font-semibold text-white">Quick links</p>
-          <ul className="mt-5 space-y-3">
-            {quickLinks.map((l) => (
-              <li key={l.label}>
-                <a href={l.href} className="text-sm text-white/55 transition-colors hover:text-brand-sky">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <p className="text-sm font-semibold text-white">Services</p>
+          <p className="text-sm font-bold text-brand-ink">Services</p>
           <ul className="mt-5 space-y-3">
             {serviceLinks.map((l) => (
               <li key={l}>
-                <a href="#services" className="text-sm text-white/55 transition-colors hover:text-brand-sky">
+                <a href="#services" className="text-sm text-slate-500 transition-colors hover:text-brand-blue">
                   {l}
                 </a>
               </li>
@@ -74,23 +61,34 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-sm font-semibold text-white">Get in touch</p>
-          <p className="mt-5 text-sm leading-relaxed text-white/55">
-            Free, no-pressure quote for your vehicle in under a minute.
+          <p className="text-sm font-bold text-brand-ink">Company</p>
+          <ul className="mt-5 space-y-3">
+            {companyLinks.map((l) => (
+              <li key={l.label}>
+                <a href={l.href} className="text-sm text-slate-500 transition-colors hover:text-brand-blue">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div>
+          <p className="text-sm font-bold text-brand-ink">Get in touch</p>
+          <p className="mt-5 text-sm text-slate-500">
+            <a href="tel:+15550102030" className="transition-colors hover:text-brand-blue">(555) 010-2030</a>
           </p>
+          <p className="mt-2 text-sm text-slate-500">
+            <a href="mailto:hello@detailondemand.com" className="transition-colors hover:text-brand-blue">hello@detailondemand.com</a>
+          </p>
+          <p className="mt-2 text-sm text-slate-500">Serving the metro area &amp; 25 miles out</p>
           <a href="#contact" onClick={open} className="btn-primary mt-5 w-full">
-            Request a free quote
+            Book Now
           </a>
-          <p className="mt-5 text-sm text-white/55">
-            <a href="tel:+10000000000" className="transition-colors hover:text-brand-sky">(000) 000-0000</a>
-          </p>
-          <p className="text-sm text-white/55">
-            <a href="mailto:hello@detailondemand.com" className="transition-colors hover:text-brand-sky">hello@detailondemand.com</a>
-          </p>
         </div>
       </div>
 
-      <div className="mx-auto mt-16 flex max-w-7xl flex-col items-center justify-between gap-3 border-t border-white/10 px-6 pt-8 text-xs text-white/40 sm:flex-row">
+      <div className="mx-auto mt-14 flex max-w-7xl flex-col items-center justify-between gap-3 border-t border-slate-200 px-6 pt-8 text-xs text-slate-400 sm:flex-row">
         <p>© {new Date().getFullYear()} Detail on Demand. All rights reserved.</p>
         <p>Mobile auto detailing that comes to you.</p>
       </div>

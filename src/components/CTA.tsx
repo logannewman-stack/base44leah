@@ -1,6 +1,4 @@
-import { Photo } from './Photo'
 import { contactModal } from './useContactModal'
-import { IMAGES } from '../images'
 
 export default function CTA() {
   const open = (e: React.MouseEvent) => {
@@ -8,42 +6,33 @@ export default function CTA() {
     contactModal.open()
   }
   return (
-    <section id="contact" className="bg-white py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <Photo
-          src={IMAGES.cta}
-          alt="A pristine, freshly detailed car"
-          gradient="from-brand-ink to-slate-900"
-          className="rounded-[2.5rem]"
-        >
-          <div className="absolute inset-0 bg-brand-ink/75" />
-          <div className="relative px-6 py-20 text-center sm:px-12 sm:py-24">
-            <p className="text-xs font-bold uppercase tracking-wider text-brand-sky">Book in 60 seconds</p>
-            <h2 className="mx-auto mt-5 max-w-2xl display text-4xl text-white sm:text-5xl">
-              Ready for the showroom treatment?
-            </h2>
-            <p className="mx-auto mt-5 max-w-xl text-lg text-white/75">
-              Tell us your vehicle and pick a time — we bring the shine to you. Upfront pricing, fully
-              insured, satisfaction guaranteed.
-            </p>
-            <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
-              <a
-                href="#contact"
-                onClick={open}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-blue px-8 py-4 text-base font-semibold text-white shadow-blue transition-colors hover:bg-brand-blueDark"
-              >
-                Book my detail
-              </a>
-              <a
-                href="#contact"
-                onClick={open}
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-8 py-4 text-base font-semibold text-white transition-colors hover:bg-white hover:text-brand-ink"
-              >
-                Request a free quote
-              </a>
-            </div>
-          </div>
-        </Photo>
+    <section id="contact" className="bg-brand-blue">
+      <div className="mx-auto max-w-4xl px-6 py-20 text-center sm:py-24">
+        <h2 className="display text-4xl text-white sm:text-5xl">Ready for a Showroom Shine?</h2>
+        <p className="mx-auto mt-5 max-w-xl text-lg text-white/90">
+          Book online in 60 seconds — we handle the rest. Pick a time, and we bring the shine to you.
+        </p>
+        <div className="mt-9 flex justify-center">
+          <a
+            href="#contact"
+            onClick={open}
+            className="inline-flex items-center gap-2 rounded-full bg-white px-9 py-4 text-base font-bold text-brand-blueDark shadow-soft transition-transform duration-200 hover:scale-[1.03]"
+          >
+            Book My Detail Now
+            <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </a>
+        </div>
+        <div className="mt-7 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-sm text-white/85">
+          <span className="inline-flex items-center gap-2">
+            <span className="h-2 w-2 rounded-full bg-white" /> Next available: Tomorrow
+          </span>
+          <span className="hidden h-4 w-px bg-white/30 sm:block" />
+          <span>★ 4.9/5 from 500+ reviews</span>
+          <span className="hidden h-4 w-px bg-white/30 sm:block" />
+          <span>Fully insured &amp; licensed</span>
+        </div>
       </div>
     </section>
   )
