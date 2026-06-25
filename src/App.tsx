@@ -1,8 +1,7 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
-import VideoReel from './components/VideoReel'
+import DetailProcess from './components/DetailProcess'
 import Services from './components/Services'
-import Process from './components/Process'
 import Pricing from './components/Pricing'
 import Reviews from './components/Reviews'
 import CTA from './components/CTA'
@@ -15,9 +14,8 @@ export default function App() {
       <Header />
       <main>
         <Hero />
-        <VideoReel />
+        <DetailProcess />
         <Services />
-        <Process />
         <Pricing />
         <Reviews />
         <CTA />

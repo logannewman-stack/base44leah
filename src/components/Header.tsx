@@ -2,9 +2,8 @@ import { useEffect, useState } from 'react'
 import { booking } from './useBooking'
 
 const links = [
-  { label: 'Work', href: '#work' },
+  { label: 'The Process', href: '#process' },
   { label: 'Services', href: '#services' },
-  { label: 'Process', href: '#process' },
   { label: 'Pricing', href: '#pricing' },
   { label: 'Reviews', href: '#reviews' },
 ]
