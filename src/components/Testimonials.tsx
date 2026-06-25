@@ -4,21 +4,21 @@ import { Depth3D, Eyebrow } from './ui'
 const quotes = [
   {
     quote:
-      'We were missing 40% of our calls after hours. FrontDeskAI books appointments while we sleep — it paid for itself in the first week.',
-    name: 'Dr. Amara Okafor',
-    role: 'Brightline Dental',
+      'Booked Sunday night, and my car was spotless in my own driveway by Monday lunch. Months later the ceramic coating still beads water like day one. Unreal.',
+    name: 'Jordan M.',
+    role: 'Tesla Model 3 owner',
   },
   {
     quote:
-      'Callers genuinely think they’re talking to our receptionist. It’s that natural. Our front desk team finally focuses on patients in the room.',
-    name: 'Marcus Reyes',
-    role: 'Apex Physical Therapy',
+      'Two years of swirl marks and scratches — gone in a single visit. It honestly looks better than the day I drove it off the lot. Worth every penny.',
+    name: 'Priya S.',
+    role: 'BMW X5 owner',
   },
   {
     quote:
-      'Every lead now lands in our CRM with a summary. No more sticky notes, no more lost jobs. Our booked revenue is up 38%.',
-    name: 'Jenna Holt',
-    role: 'Holt Home Services',
+      'I never have to leave the house and the truck comes back showroom-clean every single time. They handle our whole family’s cars now.',
+    name: 'Mike T.',
+    role: 'Ford F-150 owner',
   },
 ]
 
@@ -28,10 +28,10 @@ export default function Testimonials() {
       <div className="mx-auto max-w-6xl px-6">
         <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
           <div className="flex justify-center">
-            <Eyebrow>Results</Eyebrow>
+            <Eyebrow>Reviews</Eyebrow>
           </div>
           <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
-            Businesses that stopped <span className="gradient-text">missing calls.</span>
+            Drivers who'll never go back to <span className="gradient-text">a drive-thru wash.</span>
           </h2>
         </Depth3D>
 

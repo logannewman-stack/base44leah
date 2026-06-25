@@ -4,49 +4,49 @@ import { Eyebrow } from './ui'
 
 const services = [
   {
-    key: 'meta',
-    name: 'Meta Ads',
-    label: 'Facebook & Instagram',
-    what: 'We run fully-managed paid campaigns on Facebook and Instagram — strategy, creative, audience targeting, and relentless optimization that puts your offer in front of the right people.',
-    why: 'Turn ad spend into booked jobs by reaching ready-to-buy customers in your area — every lead funnelled straight into your pipeline.',
-    icon: 'M3 11l18-7-7 18-2.5-7.5L3 11z',
+    key: 'ceramic',
+    name: 'Ceramic Coating',
+    label: 'Liquid-glass protection',
+    what: 'A professionally-applied 9H ceramic coating that bonds to your paint, locking in a deep gloss while repelling water, dirt, UV, and road grime for years — not weeks.',
+    why: 'Your car stays glossier, cleaner, and far easier to wash, while the coating guards your paint against fading, etching, and everything the road throws at it.',
+    icon: 'M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1.4 13L7 11.4 8.4 10l2.2 2.2L15.6 7 17 8.4 10.6 15z',
+    color: 'from-blue-400 to-indigo-600',
+  },
+  {
+    key: 'correction',
+    name: 'Paint Correction',
+    label: 'Swirls & scratches erased',
+    what: 'A multi-stage machine polish that removes swirl marks, scratches, water spots, and oxidation — restoring the true depth, clarity, and mirror finish hiding under your paint.',
+    why: 'Erase years of wear in a single visit so your car looks better than the day you drove it home — the perfect foundation before any coating goes on.',
+    icon: 'M12 3l1.8 4.6a3 3 0 0 0 1.8 1.8L20 11l-4.6 1.8a3 3 0 0 0-1.8 1.8L12 19l-1.8-4.6a3 3 0 0 0-1.8-1.8L4 11l4.6-1.6a3 3 0 0 0 1.8-1.8z',
+    color: 'from-cyan-400 to-sky-600',
+  },
+  {
+    key: 'ppf',
+    name: 'Paint Protection Film',
+    label: 'Invisible armor',
+    what: 'A self-healing, optically-clear urethane film applied to high-impact areas — bumper, hood, mirrors, and beyond — that shields against rock chips, scuffs, and stains.',
+    why: 'Take the hits the road throws at you without a single chip in your paint, protecting both your finish and your resale value for the long haul.',
+    icon: 'M12 2 5 5v6c0 5 3 9 7 11 4-2 7-6 7-11V5l-7-3z',
     color: 'from-sky-400 to-blue-600',
   },
   {
-    key: 'gmb',
-    name: 'Google My Business',
-    label: 'Local visibility',
-    what: 'We create and fully optimize your Google Business Profile — photos, services, local-SEO keywords, and reviews — so you rank in local search and Google Maps.',
-    why: 'Own the map and the local 3-pack so you are the first business people find, trust, and call when they search.',
-    icon: 'M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z',
-    color: 'from-emerald-400 to-teal-600',
-  },
-  {
-    key: 'web',
-    name: 'Website Development',
-    label: 'Custom & high-converting',
-    what: 'A professional, lightning-fast, mobile-friendly website built to convert — local SEO baked in, lead-capture forms, and a direct line into your CRM.',
-    why: 'A fast, trustworthy site that works around the clock, turning curious visitors into booked leads while you sleep.',
-    icon: 'M3 5h18v14H3V5zm0 4h18M7 5v4',
+    key: 'interior',
+    name: 'Interior Detailing',
+    label: 'Like-new cabin',
+    what: 'A full interior deep clean — steam, shampoo, and extraction of carpets and seats, leather cleaned and conditioned, every vent, crevice, and surface restored and sanitized.',
+    why: 'Step into a fresh, spotless, germ-free cabin that smells and feels brand new — the part of your car you actually live in, finally treated like it.',
+    icon: 'M5 11V8a3 3 0 0 1 3-3h8a3 3 0 0 1 3 3v3a2 2 0 0 1 1 2v5h-3v-2H6v2H3v-5a2 2 0 0 1 1-2z',
     color: 'from-cyan-400 to-indigo-600',
   },
   {
-    key: 'social',
-    name: 'Social Media Management',
-    label: 'Always-on presence',
-    what: 'We keep your brand active and consistent across platforms — content creation, scheduling, posting, and community engagement that compounds your reach.',
-    why: 'Stay top-of-mind and build the social proof that makes choosing you the obvious, easy decision.',
-    icon: 'M18 8a3 3 0 1 0-2.8-4H15a3 3 0 0 0 .2 1.1L8.9 8.5a3 3 0 1 0 0 7l6.3 3.4A3 3 0 1 0 18 16a3 3 0 0 0-2.1.9L9.6 13.5a3 3 0 0 0 0-3L15.9 7A3 3 0 0 0 18 8z',
-    color: 'from-fuchsia-400 to-violet-600',
-  },
-  {
-    key: 'voice',
-    name: 'Voice AI Caller',
-    label: '24/7 AI receptionist',
-    what: 'An always-on AI that answers every call in milliseconds, qualifies leads, books appointments, makes outbound follow-ups, and replies to texts automatically.',
-    why: 'Never miss a call or a lead again — every enquiry answered and booked, day or night, even while you work.',
-    icon: 'M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z',
-    color: 'from-cyan-400 to-purple-600',
+    key: 'mobile',
+    name: 'Mobile Wash & Maintenance',
+    label: 'Showroom-ready, at your door',
+    what: 'Recurring, fully-mobile detailing on your schedule — exterior hand wash, decontamination, wheels, tires, and an interior refresh, all performed right in your driveway.',
+    why: 'Keep that just-detailed look all year without ever leaving home — we bring the water, the power, and the pro products straight to you.',
+    icon: 'M3 13l2-5h11l3 4h2v3h-2a2 2 0 1 1-4 0H9a2 2 0 1 1-4 0H3v-2z',
+    color: 'from-blue-400 to-sky-600',
   },
 ]
 
@@ -71,14 +71,14 @@ function StrandLevel({ k, total, rotate }: { k: number; total: number; rotate: M
           style={{ transform: 'translate(-50%,-50%)', width: STRAND_R * 2 }}
         />
       )}
-      {/* strand A — cyan sphere */}
+      {/* strand A — ice-blue sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ecffff,#22d3ee_55%,#0b4a63)] shadow-[0_0_18px_5px_rgba(34,211,238,0.7)]"
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ecffff,#38bdf8_55%,#0b4a63)] shadow-[0_0_18px_5px_rgba(56,189,248,0.7)]"
         style={{ transform: `translate(-50%,-50%) translateX(${STRAND_R}px)` }}
       />
-      {/* strand B — magenta sphere */}
+      {/* strand B — electric-blue sphere */}
       <span
-        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#ffe9fb,#e23bd2_55%,#5e1457)] shadow-[0_0_18px_5px_rgba(226,59,210,0.7)]"
+        className="absolute left-1/2 top-1/2 h-[15px] w-[15px] rounded-full bg-[radial-gradient(circle_at_35%_30%,#dbeafe,#2563eb_55%,#11215e)] shadow-[0_0_18px_5px_rgba(37,99,235,0.7)]"
         style={{ transform: `translate(-50%,-50%) translateX(-${STRAND_R}px)` }}
       />
     </motion.div>
@@ -118,7 +118,7 @@ function Tile({ service, i, progress }: { service: (typeof services)[number]; i:
     const depth = (Math.cos((d * STEP_ANGLE * Math.PI) / 180) + 1) / 2
     return 0.14 + depth * depth * 0.86
   })
-  const stroke = service.key === 'web' || service.key === 'social'
+  const stroke = service.key === 'interior'
   return (
     <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[300px]">
       <div className="glow-border rounded-[1.75rem] border border-white/10 bg-white/[0.07] px-8 py-9 text-center backdrop-blur-md">
@@ -157,9 +157,9 @@ export default function ServicesHelix() {
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1000px]">
         {/* heading */}
         <div className="absolute top-[8%] left-1/2 z-20 -translate-x-1/2 text-center">
-          <Eyebrow>What we do</Eyebrow>
+          <Eyebrow>Our services</Eyebrow>
           <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
-            Five services. <span className="gradient-text">One growth engine.</span>
+            Five services. <span className="gradient-text">One flawless finish.</span>
           </h2>
         </div>
 
@@ -180,7 +180,7 @@ export default function ServicesHelix() {
               >
                 <div className="mt-6 flex items-center gap-3">
                   <span className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${cur.color}`}>
-                    <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill={cur.key === 'web' || cur.key === 'social' ? 'none' : 'currentColor'} stroke={cur.key === 'web' || cur.key === 'social' ? 'currentColor' : 'none'} strokeWidth="2">
+                    <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill={cur.key === 'interior' ? 'none' : 'currentColor'} stroke={cur.key === 'interior' ? 'currentColor' : 'none'} strokeWidth="2">
                       <path d={cur.icon} />
                     </svg>
                   </span>

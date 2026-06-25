@@ -83,7 +83,7 @@ export function CursorGlow() {
           <linearGradient id="cometgrad" x1="0%" y1="0%" x2="100%" y2="100%">
             <stop offset="0%" stopColor="#c7f3ff" />
             <stop offset="45%" stopColor="#5fb8ff" />
-            <stop offset="100%" stopColor="#b07bff" />
+            <stop offset="100%" stopColor="#2563eb" />
           </linearGradient>
           <filter id="cometglow" x="-60%" y="-60%" width="220%" height="220%">
             <feGaussianBlur stdDeviation="6" />
@@ -110,7 +110,7 @@ export function CursorGlow() {
 
         {/* glowing glass head */}
         <circle cx={pts[0].x} cy={pts[0].y} r={9} fill="url(#cometgrad)" opacity={0.35} style={{ filter: 'blur(3px)' }} />
-        <circle cx={pts[0].x} cy={pts[0].y} r={4.5} fill="#eaffff" style={{ filter: 'drop-shadow(0 0 6px #5fb8ff) drop-shadow(0 0 14px #8b5cf6)' }} />
+        <circle cx={pts[0].x} cy={pts[0].y} r={4.5} fill="#eaffff" style={{ filter: 'drop-shadow(0 0 6px #5fb8ff) drop-shadow(0 0 14px #2563eb)' }} />
       </svg>
     </>
   )

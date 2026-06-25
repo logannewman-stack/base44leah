@@ -4,34 +4,34 @@ import { Eyebrow } from './ui'
 
 const features = [
   {
-    title: 'One team, every channel',
-    body: 'Ads, Google presence, website, social, and AI call handling — all run by one team that actually talks to each other, so nothing falls through the cracks.',
-    icon: 'M4 5h16v4H4V5zm0 6h16v4H4v-4zm0 6h10v2H4v-2z',
+    title: 'We come to you',
+    body: 'Fully mobile, every single time. We pull up to your home or office with our own water, power, and pro-grade gear — you never have to leave the driveway.',
+    icon: 'M3 13l2-5h11l3 4h2v3h-2a2 2 0 1 1-4 0H9a2 2 0 1 1-4 0H3v-2z',
     color: 'from-sky-400 to-blue-600',
   },
   {
-    title: 'Fully managed, done for you',
-    body: 'We handle the strategy, the build, and the ongoing optimization. You just show up to the booked appointments.',
+    title: 'Pro products, pro process',
+    body: 'Dual-action polishers, pH-balanced foams, and certified ceramic coatings applied by trained detailers — the same caliber as a high-end shop, right at your curb.',
+    icon: 'M12 3l1.8 4.6a3 3 0 0 0 1.8 1.8L20 11l-4.6 1.8a3 3 0 0 0-1.8 1.8L12 19l-1.8-4.6a3 3 0 0 0-1.8-1.8L4 11l4.6-1.6a3 3 0 0 0 1.8-1.8z',
+    color: 'from-cyan-400 to-sky-600',
+  },
+  {
+    title: 'Booked in 60 seconds',
+    body: 'Pick your package, pick your time, and you are set. Upfront pricing, instant confirmation, and friendly reminders — no phone tag, no quotes to chase, no surprises.',
+    icon: 'M13 2L3 14h7l-1 8 10-12h-7z',
+    color: 'from-blue-400 to-indigo-600',
+  },
+  {
+    title: 'Insured, vetted & guaranteed',
+    body: 'Every detailer is background-checked, fully insured, and backed by our 100% satisfaction guarantee. If it is not perfect, we make it right — no questions asked.',
     icon: 'M12 2 4 5v6c0 5 3.4 9.7 8 11 4.6-1.3 8-6 8-11V5l-8-3zm-1.4 13L7 11.4 8.4 10l2.2 2.2L15.6 7 17 8.4 10.6 15z',
-    color: 'from-emerald-400 to-teal-600',
+    color: 'from-sky-400 to-cyan-600',
   },
   {
-    title: 'Every lead captured',
-    body: 'Your ads, your site, and your AI receptionist all feed one pipeline — no missed calls, no lost leads, no leaks.',
-    icon: 'M16 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm-8 0a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 2c-3 0-8 1.5-8 4.5V20h9v-2.5c0-1.2.5-2.3 1.3-3.2A13 13 0 0 0 8 13zm8 0a13 13 0 0 0-2.3.2A5.6 5.6 0 0 1 15 17.5V20h9v-2.5c0-3-5-4.5-8-4.5z',
-    color: 'from-cyan-400 to-indigo-600',
-  },
-  {
-    title: 'Built to win local',
-    body: 'Local SEO, Google Maps, and the 3-pack — we make you the obvious, trusted choice in your area.',
-    icon: 'M12 2C8 2 5 5 5 9c0 5 7 13 7 13s7-8 7-13c0-4-3-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5z',
-    color: 'from-fuchsia-400 to-violet-600',
-  },
-  {
-    title: 'Real results, tracked',
-    body: 'Live dashboards and clear reporting show exactly where your leads and revenue come from — no guesswork.',
-    icon: 'M4 13h3v7H4v-7zm6.5-5h3v12h-3V8zM17 3h3v17h-3V3z',
-    color: 'from-cyan-400 to-purple-600',
+    title: 'Protection that actually lasts',
+    body: 'Our coatings and films are measured in years, not weeks. Your car keeps beading water and turning heads long after we pull out of the driveway.',
+    icon: 'M12 3c3.2 4 6 7 6 10a6 6 0 0 1-12 0c0-3 2.8-6 6-10z',
+    color: 'from-cyan-400 to-blue-600',
   },
 ]
 
@@ -81,9 +81,9 @@ export default function Features() {
     <section ref={ref} id="why" className="relative" style={{ height: `${M * 75}vh` }}>
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1100px]">
         <div className="absolute top-[5%] left-1/2 z-20 -translate-x-1/2 px-6 text-center">
-          <Eyebrow>Why Front Desk AI</Eyebrow>
+          <Eyebrow>Why Detail on Demand</Eyebrow>
           <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
-            Your entire growth team, <span className="gradient-text">under one roof.</span>
+            Detailing done right, <span className="gradient-text">brought to your door.</span>
           </h2>
         </div>
 

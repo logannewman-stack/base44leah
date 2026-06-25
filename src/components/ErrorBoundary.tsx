@@ -17,7 +17,7 @@ export class ErrorBoundary extends Component<
 
   componentDidCatch(error: unknown) {
     // Keep a breadcrumb in the console without crashing the app.
-    console.warn('[FrontDeskAI] A non-critical component failed and was skipped:', error)
+    console.warn('[DetailOnDemand] A non-critical component failed and was skipped:', error)
   }
 
   render() {

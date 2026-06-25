@@ -41,12 +41,12 @@ const fragmentShader = /* glsl */ `
     for(int i=0;i<6;i++){ v += a*noise(p); p = p*2.0 + 7.3; a *= 0.5; }
     return v;
   }
-  // on-brand neon stops
+  // on-brand chrome-blue stops (ice → electric → azure → deep)
   const vec3 BASE   = vec3(0.012, 0.018, 0.045);  // near-black navy
-  const vec3 BLUE   = vec3(0.10, 0.42, 0.95);
-  const vec3 VIOLET = vec3(0.52, 0.26, 0.96);
-  const vec3 MAGENTA= vec3(0.90, 0.22, 0.80);
-  const vec3 CYAN   = vec3(0.16, 0.84, 0.92);
+  const vec3 BLUE   = vec3(0.145, 0.388, 0.922);  // electric blue
+  const vec3 VIOLET = vec3(0.055, 0.647, 0.914);  // azure
+  const vec3 MAGENTA= vec3(0.114, 0.306, 0.835);  // deep azure
+  const vec3 CYAN   = vec3(0.220, 0.741, 0.973);  // ice blue
 
   void main(){
     vec2 uv = vUv;
