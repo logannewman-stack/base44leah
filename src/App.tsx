@@ -12,6 +12,7 @@ import Testimonials from './components/Testimonials'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
+import FloatingChatButton from './components/FloatingChatButton'
 
 // Clean light backdrop: soft grey blooms + a faint grid on near-white.
 function LightBg() {
@@ -36,6 +37,7 @@ export default function App() {
         <CursorGlow />
       </ErrorBoundary>
       <Navbar />
+      <FloatingChatButton />
       <main className="relative z-10">
         <Hero />
         <Marquee />
