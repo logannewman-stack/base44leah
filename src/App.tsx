@@ -1,62 +1,29 @@
-import { lazy, Suspense } from 'react'
-import { ErrorBoundary } from './components/ErrorBoundary'
-import { CursorGlow, ScrollProgress } from './components/Effects'
-import Navbar from './components/Navbar'
+import Header from './components/Header'
 import Hero from './components/Hero'
-import Marquee from './components/Marquee'
-import Stats from './components/Stats'
-import DetailProcess from './components/DetailProcess'
-import ServicesHelix from './components/ServicesHelix'
-import Features from './components/Features'
-import Packages from './components/Pricing'
-import Testimonials from './components/Testimonials'
+import VideoReel from './components/VideoReel'
+import Services from './components/Services'
+import Process from './components/Process'
+import Pricing from './components/Pricing'
+import Reviews from './components/Reviews'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
-import ContactModal from './components/ContactModal'
-
-const ImmersiveBg = lazy(() => import('./components/ImmersiveBg'))
-
-// Rich CSS aurora shown instantly and as a fallback if WebGL is unavailable.
-function AuroraFallback() {
-  return (
-    <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-ink-900">
-      <div className="absolute -left-1/4 top-0 h-[80vh] w-[80vh] rounded-full bg-cyber-cyan/20 blur-[140px]" />
-      <div className="absolute right-0 top-1/3 h-[80vh] w-[80vh] rounded-full bg-cyber-blue/20 blur-[150px]" />
-      <div className="absolute bottom-0 left-1/3 h-[70vh] w-[70vh] rounded-full bg-cyber-violet/15 blur-[150px]" />
-    </div>
-  )
-}
+import BookingModal from './components/BookingModal'
 
 export default function App() {
   return (
-    <div className="relative min-h-screen">
-      <ErrorBoundary fallback={<AuroraFallback />}>
-        <Suspense fallback={<AuroraFallback />}>
-          <ImmersiveBg />
-        </Suspense>
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <ScrollProgress />
-      </ErrorBoundary>
-      <ErrorBoundary>
-        <CursorGlow />
-      </ErrorBoundary>
-      <Navbar />
-      <main className="relative z-10">
+    <div className="grain relative min-h-screen bg-ink-950">
+      <Header />
+      <main>
         <Hero />
-        <Marquee />
-        <Stats />
-        <ErrorBoundary>
-          <DetailProcess />
-        </ErrorBoundary>
-        <ServicesHelix />
-        <Features />
-        <Packages />
-        <Testimonials />
+        <VideoReel />
+        <Services />
+        <Process />
+        <Pricing />
+        <Reviews />
         <CTA />
       </main>
       <Footer />
-      <ContactModal />
+      <BookingModal />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -14,128 +14,72 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 html,
 body {
   margin: 0;
   padding: 0;
-  background: #04060f;
-  color: #e6ebff;
+  background: #08090c;
+  color: #e8ecf3;
   font-family: 'Inter', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-}
-
-/* Prevent sideways scroll from decorative glows WITHOUT creating a scroll
-   container on the body (which would disable position: sticky). overflow:clip
-   on a non-scrolling root is safe for sticky descendants. */
-html {
-  overflow-x: clip;
+  text-rendering: optimizeLegibility;
 }
 
 #root {
   position: relative;
   width: 100%;
+  overflow-x: hidden;
 }
 
 ::selection {
-  background: rgba(52, 224, 232, 0.3);
+  background: #2f74f0;
   color: #fff;
 }
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 11px;
 }
 ::-webkit-scrollbar-track {
-  background: #04060f;
+  background: #08090c;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #34e0e8, #7b6cff);
+  background: #222734;
   border-radius: 999px;
+  border: 3px solid #08090c;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2f74f0;
 }
 
 @layer components {
-  .gradient-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(100deg, #34e0e8 0%, #2a8fff 35%, #7b6cff 70%, #e23bd2 100%);
+  /* Solid, primary call-to-action — no glass, no gradient soup */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-full bg-brand-500 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-brand-400;
   }
-
-  /* Brushed-chrome lettering for the "showroom shine" headline accents. */
-  .chrome-text {
-    @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      180deg,
-      #ffffff 0%,
-      #cfe0ee 18%,
-      #8ea3b6 38%,
-      #f4f9ff 50%,
-      #8ea3b6 62%,
-      #5d6f80 82%,
-      #e8f1fa 100%
-    );
-    filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.5));
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/15 px-6 py-3 text-sm font-semibold text-white transition-colors hover:border-white/40 hover:bg-white/5;
   }
-
-  .glass {
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-    backdrop-filter: blur(18px) saturate(140%);
-    -webkit-backdrop-filter: blur(18px) saturate(140%);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-[0.22em] text-brand-300;
   }
-
-  .glass-strong {
-    background: linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.03));
-    backdrop-filter: blur(24px) saturate(160%);
-    -webkit-backdrop-filter: blur(24px) saturate(160%);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+  /* A simple, solid surface card — replaces the old glassmorphism */
+  .card {
+    @apply rounded-2xl border border-white/10 bg-ink-850;
   }
 }
 
-.glow-border {
-  position: relative;
-}
-.glow-border::before {
+/* Subtle film grain so flat blacks never look dead */
+.grain::after {
   content: '';
-  position: absolute;
-  inset: -1px;
-  border-radius: inherit;
-  padding: 1px;
-  background: linear-gradient(120deg, #34e0e8, #7b6cff, #e23bd2, #34e0e8);
-  background-size: 300% 300%;
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  animation: shimmer 6s linear infinite;
-  pointer-events: none;
-  opacity: 0.7;
-}
-
-.grid-overlay {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-  background-size: 64px 64px;
-  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
-  mask-image: radial-gradient(ellipse 80% 60% at 50% 40%, #000 30%, transparent 75%);
-}
-
-/* Glossy "wet paint" reflection sheen used on dark detailing panels. */
-.wet-gloss {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent 22%),
-    linear-gradient(160deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.01));
-}
-
-/* A slow vertical highlight that drifts across a surface like light on a curved panel. */
-.sheen-sweep::after {
-  content: '';
-  position: absolute;
+  position: fixed;
   inset: 0;
-  border-radius: inherit;
-  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.16) 50%, transparent 65%);
-  background-size: 280% 280%;
-  animation: shimmer 7s linear infinite;
   pointer-events: none;
-  mix-blend-mode: screen;
+  z-index: 1;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
 @media (prefers-reduced-motion: reduce) {

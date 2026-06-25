@@ -4,68 +4,48 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Deep wet-charcoal base — like a freshly-clayed black hood under studio light
+        // Deep, neutral automotive blacks — the studio backdrop
         ink: {
-          900: '#04070b',
-          800: '#070c14',
-          700: '#0b1320',
+          950: '#08090c',
+          900: '#0c0e13',
+          850: '#11141b',
+          800: '#171b24',
+          700: '#222734',
         },
-        // Soap-bubble iridescence + water + chrome — the detailing palette
-        cyber: {
-          cyan: '#34e0e8', // clean water / pressure-washer spray
-          blue: '#2a8fff', // deep ceramic gloss
-          violet: '#7b6cff', // thin-film bubble sheen
-          magenta: '#e23bd2', // bubble rainbow edge
+        // One confident accent: clean water-blue. Used as solid fills, never neon.
+        brand: {
+          50: '#eef4ff',
+          100: '#dbe7ff',
+          300: '#90b4ff',
+          400: '#5b8dfb',
+          500: '#2f74f0',
+          600: '#1f5ad6',
+          700: '#1947ad',
         },
-        foam: {
-          50: '#f3fbff',
-          100: '#e3f4ff',
-          200: '#c7e6fb',
-        },
-        chrome: {
-          light: '#dfe9f2',
-          mid: '#9fb2c4',
-          dark: '#4a5a6b',
-        },
-        aqua: '#34e0e8',
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['Archivo', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
-      boxShadow: {
-        glow: '0 0 60px -10px rgba(52,224,232,0.55)',
-        'glow-violet': '0 0 70px -10px rgba(123,108,255,0.55)',
-        chrome: '0 10px 40px -8px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.25)',
+      letterSpacing: {
+        tightest: '-0.04em',
+      },
+      maxWidth: {
+        site: '1200px',
       },
       keyframes: {
-        float: {
-          '0%,100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-12px)' },
+        marquee: {
+          from: { transform: 'translateX(0)' },
+          to: { transform: 'translateX(-50%)' },
         },
-        shimmer: {
-          '0%': { backgroundPosition: '200% 0' },
-          '100%': { backgroundPosition: '-200% 0' },
-        },
-        pulseRing: {
-          '0%': { transform: 'scale(0.8)', opacity: '0.8' },
-          '100%': { transform: 'scale(2.4)', opacity: '0' },
-        },
-        spinSlow: {
-          to: { transform: 'rotate(360deg)' },
-        },
-        drip: {
-          '0%': { transform: 'translateY(-10%)', opacity: '0' },
-          '20%': { opacity: '1' },
-          '100%': { transform: 'translateY(120%)', opacity: '0' },
+        riseIn: {
+          from: { opacity: '0', transform: 'translateY(24px)' },
+          to: { opacity: '1', transform: 'translateY(0)' },
         },
       },
       animation: {
-        float: 'float 6s ease-in-out infinite',
-        shimmer: 'shimmer 6s linear infinite',
-        pulseRing: 'pulseRing 2.6s ease-out infinite',
-        spinSlow: 'spinSlow 14s linear infinite',
-        drip: 'drip 3.4s ease-in infinite',
+        marquee: 'marquee 30s linear infinite',
+        riseIn: 'riseIn 0.7s cubic-bezier(0.22,1,0.36,1) both',
       },
     },
   },

@@ -1,18 +1,11 @@
 import { useSyncExternalStore } from 'react'
 
-/**
- * Tiny global store for the "Speak with a representative" modal.
- * Lives outside React so ANY button anywhere on the page can open it
- * without prop-drilling or wrapping the tree in a context provider.
- */
+/** Tiny global store so any "Book" button anywhere can open the booking modal. */
 let isOpen = false
 const listeners = new Set<() => void>()
+const emit = () => listeners.forEach((l) => l())
 
-function emit() {
-  listeners.forEach((l) => l())
-}
-
-export const contactModal = {
+export const booking = {
   open() {
     if (!isOpen) {
       isOpen = true
@@ -27,7 +20,7 @@ export const contactModal = {
   },
 }
 
-export function useContactModal() {
+export function useBooking() {
   const open = useSyncExternalStore(
     (cb) => {
       listeners.add(cb)
@@ -36,5 +29,5 @@ export function useContactModal() {
     () => isOpen,
     () => isOpen,
   )
-  return { isOpen: open, open: contactModal.open, close: contactModal.close }
+  return { isOpen: open, open: booking.open, close: booking.close }
 }
