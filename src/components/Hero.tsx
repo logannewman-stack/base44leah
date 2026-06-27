@@ -136,7 +136,7 @@ export default function Hero() {
             Front Desk AI · Growth agency
           </motion.span>
 
-          <h1 className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.7rem]">
+          <h1 className="mt-6 font-display text-5xl font-bold leading-[0.98] tracking-tightest text-balance sm:text-6xl lg:text-[5rem]">
             <motion.span className="block" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.8 }}>
               The future of
             </motion.span>

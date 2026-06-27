@@ -19,9 +19,10 @@ export function Depth3D({
 }) {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  const z = useTransform(scrollYProgress, [0, 0.42, 0.82, 1], [-820 * power, 0, 200 * power, 560 * power])
-  const rotateX = useTransform(scrollYProgress, [0, 0.42, 1], [38, 0, -26])
-  const opacity = useTransform(scrollYProgress, [0, 0.16, 0.88, 1], [0, 1, 1, 0.32])
+  const z = useTransform(scrollYProgress, [0, 0.42, 0.82, 1], [-820 * power, 0, 160 * power, 380 * power])
+  const rotateX = useTransform(scrollYProgress, [0, 0.42, 1], [38, 0, -22])
+  // Fade fully out on exit so flown-forward cards never ghost over the next section.
+  const opacity = useTransform(scrollYProgress, [0, 0.16, 0.82, 0.97], [0, 1, 1, 0])
   return (
     <div ref={ref} className={className} style={{ perspective: 780 }}>
       <motion.div className="will-change-transform" style={{ z, rotateX, opacity, transformStyle: 'preserve-3d' }}>

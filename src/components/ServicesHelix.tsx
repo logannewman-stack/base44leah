@@ -158,7 +158,7 @@ export default function ServicesHelix() {
         {/* heading */}
         <div className="absolute top-[8%] left-1/2 z-20 -translate-x-1/2 text-center">
           <Eyebrow>What we do</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+          <h2 className="mt-3 font-display text-3xl font-bold tracking-tightest text-balance sm:text-[2.75rem]">
             Five services. <span className="gradient-text">One growth engine.</span>
           </h2>
         </div>

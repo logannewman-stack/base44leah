@@ -39,7 +39,7 @@ export default function Packages() {
           <div className="flex justify-center">
             <Eyebrow>Packages</Eyebrow>
           </div>
-          <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
+          <h2 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tightest text-balance sm:text-5xl">
             Built around your business. <span className="gradient-text">Fully managed.</span>
           </h2>
           <p className="mt-5 text-white/60">
@@ -54,7 +54,7 @@ export default function Packages() {
               <motion.div
                 whileHover={{ y: -8 }}
                 className={`relative flex h-full flex-col rounded-3xl p-7 ${
-                  plan.featured ? 'glass-strong glow-border shadow-glow-violet' : 'glass'
+                  plan.featured ? 'glass-strong glow-border shadow-glow-violet' : 'glass shadow-card'
                 }`}
               >
                 {plan.featured && (

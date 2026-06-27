@@ -30,7 +30,7 @@ export default function Testimonials() {
           <div className="flex justify-center">
             <Eyebrow>Results</Eyebrow>
           </div>
-          <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
+          <h2 className="mt-5 font-display text-4xl font-bold leading-[1.05] tracking-tightest text-balance sm:text-5xl">
             Businesses that stopped <span className="gradient-text">missing calls.</span>
           </h2>
         </Depth3D>
@@ -40,10 +40,13 @@ export default function Testimonials() {
             <Depth3D key={q.name} className="h-full">
               <motion.figure
                 whileHover={{ y: -6 }}
-                className="glass flex h-full flex-col justify-between rounded-3xl p-7"
+                className="spotlight glass flex h-full flex-col justify-between rounded-3xl p-7 shadow-card"
               >
                 <div>
-                  <div className="text-cyber-cyan">★★★★★</div>
+                  <svg viewBox="0 0 24 24" className="h-8 w-8 text-white/15" fill="currentColor">
+                    <path d="M7.2 6C4.9 7.4 3.5 9.8 3.5 12.6c0 2.9 1.9 4.9 4.3 4.9 2.1 0 3.7-1.6 3.7-3.7 0-2-1.4-3.5-3.3-3.5-.4 0-.9.1-1 .1.3-1.4 1.6-3 3.2-3.9L7.2 6zm9 0c-2.3 1.4-3.7 3.8-3.7 6.6 0 2.9 1.9 4.9 4.3 4.9 2.1 0 3.7-1.6 3.7-3.7 0-2-1.4-3.5-3.3-3.5-.4 0-.9.1-1 .1.3-1.4 1.6-3 3.2-3.9L16.2 6z" />
+                  </svg>
+                  <div className="mt-3 text-cyber-cyan">★★★★★</div>
                   <blockquote className="mt-4 text-white/80">“{q.quote}”</blockquote>
                 </div>
                 <figcaption className="mt-6 flex items-center gap-3">

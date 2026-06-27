@@ -82,7 +82,7 @@ export default function Features() {
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1100px]">
         <div className="absolute top-[5%] left-1/2 z-20 -translate-x-1/2 px-6 text-center">
           <Eyebrow>Why Front Desk AI</Eyebrow>
-          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+          <h2 className="mt-3 font-display text-2xl font-bold tracking-tightest text-balance sm:text-[2.4rem]">
             Your entire growth team, <span className="gradient-text">under one roof.</span>
           </h2>
         </div>
