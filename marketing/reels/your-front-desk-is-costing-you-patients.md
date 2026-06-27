@@ -11,14 +11,14 @@
 
 | # | Scene | Job ID | Download URL |
 |---|-------|--------|--------------|
-| 1 | Hook — ringing front desk | `57697e6a-7f61-4215-a0f0-5cd55045db49` | _pending_ |
-| 2 | Problem — staff busy, phone unanswered | `59af8386-68b3-4cfc-af84-1c5627c6fcf5` | _pending_ |
-| 3 | Agitation — split-screen missed call | `5cdf40ba-f87c-4e7f-9c51-c6b7244a5404` | _pending_ |
-| 4a | Solution — aerial waiting room | `59087d8b-f510-4ab2-8dd9-079ebbbd7abf` | _pending_ |
-| 4b | Solution — phone "Call Answered" UI | `d4de45cd-ab4d-4d20-b534-788452648e51` | _pending_ |
-| 5 | Social proof — practice owner nod | `6a4c072a-c39b-4e2c-a462-4fc10d71d1b9` | _pending_ |
-| 6 | CTA end card (animated) | _pending_ | _pending_ |
-| — | End card still (source) | `b4d5b267-d3a6-43dd-b623-a3d28baf0cd4` | _pending_ |
+| 1 | Hook — ringing front desk | `57697e6a…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011014_57697e6a-7f61-4215-a0f0-5cd55045db49.mp4 |
+| 2 | Problem — staff busy, phone unanswered | `59af8386…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011017_59af8386-68b3-4cfc-af84-1c5627c6fcf5.mp4 |
+| 3 | Agitation — split-screen missed call | `5cdf40ba…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011006_5cdf40ba-f87c-4e7f-9c51-c6b7244a5404.mp4 |
+| 4a | Solution — aerial waiting room | `59087d8b…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011020_59087d8b-f510-4ab2-8dd9-079ebbbd7abf.mp4 |
+| 4b | Solution — phone "Call Answered" UI | `d4de45cd…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011022_d4de45cd-ab4d-4d20-b534-788452648e51.mp4 |
+| 5 | Social proof — practice owner nod | `6a4c072a…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011024_6a4c072a-c39b-4e2c-a462-4fc10d71d1b9.mp4 |
+| 6 | CTA end card (animated) | `eca205fc…` | _rendering_ |
+| — | End card still (source) | `b4d5b267…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_010959_b4d5b267-d3a6-43dd-b623-a3d28baf0cd4.png |
 
 ---
 
