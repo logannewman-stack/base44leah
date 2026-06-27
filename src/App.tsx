@@ -7,8 +7,10 @@ import Marquee from './components/Marquee'
 import Stats from './components/Stats'
 import ServicesHelix from './components/ServicesHelix'
 import Features from './components/Features'
+import Process from './components/Process'
 import Packages from './components/Pricing'
 import Testimonials from './components/Testimonials'
+import FAQ from './components/FAQ'
 import CTA from './components/CTA'
 import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
@@ -34,6 +36,9 @@ export default function App() {
           <ImmersiveBg />
         </Suspense>
       </ErrorBoundary>
+      {/* Filmic depth layers — above the WebGL field, below content. */}
+      <div className="page-vignette" aria-hidden />
+      <div className="film-grain" aria-hidden />
       <ErrorBoundary>
         <ScrollProgress />
       </ErrorBoundary>
@@ -47,8 +52,10 @@ export default function App() {
         <Stats />
         <ServicesHelix />
         <Features />
+        <Process />
         <Packages />
         <Testimonials />
+        <FAQ />
         <CTA />
       </main>
       <Footer />

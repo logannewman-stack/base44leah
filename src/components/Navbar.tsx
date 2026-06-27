@@ -6,8 +6,9 @@ import { contactModal } from './useContactModal'
 const links = [
   { label: 'Services', href: '#services' },
   { label: 'Why us', href: '#why' },
+  { label: 'Process', href: '#process' },
   { label: 'Packages', href: '#packages' },
-  { label: 'Results', href: '#results' },
+  { label: 'FAQ', href: '#faq' },
 ]
 
 export default function Navbar() {

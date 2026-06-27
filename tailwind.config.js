@@ -17,12 +17,17 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
+        display: ['Sora', '"Space Grotesk"', 'system-ui', 'sans-serif'],
         sans: ['Inter', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: {
+        tightest: '-0.04em',
       },
       boxShadow: {
         glow: '0 0 60px -10px rgba(34,211,238,0.55)',
         'glow-violet': '0 0 70px -10px rgba(139,92,246,0.55)',
+        card: '0 24px 60px -24px rgba(0,0,0,0.7), inset 0 1px 0 0 rgba(255,255,255,0.06)',
+        'card-lift': '0 40px 90px -30px rgba(34,211,238,0.28), 0 24px 60px -24px rgba(0,0,0,0.8), inset 0 1px 0 0 rgba(255,255,255,0.1)',
       },
       keyframes: {
         float: {
@@ -36,6 +41,10 @@ export default {
         pulseRing: {
           '0%': { transform: 'scale(0.8)', opacity: '0.8' },
           '100%': { transform: 'scale(2.4)', opacity: '0' },
+        },
+        marqueeUp: {
+          '0%': { transform: 'translateY(0)' },
+          '100%': { transform: 'translateY(-50%)' },
         },
       },
       animation: {
