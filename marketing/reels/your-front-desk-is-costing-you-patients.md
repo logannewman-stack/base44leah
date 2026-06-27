@@ -17,7 +17,7 @@
 | 4a | Solution — aerial waiting room | `59087d8b…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011020_59087d8b-f510-4ab2-8dd9-079ebbbd7abf.mp4 |
 | 4b | Solution — phone "Call Answered" UI | `d4de45cd…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011022_d4de45cd-ab4d-4d20-b534-788452648e51.mp4 |
 | 5 | Social proof — practice owner nod | `6a4c072a…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011024_6a4c072a-c39b-4e2c-a462-4fc10d71d1b9.mp4 |
-| 6 | CTA end card (animated) | `eca205fc…` | _rendering_ |
+| 6 | CTA end card (animated) | `eca205fc…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_011258_eca205fc-83a2-479f-a2c1-6045d8433692.mp4 |
 | — | End card still (source) | `b4d5b267…` | https://d8j0ntlcm91z4.cloudfront.net/user_3Fe5tKlpqU1pLAVp6y10kiHYojp/hf_20260627_010959_b4d5b267-d3a6-43dd-b623-a3d28baf0cd4.png |
 
 ---
