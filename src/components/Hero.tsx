@@ -183,17 +183,45 @@ export default function Hero() {
             </MagneticButton>
           </motion.div>
 
+          {/* Reassurance microcopy — lowers friction right at the CTA. */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.9 }}
+            className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.82rem] font-medium text-neutral-500"
+          >
+            {['Free strategy call', 'No commitment', 'Reply within minutes'].map((t) => (
+              <span key={t} className="inline-flex items-center gap-1.5">
+                <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-cyber-blue" fill="none" stroke="currentColor" strokeWidth="3">
+                  <path d="M5 13l4 4L19 7" />
+                </svg>
+                {t}
+              </span>
+            ))}
+          </motion.p>
+
+          {/* Social proof — avatar cluster + rating. */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
-            className="mt-9 flex flex-wrap items-center gap-x-6 gap-y-3 text-sm text-neutral-500"
+            className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-neutral-500"
           >
-            <span>★★★★★ <span className="text-neutral-600">4.9/5</span></span>
+            <span className="inline-flex items-center gap-2.5">
+              <span className="flex -space-x-2">
+                {['from-zinc-600 to-zinc-900', 'from-neutral-500 to-neutral-800', 'from-zinc-700 to-black', 'from-neutral-600 to-neutral-900', 'from-zinc-500 to-zinc-800'].map((g, i) => (
+                  <span key={i} className={`h-6 w-6 rounded-full border-2 border-[#f7f7f8] bg-gradient-to-br ${g}`} />
+                ))}
+              </span>
+              <span>
+                <span className="font-semibold text-neutral-800">1,200+</span> businesses trust us
+              </span>
+            </span>
             <span className="hidden h-4 w-px bg-black/[0.06] sm:block" />
-            <span>Trusted by 1,200+ businesses</span>
-            <span className="hidden h-4 w-px bg-black/[0.06] sm:block" />
-            <span>Fully managed, done for you</span>
+            <span className="inline-flex items-center gap-1.5">
+              <span className="tracking-[0.1em] text-cyber-blue">★★★★★</span>
+              <span className="font-semibold text-neutral-800">4.9/5</span>
+            </span>
           </motion.div>
         </motion.div>
 

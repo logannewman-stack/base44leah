@@ -28,7 +28,16 @@ export default function CTA() {
                 See what we offer
               </MagneticButton>
             </div>
-            <p className="relative mt-6 text-sm text-neutral-500">Fully managed · Tailored to your business</p>
+            <div className="relative mt-6 flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5 text-[0.82rem] font-medium text-neutral-500">
+              {['Free strategy call', 'No commitment', 'Reply within minutes'].map((t) => (
+                <span key={t} className="inline-flex items-center gap-1.5">
+                  <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-cyber-blue" fill="none" stroke="currentColor" strokeWidth="3">
+                    <path d="M5 13l4 4L19 7" />
+                  </svg>
+                  {t}
+                </span>
+              ))}
+            </div>
           </div>
         </Depth3D>
       </div>
