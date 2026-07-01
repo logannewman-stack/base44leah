@@ -65,7 +65,7 @@ export default function ContactModal() {
                 type="button"
                 onClick={close}
                 aria-label="Close"
-                className="-mr-1 -mt-1 flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-neutral-900 transition-colors hover:bg-neutral-100"
+                className="-mr-2 -mt-2 flex h-11 w-11 shrink-0 items-center justify-center rounded-full text-neutral-900 transition-colors hover:bg-neutral-100"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
                   <line x1="6" y1="6" x2="18" y2="18" />

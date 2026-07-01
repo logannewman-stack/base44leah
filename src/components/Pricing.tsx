@@ -83,7 +83,7 @@ export default function Packages() {
             </Depth3D>
           ))}
         </div>
-        <p className="mt-8 text-center text-sm text-neutral-400">
+        <p className="mt-8 text-center text-sm text-neutral-500">
           Prefer just one service? We offer Meta Ads, Google My Business, Websites, Social Media, and
           the Voice AI Caller individually too — just ask.
         </p>

@@ -28,7 +28,7 @@ export default function CTA() {
                 See what we offer
               </MagneticButton>
             </div>
-            <p className="relative mt-6 text-sm text-neutral-400">Fully managed · Tailored to your business</p>
+            <p className="relative mt-6 text-sm text-neutral-500">Fully managed · Tailored to your business</p>
           </div>
         </Depth3D>
       </div>

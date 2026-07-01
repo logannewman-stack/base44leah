@@ -59,8 +59,9 @@ export default function Navbar() {
         </div>
 
         <button
-          aria-label="Toggle menu"
-          className="md:hidden text-neutral-900"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          className="-mr-2 flex h-11 w-11 items-center justify-center rounded-xl text-neutral-900 transition-colors hover:bg-black/[0.04] md:hidden"
           onClick={() => setOpen((o) => !o)}
         >
           <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">

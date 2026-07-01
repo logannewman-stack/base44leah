@@ -28,8 +28,8 @@ export default function Footer() {
 
         {groups.map((g) => (
           <div key={g.title}>
-            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-neutral-400">{g.title}</p>
-            <ul className="mt-5 space-y-3">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-neutral-500">{g.title}</p>
+            <ul className="mt-4 space-y-1">
               {g.links.map((l) => (
                 <li key={l}>
                   <a
@@ -42,7 +42,7 @@ export default function Footer() {
                           }
                         : undefined
                     }
-                    className="text-[0.9rem] text-neutral-500 transition-colors hover:text-neutral-900"
+                    className="inline-block py-1.5 text-[0.9rem] text-neutral-500 transition-colors hover:text-neutral-900"
                   >
                     {l}
                   </a>
@@ -53,7 +53,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="mx-auto mt-16 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-black/[0.06] px-6 pt-8 text-[0.82rem] text-neutral-400 sm:flex-row">
+      <div className="mx-auto mt-16 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-black/[0.06] px-6 pt-8 text-[0.82rem] text-neutral-500 sm:flex-row">
         <p>© {new Date().getFullYear()} FrontDeskAI. All rights reserved.</p>
         <p>Built for businesses that never want to miss a call.</p>
       </div>
