@@ -25,15 +25,32 @@ export const salon = {
   ],
 }
 
-// Image slots. These point at tasteful on-brand placeholder frames in
-// /public/images. Swap each file (or path) for your own photo — keep the same
-// filename to drop a photo straight in, e.g. replace hero.svg with hero.jpg and
-// update the extension below.
+/**
+ * IMAGE SLOTS + DROP-IN GUIDE
+ * ---------------------------------------------------------------------------
+ * Each slot below shows a labelled placeholder. To use a real photo, drop the
+ * file into /public/images with the filename shown, then change the extension
+ * here from `.svg` to your file's (e.g. `.jpg`). Recommended photo → slot:
+ *
+ *   hero              → Layla in the salon (black suit, standing)        [tall 2:3]
+ *   portrait          → Layla headshot / owner photo                     [tall 4:5]
+ *   extensions        → extensions being installed (side profile)        [tall 4:5]
+ *   extensionsDetail  → close-up of the weft / hand-tied row             [tall 4:5]
+ *   beforeAfter       → before/after transformation (side-by-side)       [square 1:1]
+ *   color             → color / balayage result                          [tall 4:5]
+ *   haircut           → stylist cutting / combing a client               [tall 4:5]
+ *   nails             → manicure                                         [square 1:1]
+ *   pedicure          → pedicure                                         [square 1:1]
+ *   interior          → wide shot of the salon space                     [wide 16:9]
+ * ---------------------------------------------------------------------------
+ */
 export const images = {
   hero: '/images/hero.svg',
   portrait: '/images/portrait.svg',
   interior: '/images/interior.svg',
   extensions: '/images/extensions.svg',
+  extensionsDetail: '/images/extensions-detail.svg',
+  beforeAfter: '/images/before-after.svg',
   color: '/images/color.svg',
   haircut: '/images/haircut.svg',
   nails: '/images/nails.svg',

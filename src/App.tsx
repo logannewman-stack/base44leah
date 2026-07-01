@@ -3,7 +3,9 @@ import { ScrollProgress } from './components/Effects'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import Marquee from './components/Marquee'
+import ExtensionsBand from './components/ExtensionsBand'
 import Services from './components/Services'
+import BeforeAfter from './components/BeforeAfter'
 import About from './components/About'
 import Gallery from './components/Gallery'
 import PriceList from './components/PriceList'
@@ -22,7 +24,9 @@ export default function App() {
       <main className="relative">
         <Hero />
         <Marquee />
+        <ExtensionsBand />
         <Services />
+        <BeforeAfter />
         <About />
         <Gallery />
         <PriceList />

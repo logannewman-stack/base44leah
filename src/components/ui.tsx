@@ -1,6 +1,42 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll, useTransform } from 'framer-motion'
 import { useRef, type ReactNode, type MouseEvent } from 'react'
 import { bookingModal } from './useContactModal'
+
+/**
+ * Image that drifts slightly slower than the scroll for depth. The <img> is
+ * over-scaled and translated within an overflow-hidden frame so edges never
+ * show. Give the wrapping frame a fixed aspect via className.
+ */
+export function ParallaxImage({
+  src,
+  alt,
+  className = '',
+  imgClassName = '',
+  strength = 60,
+  eager = false,
+}: {
+  src: string
+  alt: string
+  className?: string
+  imgClassName?: string
+  strength?: number
+  eager?: boolean
+}) {
+  const ref = useRef<HTMLDivElement>(null)
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
+  const y = useTransform(scrollYProgress, [0, 1], [-strength, strength])
+  return (
+    <div ref={ref} className={`relative overflow-hidden ${className}`}>
+      <motion.img
+        src={src}
+        alt={alt}
+        loading={eager ? 'eager' : 'lazy'}
+        style={{ y, height: `calc(100% + ${strength * 2}px)`, top: -strength }}
+        className={`absolute left-0 w-full object-cover ${imgClassName}`}
+      />
+    </div>
+  )
+}
 
 /** Reveals children with a soft blur-up as they scroll into view. */
 export function Reveal({

@@ -4,7 +4,7 @@
   <rect x="24" y="24" width="952" height="1202" fill="none" stroke="#B79A6B" stroke-opacity="0.5" stroke-width="1.5"/>
   <text x="500" y="619" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="420" font-weight="600" fill="rgba(20,18,16,0.045)">LS</text>
   <g transform="translate(500, 425)"><g stroke="#141210" stroke-width="3" fill="none" stroke-linecap="round"><circle cx="-18" cy="20" r="11"/><circle cx="18" cy="20" r="11"/><path d="M-9 12 L26 -34 M9 12 L-26 -34"/></g></g>
-  <text x="500" y="650" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="75" font-weight="600" fill="#141210">Precision Cuts</text>
-  <text x="500" y="718.75" text-anchor="middle" font-family="Jost, Inter, sans-serif" font-size="22" letter-spacing="6" fill="#B79A6B">CUT &amp; STYLE</text>
-  <text x="500" y="1196" text-anchor="middle" font-family="Jost, Inter, sans-serif" font-size="19" letter-spacing="4" fill="rgba(20,18,16,0.4)">ADD YOUR PHOTO IN THE EDITOR</text>
+  <text x="500" y="650" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="72" font-weight="600" fill="#141210">Precision Cuts</text>
+  <text x="500" y="715" text-anchor="middle" font-family="Jost, Inter, sans-serif" font-size="21" letter-spacing="6" fill="#B79A6B">CUT &amp; STYLE</text>
+  <text x="500" y="1198" text-anchor="middle" font-family="Jost, Inter, sans-serif" font-size="18" letter-spacing="4" fill="rgba(20,18,16,0.4)">ADD YOUR PHOTO IN THE EDITOR</text>
 </svg>

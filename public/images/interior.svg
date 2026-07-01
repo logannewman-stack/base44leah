@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="900" viewBox="0 0 1400 900">
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
   <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#14120F"/><stop offset="1" stop-color="#0E0C0A"/></linearGradient></defs>
-  <rect width="1400" height="900" fill="url(#g)"/>
-  <rect x="24" y="24" width="1352" height="852" fill="none" stroke="#B79A6B" stroke-opacity="0.5" stroke-width="1.5"/>
-  <text x="700" y="444" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="588" font-weight="600" fill="rgba(245,241,232,0.06)">LS</text>
-  <g transform="translate(700, 306)"><g stroke="#B79A6B" stroke-width="3" fill="none" stroke-linecap="round"><path d="M-22 -34 C-8 -14 -8 14 -22 34 M0 -34 C14 -14 14 14 0 34 M22 -34 C36 -14 36 14 22 34"/></g></g>
-  <text x="700" y="468" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="105" font-weight="600" fill="#F5F1E8">The Studio</text>
-  <text x="700" y="517.5" text-anchor="middle" font-family="Jost, Inter, sans-serif" font-size="31" letter-spacing="6" fill="#B79A6B">A REFINED SPACE</text>
-  <text x="700" y="846" text-anchor="middle" font-family="Jost, Inter, sans-serif" font-size="27" letter-spacing="4" fill="rgba(245,241,232,0.55)">ADD YOUR PHOTO IN THE EDITOR</text>
+  <rect width="1600" height="900" fill="url(#g)"/>
+  <rect x="24" y="24" width="1552" height="852" fill="none" stroke="#B79A6B" stroke-opacity="0.5" stroke-width="1.5"/>
+  <text x="800" y="444" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="378" font-weight="600" fill="rgba(245,241,232,0.06)">LS</text>
+  <g transform="translate(800, 306)"><g stroke="#B79A6B" stroke-width="3" fill="none" stroke-linecap="round"><path d="M-22 -34 C-8 -14 -8 14 -22 34 M0 -34 C14 -14 14 14 0 34 M22 -34 C36 -14 36 14 22 34"/></g></g>
+  <text x="800" y="468" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="115" font-weight="600" fill="#F5F1E8">The Studio</text>
+  <text x="800" y="514.8" text-anchor="middle" font-family="Jost, Inter, sans-serif" font-size="34" letter-spacing="6" fill="#B79A6B">A REFINED SPACE</text>
+  <text x="800" y="848" text-anchor="middle" font-family="Jost, Inter, sans-serif" font-size="29" letter-spacing="4" fill="rgba(245,241,232,0.55)">ADD YOUR PHOTO IN THE EDITOR</text>
 </svg>

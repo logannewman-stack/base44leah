@@ -3,13 +3,13 @@ import { Eyebrow, Reveal, Section } from './ui'
 
 // Editorial gallery grid. Swap these paths for your own photos anytime.
 const shots = [
-  { src: images.extensions, alt: 'Seamless hair extensions', span: 'row-span-2' },
-  { src: images.color, alt: 'Hand-painted balayage', span: '' },
-  { src: images.nails, alt: 'Polished manicure', span: '' },
+  { src: images.extensions, alt: 'Hand-tied extensions install', span: 'row-span-2' },
+  { src: images.beforeAfter, alt: 'Color transformation', span: '' },
+  { src: images.color, alt: 'Balayage & dimension', span: '' },
   { src: images.interior, alt: 'The salon studio', span: 'col-span-2' },
-  { src: images.haircut, alt: 'Precision cut', span: 'row-span-2' },
-  { src: images.pedicure, alt: 'Spa pedicure', span: '' },
-  { src: images.hero, alt: 'Styling in the studio', span: '' },
+  { src: images.haircut, alt: 'Precision cut & style', span: 'row-span-2' },
+  { src: images.extensionsDetail, alt: 'Weft detail', span: '' },
+  { src: images.portrait, alt: 'Layla, behind the chair', span: '' },
 ]
 
 export default function Gallery() {
