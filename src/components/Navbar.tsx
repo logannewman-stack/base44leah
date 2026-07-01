@@ -24,31 +24,30 @@ export default function Navbar() {
       className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4"
     >
       <nav
-        className={`flex w-full max-w-6xl items-center justify-between rounded-2xl px-5 py-3 transition-all duration-300 ${
+        className={`flex w-full max-w-6xl items-center justify-between rounded-2xl px-5 py-2.5 transition-all duration-300 ${
           scrolled ? 'glass-strong shadow-glow' : 'border border-transparent'
         }`}
       >
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-neutral-900">
-            <span className="absolute inset-0 rounded-xl bg-black/10 blur-md" />
-            <svg viewBox="0 0 24 24" className="relative h-5 w-5 text-white" fill="currentColor">
+          <span className="relative flex h-9 w-9 items-center justify-center rounded-[0.7rem] bg-neutral-900 shadow-soft">
+            <svg viewBox="0 0 24 24" className="relative h-[1.15rem] w-[1.15rem] text-white" fill="currentColor">
               <path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z" />
             </svg>
           </span>
-          <span className="font-display text-lg font-semibold tracking-tight">
+          <span className="font-display text-[1.15rem] font-semibold tracking-[-0.03em]">
             Front<span className="gradient-text">Desk</span>AI
           </span>
         </a>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-9 md:flex">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="group relative text-sm font-medium text-neutral-600 transition-colors hover:text-white"
+              className="group relative text-[0.9rem] font-medium tracking-[-0.01em] text-neutral-500 transition-colors hover:text-neutral-900"
             >
               {l.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-neutral-900 transition-all duration-300 group-hover:w-full" />
+              <span className="absolute -bottom-1.5 left-0 h-px w-0 bg-neutral-900 transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
@@ -74,14 +73,14 @@ export default function Navbar() {
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
-          className="absolute top-20 w-[calc(100%-2rem)] max-w-6xl rounded-2xl glass-strong p-4 md:hidden"
+          className="absolute top-20 w-[calc(100%-2rem)] max-w-6xl rounded-2xl glass-strong p-3 shadow-glow md:hidden"
         >
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
               onClick={() => setOpen(false)}
-              className="block rounded-lg px-4 py-3 text-neutral-700 hover:bg-black/[0.04]"
+              className="block rounded-xl px-4 py-3 text-[0.95rem] font-medium tracking-[-0.01em] text-neutral-700 transition-colors hover:bg-black/[0.04]"
             >
               {l.label}
             </a>

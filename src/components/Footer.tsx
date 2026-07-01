@@ -8,28 +8,28 @@ const groups = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-black/[0.06] pt-16 pb-10">
-      <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.5fr_repeat(3,1fr)]">
+    <footer className="relative border-t border-black/[0.06] pb-10 pt-20">
+      <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-[1.6fr_repeat(3,1fr)]">
         <div>
           <a href="#top" className="flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-neutral-900">
-              <svg viewBox="0 0 24 24" className="h-5 w-5 text-white" fill="currentColor">
+            <span className="flex h-9 w-9 items-center justify-center rounded-[0.7rem] bg-neutral-900 shadow-soft">
+              <svg viewBox="0 0 24 24" className="h-[1.15rem] w-[1.15rem] text-white" fill="currentColor">
                 <path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z" />
               </svg>
             </span>
-            <span className="font-display text-lg font-semibold">
+            <span className="font-display text-[1.15rem] font-semibold tracking-[-0.03em]">
               Front<span className="gradient-text">Desk</span>AI
             </span>
           </a>
-          <p className="mt-4 max-w-xs text-sm text-neutral-500">
+          <p className="mt-5 max-w-xs text-[0.92rem] leading-relaxed text-neutral-500">
             Your all-in-one growth agency — ads, Google presence, websites, social, and AI call handling, fully managed.
           </p>
         </div>
 
         {groups.map((g) => (
           <div key={g.title}>
-            <p className="text-sm font-semibold text-neutral-900">{g.title}</p>
-            <ul className="mt-4 space-y-2.5">
+            <p className="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-neutral-400">{g.title}</p>
+            <ul className="mt-5 space-y-3">
               {g.links.map((l) => (
                 <li key={l}>
                   <a
@@ -42,7 +42,7 @@ export default function Footer() {
                           }
                         : undefined
                     }
-                    className="text-sm text-neutral-500 transition-colors hover:text-cyber-cyan"
+                    className="text-[0.9rem] text-neutral-500 transition-colors hover:text-neutral-900"
                   >
                     {l}
                   </a>
@@ -53,7 +53,7 @@ export default function Footer() {
         ))}
       </div>
 
-      <div className="mx-auto mt-12 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-black/[0.06] px-6 pt-8 text-sm text-neutral-400 sm:flex-row">
+      <div className="mx-auto mt-16 flex max-w-6xl flex-col items-center justify-between gap-4 border-t border-black/[0.06] px-6 pt-8 text-[0.82rem] text-neutral-400 sm:flex-row">
         <p>© {new Date().getFullYear()} FrontDeskAI. All rights reserved.</p>
         <p>Built for businesses that never want to miss a call.</p>
       </div>
