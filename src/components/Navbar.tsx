@@ -1,104 +1,121 @@
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion'
-import { useState } from 'react'
-import { MagneticButton } from './ui'
-import { contactModal } from './useContactModal'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { salon } from '../data/salon'
+import { bookingModal } from './useContactModal'
 
 const links = [
   { label: 'Services', href: '#services' },
-  { label: 'Why us', href: '#why' },
-  { label: 'Packages', href: '#packages' },
-  { label: 'Results', href: '#results' },
+  { label: 'About', href: '#about' },
+  { label: 'Gallery', href: '#gallery' },
+  { label: 'Pricing', href: '#pricing' },
+  { label: 'Reviews', href: '#reviews' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
-  const [open, setOpen] = useState(false)
-  const { scrollY } = useScroll()
-  useMotionValueEvent(scrollY, 'change', (v) => setScrolled(v > 40))
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
 
   return (
     <motion.header
-      initial={{ y: -80, opacity: 0 }}
+      initial={{ y: -70, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-      className="fixed inset-x-0 top-0 z-50 flex justify-center px-4 pt-4"
+      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
+        scrolled
+          ? 'border-b border-ink-900/10 bg-cream-100/85 backdrop-blur-md'
+          : 'border-b border-transparent bg-transparent'
+      }`}
     >
-      <nav
-        className={`flex w-full max-w-6xl items-center justify-between rounded-2xl px-5 py-3 transition-all duration-300 ${
-          scrolled ? 'glass-strong shadow-glow' : 'border border-transparent'
-        }`}
-      >
-        <a href="#top" className="flex items-center gap-2.5">
-          <span className="relative flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-cyber-cyan to-cyber-violet">
-            <span className="absolute inset-0 rounded-xl bg-cyber-cyan/40 blur-md" />
-            <svg viewBox="0 0 24 24" className="relative h-5 w-5 text-ink-900" fill="currentColor">
-              <path d="M6.6 10.8a15.5 15.5 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.58 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11.4 11.4 0 0 0 .57 3.6 1 1 0 0 1-.25 1z" />
-            </svg>
+      <nav className="mx-auto flex h-[70px] w-full max-w-[1240px] items-center justify-between px-6 md:px-10">
+        {/* Wordmark */}
+        <a href="#top" className="group flex items-center gap-3">
+          <span className="flex h-9 w-9 items-center justify-center rounded-full bg-ink-900 font-display text-sm font-semibold text-cream-100">
+            {salon.monogram}
           </span>
-          <span className="font-display text-lg font-semibold tracking-tight">
-            Front<span className="gradient-text">Desk</span>AI
+          <span className="flex flex-col leading-none">
+            <span className="font-display text-lg font-semibold tracking-wide text-ink-900">{salon.name}</span>
+            <span className="text-[0.58rem] font-medium uppercase tracking-luxe text-taupe-600">Salon Studio</span>
           </span>
         </a>
 
-        <div className="hidden items-center gap-8 md:flex">
+        {/* Desktop links */}
+        <div className="hidden items-center gap-9 lg:flex">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              className="group relative text-sm font-medium text-white/70 transition-colors hover:text-white"
+              className="link-underline text-[0.72rem] font-medium uppercase tracking-[0.16em] text-ink-700 transition-colors hover:text-ink-900"
             >
               {l.label}
-              <span className="absolute -bottom-1 left-0 h-px w-0 bg-gradient-to-r from-cyber-cyan to-cyber-violet transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </div>
 
-        <div className="hidden md:block">
-          <MagneticButton href="#contact" className="px-5 py-2.5 text-xs">
-            Speak with a rep
-          </MagneticButton>
+        <div className="hidden items-center gap-5 lg:flex">
+          <a
+            href={salon.phoneHref}
+            className="text-[0.72rem] font-medium uppercase tracking-[0.16em] text-ink-700 transition-colors hover:text-champagne-600"
+          >
+            {salon.phoneDisplay}
+          </a>
+          <button
+            onClick={() => bookingModal.open()}
+            className="rounded-full bg-ink-900 px-6 py-2.5 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-cream-100 transition-colors hover:bg-ink-700"
+          >
+            Book Now
+          </button>
         </div>
 
+        {/* Mobile toggle */}
         <button
+          onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
-          className="md:hidden text-white"
-          onClick={() => setOpen((o) => !o)}
+          className="flex h-10 w-10 items-center justify-center lg:hidden"
         >
-          <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="2">
-            {open ? <path d="M6 6l12 12M18 6L6 18" /> : <path d="M4 7h16M4 12h16M4 17h16" />}
-          </svg>
+          <div className="flex flex-col items-end gap-1.5">
+            <span className={`h-px bg-ink-900 transition-all ${menuOpen ? 'w-6 translate-y-[7px] rotate-45' : 'w-6'}`} />
+            <span className={`h-px bg-ink-900 transition-all ${menuOpen ? 'opacity-0' : 'w-4'}`} />
+            <span className={`h-px bg-ink-900 transition-all ${menuOpen ? 'w-6 -translate-y-[5px] -rotate-45' : 'w-6'}`} />
+          </div>
         </button>
       </nav>
 
-      {open && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="absolute top-20 w-[calc(100%-2rem)] max-w-6xl rounded-2xl glass-strong p-4 md:hidden"
-        >
+      {/* Mobile menu */}
+      <motion.div
+        initial={false}
+        animate={{ height: menuOpen ? 'auto' : 0, opacity: menuOpen ? 1 : 0 }}
+        transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+        className="overflow-hidden border-t border-ink-900/10 bg-cream-100/95 backdrop-blur-md lg:hidden"
+      >
+        <div className="flex flex-col gap-1 px-6 py-5">
           {links.map((l) => (
             <a
               key={l.href}
               href={l.href}
-              onClick={() => setOpen(false)}
-              className="block rounded-lg px-4 py-3 text-white/80 hover:bg-white/5"
+              onClick={() => setMenuOpen(false)}
+              className="py-2.5 text-sm font-medium uppercase tracking-[0.16em] text-ink-700"
             >
               {l.label}
             </a>
           ))}
-          <a
-            href="#contact"
-            onClick={(e) => {
-              e.preventDefault()
-              setOpen(false)
-              contactModal.open()
+          <button
+            onClick={() => {
+              setMenuOpen(false)
+              bookingModal.open()
             }}
-            className="mt-2 block rounded-full bg-gradient-to-r from-cyber-cyan to-cyber-violet px-4 py-3 text-center font-semibold text-ink-900"
+            className="mt-3 rounded-full bg-ink-900 px-6 py-3 text-[0.72rem] font-medium uppercase tracking-[0.16em] text-cream-100"
           >
-            Speak with a representative
-          </a>
-        </motion.div>
-      )}
+            Book an Appointment
+          </button>
+        </div>
+      </motion.div>
     </motion.header>
   )
 }

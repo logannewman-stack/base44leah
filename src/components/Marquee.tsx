@@ -1,40 +1,33 @@
-import { motion } from 'framer-motion'
-
-const items = [
-  'Dental Practices',
-  'Law Firms',
-  'Med Spas',
-  'Home Services',
-  'Real Estate',
-  'Auto Detailing',
-  'Salons',
-  'Clinics',
-  'Contractors',
+const words = [
+  'Hair Extensions',
+  'Balayage',
+  'Vivid Color',
+  'Precision Cuts',
+  'Blowouts',
+  'Manicures',
+  'Pedicures',
+  'Bridal Styling',
+  'Color Correction',
+  'Gel Nails',
 ]
 
 export default function Marquee() {
-  const row = [...items, ...items]
   return (
-    <section className="relative border-y border-white/5 py-8">
-      <p className="mb-6 text-center text-xs uppercase tracking-[0.3em] text-white/40">
-        Powering front desks across every industry
-      </p>
-      <div className="relative flex overflow-hidden [mask-image:linear-gradient(90deg,transparent,#000_15%,#000_85%,transparent)]">
-        <motion.div
-          className="flex shrink-0 items-center gap-12 pr-12"
-          animate={{ x: ['0%', '-50%'] }}
-          transition={{ duration: 28, repeat: Infinity, ease: 'linear' }}
-        >
-          {row.map((item, i) => (
-            <span
-              key={i}
-              className="whitespace-nowrap font-display text-xl font-medium text-white/30 transition-colors hover:text-white/70"
-            >
-              {item}
-            </span>
-          ))}
-        </motion.div>
+    <div className="relative overflow-hidden border-y border-ink-900/10 bg-ink-900 py-5">
+      <div className="flex w-max animate-marquee">
+        {[0, 1].map((rep) => (
+          <div key={rep} className="flex shrink-0 items-center" aria-hidden={rep === 1}>
+            {words.map((w) => (
+              <span key={w + rep} className="flex items-center">
+                <span className="whitespace-nowrap px-8 font-display text-xl italic text-cream-100/90 sm:text-2xl">
+                  {w}
+                </span>
+                <span className="h-1 w-1 rounded-full bg-champagne-500" />
+              </span>
+            ))}
+          </div>
+        ))}
       </div>
-    </section>
+    </div>
   )
 }

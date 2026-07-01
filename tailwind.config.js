@@ -4,44 +4,60 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: {
-          900: '#04060f',
-          800: '#070b18',
-          700: '#0b1124',
+        // Warm neutral luxury palette — cream, bone, warm white, ink black
+        cream: {
+          50: '#FCFAF6',
+          100: '#F8F4EC',
+          200: '#F1EBDF',
+          300: '#E7DECF',
         },
-        cyber: {
-          cyan: '#22d3ee',
-          blue: '#3b82f6',
-          violet: '#8b5cf6',
-          magenta: '#e23bd2',
+        bone: '#F5F1E8',
+        ink: {
+          900: '#141210',
+          800: '#1E1B18',
+          700: '#2A2622',
+          600: '#3A352F',
+        },
+        taupe: {
+          400: '#B7AE9F',
+          500: '#9A9081',
+          600: '#7C7366',
+        },
+        champagne: {
+          400: '#CBB489',
+          500: '#B79A6B',
+          600: '#9E8253',
         },
       },
       fontFamily: {
-        display: ['"Space Grotesk"', 'system-ui', 'sans-serif'],
-        sans: ['Inter', 'system-ui', 'sans-serif'],
+        display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+        sans: ['Jost', 'Inter', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: {
+        luxe: '0.28em',
       },
       boxShadow: {
-        glow: '0 0 60px -10px rgba(34,211,238,0.55)',
-        'glow-violet': '0 0 70px -10px rgba(139,92,246,0.55)',
+        soft: '0 20px 60px -25px rgba(30,27,24,0.35)',
+        card: '0 30px 80px -40px rgba(30,27,24,0.45)',
       },
       keyframes: {
-        float: {
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        floaty: {
           '0%,100%': { transform: 'translateY(0)' },
-          '50%': { transform: 'translateY(-12px)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
-        shimmer: {
-          '0%': { backgroundPosition: '200% 0' },
-          '100%': { backgroundPosition: '-200% 0' },
-        },
-        pulseRing: {
-          '0%': { transform: 'scale(0.8)', opacity: '0.8' },
-          '100%': { transform: 'scale(2.4)', opacity: '0' },
+        fadeUp: {
+          '0%': { opacity: '0', transform: 'translateY(20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
       animation: {
-        float: 'float 6s ease-in-out infinite',
-        shimmer: 'shimmer 6s linear infinite',
-        pulseRing: 'pulseRing 2.6s ease-out infinite',
+        marquee: 'marquee 40s linear infinite',
+        floaty: 'floaty 7s ease-in-out infinite',
+        fadeUp: 'fadeUp 0.9s cubic-bezier(0.22,1,0.36,1) forwards',
       },
     },
   },
