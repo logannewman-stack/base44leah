@@ -137,13 +137,13 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
-            className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.25em] text-cyber-cyan"
+            className="inline-flex items-center gap-2 rounded-full border border-black/[0.07] bg-white/70 px-3.5 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-neutral-500 shadow-soft backdrop-blur-sm"
           >
-            <span className="h-1.5 w-1.5 rounded-full bg-cyber-cyan shadow-glow" />
+            <span className="h-1.5 w-1.5 rounded-full bg-cyber-blue shadow-[0_0_0_3px_rgba(79,124,255,0.14)]" />
             Front Desk AI · Growth agency
           </motion.span>
 
-          <h1 className="mt-6 font-display text-5xl font-bold leading-[1.02] tracking-tight sm:text-6xl lg:text-[4.7rem]">
+          <h1 className="mt-7 font-display text-[2.9rem] font-bold leading-[1.04] tracking-[-0.035em] sm:text-6xl sm:leading-[1.02] lg:text-[4.7rem]">
             <motion.span className="block" initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.8 }}>
               The future of
             </motion.span>
@@ -159,7 +159,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.62, duration: 0.8 }}
-            className="mt-6 max-w-md text-lg leading-relaxed text-neutral-600"
+            className="mt-6 max-w-md text-[1.07rem] leading-[1.65] text-neutral-500"
           >
             We run your Meta &amp; Google ads, build and optimize your Google Business profile,
             design your website, manage your social media, and answer every call with AI — one

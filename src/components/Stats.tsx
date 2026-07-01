@@ -53,30 +53,30 @@ const stats = [
 
 export default function Stats() {
   return (
-    <section className="relative overflow-x-clip py-20">
+    <section className="relative overflow-x-clip py-24 sm:py-28">
       <div className="mx-auto max-w-6xl px-6">
         <Depth3D className="mx-auto max-w-2xl text-center" power={0.7}>
           <div className="flex justify-center">
             <Eyebrow>By the numbers</Eyebrow>
           </div>
-          <h2 className="mt-5 font-display text-4xl font-bold leading-tight sm:text-5xl">
+          <h2 className="mt-6 font-display text-[2.15rem] font-bold leading-[1.1] tracking-[-0.03em] sm:text-[2.6rem] lg:text-[3rem]">
             Results you can <span className="gradient-text">measure.</span>
           </h2>
-          <p className="mt-5 text-neutral-500">
+          <p className="mx-auto mt-5 max-w-xl text-[1.02rem] leading-relaxed text-neutral-500">
             Real outcomes from the campaigns, websites, and AI we run for service businesses like yours.
           </p>
         </Depth3D>
 
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-16 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {stats.map((s) => (
             <Depth3D key={s.label} className="h-full">
-              <motion.div whileHover={{ y: -6 }} className="glass relative flex h-full flex-col overflow-hidden rounded-2xl p-6">
+              <motion.div whileHover={{ y: -6 }} className="glass relative flex h-full flex-col overflow-hidden rounded-3xl p-7">
                 <div className="pointer-events-none absolute -right-6 -top-6 h-24 w-24 rounded-full bg-black/[0.03] blur-2xl" />
-                <p className="whitespace-nowrap font-display text-[2.6rem] font-bold leading-none gradient-text">
+                <p className="whitespace-nowrap font-display text-[2.7rem] font-bold leading-none tracking-[-0.03em] gradient-text">
                   <Counter to={s.to} from={s.from} prefix={s.prefix} suffix={s.suffix} decimals={s.decimals} />
                 </p>
-                <p className="mt-4 font-semibold text-neutral-900">{s.label}</p>
-                <p className="mt-1 text-sm text-neutral-500">{s.sub}</p>
+                <p className="mt-5 font-semibold tracking-[-0.01em] text-neutral-900">{s.label}</p>
+                <p className="mt-1.5 text-sm leading-relaxed text-neutral-500">{s.sub}</p>
               </motion.div>
             </Depth3D>
           ))}

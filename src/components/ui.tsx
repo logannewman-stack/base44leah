@@ -96,11 +96,11 @@ export function MagneticButton({
   }
 
   const base =
-    'relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-wide transition-colors'
+    'relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold tracking-[0.005em] transition-all duration-200'
   const styles =
     variant === 'primary'
-      ? 'text-white bg-neutral-900 shadow-glow hover:bg-neutral-800'
-      : 'text-neutral-900 border border-neutral-300 bg-white/70 hover:bg-white'
+      ? 'text-white bg-neutral-900 shadow-glow hover:bg-black hover:shadow-glow-violet'
+      : 'text-neutral-900 border border-black/[0.09] bg-white/80 shadow-soft hover:bg-white hover:border-black/[0.14]'
 
   return (
     <motion.a
@@ -121,8 +121,8 @@ export function MagneticButton({
 /** Small pill label used above section headings. */
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center gap-2 rounded-full glass px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.2em] text-cyber-blue">
-      <span className="h-1.5 w-1.5 rounded-full bg-cyber-blue" />
+    <span className="inline-flex items-center gap-2 rounded-full border border-black/[0.07] bg-white/70 px-3.5 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-neutral-500 shadow-soft backdrop-blur-sm">
+      <span className="h-1.5 w-1.5 rounded-full bg-cyber-blue shadow-[0_0_0_3px_rgba(79,124,255,0.14)]" />
       {children}
     </span>
   )

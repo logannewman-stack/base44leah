@@ -23,8 +23,13 @@ export default {
         sans: ['Inter', 'system-ui', 'sans-serif'],
       },
       boxShadow: {
-        glow: '0 12px 40px -14px rgba(15,15,20,0.22)',
-        'glow-violet': '0 18px 55px -16px rgba(15,15,20,0.26)',
+        // Layered hairline + soft ambient shadows for a high-end, weightless feel.
+        soft: '0 1px 2px rgba(15,15,20,0.04), 0 10px 28px -14px rgba(15,15,20,0.14)',
+        glow: '0 1px 2px rgba(15,15,20,0.05), 0 16px 40px -16px rgba(15,15,20,0.18)',
+        'glow-violet': '0 2px 6px rgba(15,15,20,0.05), 0 30px 70px -26px rgba(79,124,255,0.22)',
+      },
+      letterSpacing: {
+        tightest: '-0.04em',
       },
       keyframes: {
         float: {
