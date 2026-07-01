@@ -5,3 +5,6 @@ dist-ssr
 .DS_Store
 *.log
 .vite
+
+.claude/settings.local.json
+**/__pycache__/
