@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useScroll, useSpring, useTransform } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import { MagneticButton } from './ui'
+import { useIsMobile } from './useIsMobile'
 
 const channels = [
   { name: 'Meta Ads', icon: 'M3 11l18-7-7 18-2.5-7.5L3 11z', tone: 'from-zinc-700 to-zinc-900' },
@@ -18,6 +19,9 @@ function CommandCard() {
   const rotateY = useSpring(useTransform(mx, [-0.5, 0.5], [-7, 7]), { stiffness: 120, damping: 16 })
   const rotateX = useSpring(useTransform(my, [-0.5, 0.5], [6, -6]), { stiffness: 120, damping: 16 })
   useEffect(() => {
+    // Pointer-driven tilt is desktop-only; skip the listener + springs on touch
+    // devices where it does nothing but cost main-thread work.
+    if (typeof window !== 'undefined' && !window.matchMedia('(pointer: fine)').matches) return
     const h = (e: PointerEvent) => {
       mx.set(e.clientX / window.innerWidth - 0.5)
       my.set(e.clientY / window.innerHeight - 0.5)
@@ -104,6 +108,7 @@ function FloatChip({ className, delay, label, value, icon }: { className: string
 
 export default function Hero() {
   const ref = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const yText = useTransform(scrollYProgress, [0, 1], [0, -120])
   const yCard = useTransform(scrollYProgress, [0, 1], [0, 80])
@@ -113,14 +118,16 @@ export default function Hero() {
   return (
     <section ref={ref} id="top" className="relative flex min-h-screen items-center overflow-x-clip pt-28 pb-12">
       <div className="absolute inset-0 grid-overlay" />
+      {/* Big blurred blobs: animating scale on a 120px-blurred layer is very
+          GPU-heavy, so on mobile we render them static (no per-frame repaint). */}
       <motion.div
-        animate={{ opacity: [0.5, 0.85, 0.5], scale: [1, 1.15, 1] }}
-        transition={{ duration: 9, repeat: Infinity, ease: 'easeInOut' }}
+        animate={isMobile ? undefined : { opacity: [0.5, 0.85, 0.5], scale: [1, 1.15, 1] }}
+        transition={isMobile ? undefined : { duration: 9, repeat: Infinity, ease: 'easeInOut' }}
         className="pointer-events-none absolute -left-32 top-24 h-[28rem] w-[28rem] rounded-full bg-black/[0.03] blur-[120px]"
       />
       <motion.div
-        animate={{ opacity: [0.45, 0.8, 0.45], scale: [1.1, 1, 1.1] }}
-        transition={{ duration: 11, repeat: Infinity, ease: 'easeInOut' }}
+        animate={isMobile ? undefined : { opacity: [0.45, 0.8, 0.45], scale: [1.1, 1, 1.1] }}
+        transition={isMobile ? undefined : { duration: 11, repeat: Infinity, ease: 'easeInOut' }}
         className="pointer-events-none absolute right-0 bottom-10 h-[32rem] w-[32rem] rounded-full bg-black/[0.03] blur-[130px]"
       />
 
@@ -191,10 +198,10 @@ export default function Hero() {
         </motion.div>
 
         <motion.div style={{ y: yCard }} className="relative flex justify-center [perspective:1200px] lg:justify-end">
-          <div className="pointer-events-none absolute inset-0 -z-10 animate-float rounded-full bg-gradient-to-br from-cyber-cyan/15 to-cyber-violet/20 blur-3xl" />
+          <div className={`pointer-events-none absolute inset-0 -z-10 rounded-full bg-gradient-to-br from-cyber-cyan/15 to-cyber-violet/20 blur-3xl ${isMobile ? '' : 'animate-float'}`} />
           <motion.div
-            animate={{ rotate: 360 }}
-            transition={{ duration: 32, repeat: Infinity, ease: 'linear' }}
+            animate={isMobile ? undefined : { rotate: 360 }}
+            transition={isMobile ? undefined : { duration: 32, repeat: Infinity, ease: 'linear' }}
             className="pointer-events-none absolute left-1/2 top-1/2 h-[26rem] w-[26rem] -translate-x-1/2 -translate-y-1/2 rounded-full border border-black/[0.06] [mask-image:linear-gradient(transparent,#000,transparent)]"
           />
           <CommandCard />

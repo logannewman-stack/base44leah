@@ -86,8 +86,8 @@ function StrandLevel({ k, total, rotate }: { k: number; total: number; rotate: M
   )
 }
 
-function DnaStrand({ rotate }: { rotate: MotionValue<number> }) {
-  const levels = Array.from({ length: 52 })
+function DnaStrand({ rotate, count }: { rotate: MotionValue<number>; count: number }) {
+  const levels = Array.from({ length: count })
   return (
     <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
       {/* soft glowing core so the spine reads as solid */}
@@ -220,7 +220,7 @@ export default function ServicesHelix() {
 
         {/* shared 3D stage: DNA axis + tiles orbiting around it */}
         <motion.div className="absolute inset-0" style={{ transformStyle: 'preserve-3d', rotateX: 6 }}>
-          <DnaStrand rotate={helixRotate} />
+          <DnaStrand rotate={helixRotate} count={isMobile ? 30 : 52} />
           {services.map((s, i) => (
             <Tile key={s.key} service={s} i={i} progress={scrollYProgress} isMobile={isMobile} />
           ))}

@@ -1,36 +1,76 @@
-import { lazy, Suspense, useEffect, type ReactNode } from 'react'
+import { lazy, Suspense, useEffect, useRef, useState, type ComponentType, type ReactNode } from 'react'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import { CursorGlow, ScrollProgress } from './components/Effects'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
-import Marquee from './components/Marquee'
-import Stats from './components/Stats'
 import Footer from './components/Footer'
 import ContactModal from './components/ContactModal'
 import FloatingChatButton from './components/FloatingChatButton'
 
-// Below-the-fold sections are code-split so the initial bundle only carries the
-// hero + above-the-fold UI. They're prefetched on idle so they're ready by the
-// time the user scrolls to them.
-const ServicesHelix = lazy(() => import('./components/ServicesHelix'))
-const Features = lazy(() => import('./components/Features'))
-const CoverFlow = lazy(() => import('./components/CoverFlow'))
-const Packages = lazy(() => import('./components/Pricing'))
-const Testimonials = lazy(() => import('./components/Testimonials'))
-const CTA = lazy(() => import('./components/CTA'))
+// Retry a dynamic import a few times before giving up — flaky mobile networks
+// often drop a single chunk request, and a bare lazy() would then blank the page.
+function lazyWithRetry<T extends ComponentType<unknown>>(factory: () => Promise<{ default: T }>) {
+  return lazy(async () => {
+    let lastErr: unknown
+    for (let i = 0; i <= 3; i++) {
+      try {
+        return await factory()
+      } catch (e) {
+        lastErr = e
+        await new Promise((r) => setTimeout(r, 500 * (i + 1)))
+      }
+    }
+    throw lastErr
+  })
+}
 
-const lazyChunks = [
-  () => import('./components/ServicesHelix'),
-  () => import('./components/Features'),
-  () => import('./components/CoverFlow'),
-  () => import('./components/Pricing'),
-  () => import('./components/Testimonials'),
-  () => import('./components/CTA'),
-]
+// Everything below the hero is code-split AND kept off the first paint so the
+// initial main-thread work is just the hero. Prefetched on idle so they're
+// ready by the time the user scrolls.
+const Marquee = lazyWithRetry(() => import('./components/Marquee'))
+const Stats = lazyWithRetry(() => import('./components/Stats'))
+const ServicesHelix = lazyWithRetry(() => import('./components/ServicesHelix'))
+const Features = lazyWithRetry(() => import('./components/Features'))
+const CoverFlow = lazyWithRetry(() => import('./components/CoverFlow'))
+const Packages = lazyWithRetry(() => import('./components/Pricing'))
+const Testimonials = lazyWithRetry(() => import('./components/Testimonials'))
+const CTA = lazyWithRetry(() => import('./components/CTA'))
 
-// Reserves vertical space so a not-yet-loaded chunk doesn't cause layout shift.
+// Renders its (lazy) child only once it's scrolled near the viewport, so a
+// section's JavaScript parses just-in-time instead of every section executing
+// at once right after first paint (which froze the main thread on mobile).
+// Until then it shows a same-height spacer, so there's no layout shift.
 function Defer({ children, minH = '60vh' }: { children: ReactNode; minH?: string }) {
-  return <Suspense fallback={<div style={{ minHeight: minH }} aria-hidden />}>{children}</Suspense>
+  const ref = useRef<HTMLDivElement>(null)
+  const [show, setShow] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          setShow(true)
+          io.disconnect()
+        }
+      },
+      // start loading ~one screen ahead so it's ready before it scrolls in
+      { rootMargin: '700px 0px' },
+    )
+    io.observe(el)
+    return () => io.disconnect()
+  }, [])
+  const spacer = <div style={{ minHeight: minH }} aria-hidden />
+  return (
+    <div ref={ref}>
+      {show ? (
+        <ErrorBoundary fallback={spacer}>
+          <Suspense fallback={spacer}>{children}</Suspense>
+        </ErrorBoundary>
+      ) : (
+        spacer
+      )}
+    </div>
+  )
 }
 
 // Clean light backdrop: soft grey blooms + a faint grid on near-white.
@@ -46,28 +86,6 @@ function LightBg() {
 }
 
 export default function App() {
-  // Warm the split chunks once the main thread is idle after first paint.
-  useEffect(() => {
-    let cancelled = false
-    const run = () => {
-      if (cancelled) return
-      lazyChunks.forEach((load) => load())
-    }
-    const w = window as typeof window & {
-      requestIdleCallback?: (cb: () => void) => number
-      cancelIdleCallback?: (id: number) => void
-    }
-    let idleId: number | undefined
-    let timeoutId: ReturnType<typeof setTimeout> | undefined
-    if (w.requestIdleCallback) idleId = w.requestIdleCallback(run)
-    else timeoutId = setTimeout(run, 1500)
-    return () => {
-      cancelled = true
-      if (idleId !== undefined && w.cancelIdleCallback) w.cancelIdleCallback(idleId)
-      if (timeoutId !== undefined) clearTimeout(timeoutId)
-    }
-  }, [])
-
   return (
     <div className="relative min-h-screen">
       <LightBg />
@@ -81,8 +99,12 @@ export default function App() {
       <FloatingChatButton />
       <main className="relative z-10">
         <Hero />
-        <Marquee />
-        <Stats />
+        <Defer minH="200px">
+          <Marquee />
+        </Defer>
+        <Defer minH="90vh">
+          <Stats />
+        </Defer>
         <Defer minH="100vh">
           <ServicesHelix />
         </Defer>
