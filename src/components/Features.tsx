@@ -60,14 +60,14 @@ function RollCard({ f, i, progress }: { f: (typeof features)[number]; i: number;
   })
   return (
     <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[min(88vw,540px)]">
-      <div className="glow-border rounded-[2rem] border border-black/10 bg-white/80 p-6 backdrop-blur-md shadow-glow-violet sm:p-10">
-        <span className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br sm:h-20 sm:w-20 ${f.color}`}>
+      <div className="glow-border rounded-[2rem] border border-black/[0.06] bg-white/80 p-7 backdrop-blur-md shadow-glow-violet sm:p-10">
+        <span className={`inline-flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br shadow-soft sm:h-20 sm:w-20 ${f.color}`}>
           <svg viewBox="0 0 24 24" className="h-8 w-8 text-white sm:h-10 sm:w-10" fill="currentColor">
             <path d={f.icon} />
           </svg>
         </span>
-        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-neutral-900 sm:mt-7 sm:text-4xl">{f.title}</h3>
-        <p className="mt-3 text-base leading-relaxed text-neutral-600 sm:mt-4 sm:text-xl">{f.body}</p>
+        <h3 className="mt-6 font-display text-[1.7rem] font-bold leading-[1.1] tracking-[-0.03em] text-neutral-900 sm:mt-7 sm:text-[2.4rem]">{f.title}</h3>
+        <p className="mt-3.5 text-[1.02rem] leading-relaxed text-neutral-500 sm:mt-4 sm:text-[1.2rem]">{f.body}</p>
       </div>
     </motion.div>
   )
@@ -82,7 +82,7 @@ export default function Features() {
       <div className="sticky top-0 flex h-screen items-center justify-center overflow-hidden [perspective:1600px]">
         <div className="absolute top-[5%] left-1/2 z-20 -translate-x-1/2 px-6 text-center">
           <Eyebrow>Why Front Desk AI</Eyebrow>
-          <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">
+          <h2 className="mt-4 font-display text-[1.9rem] font-bold leading-[1.1] tracking-[-0.03em] sm:text-[2.5rem]">
             Your entire growth team, <span className="gradient-text">under one roof.</span>
           </h2>
         </div>

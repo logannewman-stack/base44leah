@@ -124,14 +124,14 @@ function Tile({ service, i, progress, isMobile }: { service: (typeof services)[n
   const stroke = service.key === 'web' || service.key === 'social'
   return (
     <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[230px] sm:w-[300px]">
-      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/80 px-6 py-7 text-center backdrop-blur-md sm:px-8 sm:py-9">
-        <span className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br sm:h-20 sm:w-20 ${service.color}`}>
+      <div className="glow-border rounded-[1.75rem] border border-black/[0.06] bg-white/80 px-6 py-7 text-center backdrop-blur-md sm:px-8 sm:py-9">
+        <span className={`mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br shadow-soft sm:h-20 sm:w-20 ${service.color}`}>
           <svg viewBox="0 0 24 24" className="h-8 w-8 text-white sm:h-10 sm:w-10" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
             <path d={service.icon} />
           </svg>
         </span>
-        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-neutral-900 sm:mt-6 sm:text-[1.7rem]">{service.name}</h3>
-        <p className="mt-2.5 text-[0.8rem] uppercase tracking-[0.2em] text-cyber-cyan">{service.label}</p>
+        <h3 className="mt-5 font-display text-2xl font-bold leading-tight tracking-[-0.02em] text-neutral-900 sm:mt-6 sm:text-[1.7rem]">{service.name}</h3>
+        <p className="mt-2.5 text-[0.72rem] font-semibold uppercase tracking-[0.2em] text-cyber-blue">{service.label}</p>
       </div>
     </motion.div>
   )
@@ -162,17 +162,17 @@ export default function ServicesHelix() {
         {/* heading */}
         <div className="absolute top-[8%] left-1/2 z-20 -translate-x-1/2 text-center">
           <Eyebrow>What we do</Eyebrow>
-          <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+          <h2 className="mt-4 font-display text-[1.9rem] font-bold leading-[1.1] tracking-[-0.03em] sm:text-[2.5rem]">
             Five services. <span className="gradient-text">One growth engine.</span>
           </h2>
         </div>
 
         {/* LEFT — what it does */}
         <div className="absolute left-5 top-1/2 z-20 hidden w-[384px] -translate-y-1/2 md:block lg:left-10 xl:left-16">
-          <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/70 p-8 backdrop-blur-md">
-            <div className="flex items-center gap-2 text-cyber-cyan">
-              <span className="h-1.5 w-1.5 rounded-full bg-cyber-cyan shadow-glow" />
-              <p className="text-sm font-semibold uppercase tracking-[0.28em]">What it does</p>
+          <div className="glow-border rounded-[1.75rem] border border-black/[0.06] bg-white/75 p-8 backdrop-blur-md">
+            <div className="flex items-center gap-2 text-cyber-blue">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyber-blue shadow-[0_0_0_3px_rgba(79,124,255,0.14)]" />
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em]">What it does</p>
             </div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -183,14 +183,14 @@ export default function ServicesHelix() {
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
                 <div className="mt-6 flex items-center gap-3">
-                  <span className={`flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br ${cur.color}`}>
+                  <span className={`flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br shadow-soft ${cur.color}`}>
                     <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill={cur.key === 'web' || cur.key === 'social' ? 'none' : 'currentColor'} stroke={cur.key === 'web' || cur.key === 'social' ? 'currentColor' : 'none'} strokeWidth="2">
                       <path d={cur.icon} />
                     </svg>
                   </span>
-                  <h3 className="font-display text-[1.7rem] font-bold leading-tight text-neutral-900">{cur.name}</h3>
+                  <h3 className="font-display text-[1.7rem] font-bold leading-tight tracking-[-0.02em] text-neutral-900">{cur.name}</h3>
                 </div>
-                <p className="mt-5 text-base leading-relaxed text-neutral-600">{cur.what}</p>
+                <p className="mt-5 text-[0.98rem] leading-relaxed text-neutral-500">{cur.what}</p>
               </motion.div>
             </AnimatePresence>
           </div>
@@ -198,10 +198,10 @@ export default function ServicesHelix() {
 
         {/* RIGHT — why it matters */}
         <div className="absolute right-5 top-1/2 z-20 hidden w-[384px] -translate-y-1/2 md:block lg:right-10 xl:right-16">
-          <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/70 p-8 text-right backdrop-blur-md">
+          <div className="glow-border rounded-[1.75rem] border border-black/[0.06] bg-white/75 p-8 text-right backdrop-blur-md">
             <div className="flex items-center justify-end gap-2 text-cyber-magenta">
-              <p className="text-sm font-semibold uppercase tracking-[0.28em]">Why it matters</p>
-              <span className="h-1.5 w-1.5 rounded-full bg-cyber-magenta shadow-glow-violet" />
+              <p className="text-[0.7rem] font-semibold uppercase tracking-[0.2em]">Why it matters</p>
+              <span className="h-1.5 w-1.5 rounded-full bg-cyber-magenta shadow-[0_0_0_3px_rgba(139,135,240,0.16)]" />
             </div>
             <AnimatePresence mode="wait">
               <motion.div
@@ -211,8 +211,8 @@ export default function ServicesHelix() {
                 exit={{ opacity: 0, x: 14, filter: 'blur(8px)' }}
                 transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
               >
-                <p className="mt-6 font-display text-[1.7rem] font-bold leading-tight text-neutral-900">{cur.name}</p>
-                <p className="mt-5 text-base leading-relaxed text-neutral-600">{cur.why}</p>
+                <p className="mt-6 font-display text-[1.7rem] font-bold leading-tight tracking-[-0.02em] text-neutral-900">{cur.name}</p>
+                <p className="mt-5 text-[0.98rem] leading-relaxed text-neutral-500">{cur.why}</p>
               </motion.div>
             </AnimatePresence>
           </div>

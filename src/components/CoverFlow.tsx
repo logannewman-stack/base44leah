@@ -65,10 +65,10 @@ function FlowCard({ card, i, progress, isMobile }: { card: (typeof cards)[number
 
   return (
     <motion.div style={{ transform, opacity }} className="absolute left-1/2 top-1/2 w-[min(86vw,380px)] sm:w-[440px]">
-      <div className="glow-border rounded-[1.75rem] border border-black/10 bg-white/85 p-7 backdrop-blur-md shadow-glow-violet sm:p-9">
+      <div className="glow-border rounded-[1.75rem] border border-black/[0.06] bg-white/85 p-8 backdrop-blur-md shadow-glow-violet sm:p-9">
         <span className="inline-flex h-1.5 w-10 rounded-full bg-gradient-to-r from-cyber-blue to-cyber-magenta" />
-        <h3 className="mt-5 font-display text-2xl font-bold leading-tight text-neutral-900 sm:text-[1.7rem]">{card.title}</h3>
-        <p className="mt-3 text-base leading-relaxed text-neutral-600 sm:text-lg">{card.body}</p>
+        <h3 className="mt-6 font-display text-2xl font-bold leading-[1.12] tracking-[-0.03em] text-neutral-900 sm:text-[1.7rem]">{card.title}</h3>
+        <p className="mt-3.5 text-[1.02rem] leading-relaxed text-neutral-500 sm:text-lg">{card.body}</p>
       </div>
     </motion.div>
   )
@@ -83,7 +83,7 @@ function ProgressDot({ i, progress }: { i: number; progress: MotionValue<number>
 const Heading = () => (
   <>
     <Eyebrow>Why we're different</Eyebrow>
-    <h2 className="mt-3 font-display text-3xl font-bold sm:text-4xl">
+    <h2 className="mt-4 font-display text-[1.9rem] font-bold leading-[1.1] tracking-[-0.03em] sm:text-[2.5rem]">
       Built to make you the <span className="gradient-text">obvious choice.</span>
     </h2>
   </>
@@ -100,7 +100,7 @@ function CoverFlowStatic() {
         </div>
         <div className="mt-10 space-y-4">
           {cards.map((c) => (
-            <div key={c.title} className="glow-border rounded-[1.75rem] border border-black/10 bg-white/85 p-6">
+            <div key={c.title} className="glow-border rounded-[1.75rem] border border-black/[0.06] bg-white/85 p-6">
               <span className="inline-flex h-1.5 w-10 rounded-full bg-gradient-to-r from-cyber-blue to-cyber-magenta" />
               <h3 className="mt-4 font-display text-xl font-bold leading-tight text-neutral-900">{c.title}</h3>
               <p className="mt-2 text-sm leading-relaxed text-neutral-600">{c.body}</p>
