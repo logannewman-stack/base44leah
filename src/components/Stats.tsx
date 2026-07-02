@@ -1,6 +1,7 @@
 import { animate, motion, useInView } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
 import { Depth3D, Eyebrow } from './ui'
+import { useIsMobile } from './useIsMobile'
 
 function Counter({
   to,
@@ -15,12 +16,18 @@ function Counter({
   prefix?: string
   decimals?: number
 }) {
+  const isMobile = useIsMobile()
   const ref = useRef(null)
   // once:false so the count replays every time the card scrolls back into view
   const inView = useInView(ref, { once: false, margin: '-80px' })
   const [val, setVal] = useState(from)
 
   useEffect(() => {
+    // Mobile: show the final value instantly — no count-up animation.
+    if (isMobile) {
+      setVal(to)
+      return
+    }
     if (!inView) {
       setVal(from) // reset so it counts again next time
       return
@@ -31,7 +38,7 @@ function Counter({
       onUpdate: (v) => setVal(v),
     })
     return () => controls.stop()
-  }, [inView, to, from])
+  }, [inView, to, from, isMobile])
 
   const formatted = val.toLocaleString('en-US', { minimumFractionDigits: decimals, maximumFractionDigits: decimals })
   return (

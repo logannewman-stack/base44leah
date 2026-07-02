@@ -143,9 +143,57 @@ function ProgressDot({ i, progress }: { i: number; progress: MotionValue<number>
   return <motion.span style={{ width: w, opacity: o }} className="h-1.5 rounded-full bg-neutral-900" />
 }
 
+/* --------------------- Mobile: flat static stacked list -------------------- */
+
+function ServicesHelixMobile() {
+  return (
+    <section id="services" className="relative overflow-x-clip py-24">
+      <div className="mx-auto max-w-md px-6">
+        <div className="text-center">
+          <Eyebrow>What we do</Eyebrow>
+          <h2 className="mt-4 font-display text-[1.9rem] font-bold leading-[1.1] tracking-[-0.03em]">
+            Five services. <span className="gradient-text">One growth engine.</span>
+          </h2>
+        </div>
+        <div className="mt-10 space-y-4">
+          {services.map((s) => {
+            const stroke = s.key === 'web' || s.key === 'social'
+            return (
+              <div key={s.key} className="glow-border rounded-3xl border border-black/[0.06] bg-white/90 p-6">
+                <div className="flex items-center gap-3">
+                  <span className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br ${s.color}`}>
+                    <svg viewBox="0 0 24 24" className="h-6 w-6 text-white" fill={stroke ? 'none' : 'currentColor'} stroke={stroke ? 'currentColor' : 'none'} strokeWidth="2">
+                      <path d={s.icon} />
+                    </svg>
+                  </span>
+                  <div>
+                    <h3 className="font-display text-xl font-bold leading-tight tracking-[-0.02em] text-neutral-900">{s.name}</h3>
+                    <p className="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-cyber-blue">{s.label}</p>
+                  </div>
+                </div>
+                <p className="mt-4 text-[0.92rem] leading-relaxed text-neutral-600">{s.what}</p>
+                <p className="mt-3 text-[0.92rem] leading-relaxed text-neutral-500">
+                  <span className="font-semibold text-cyber-magenta">Why it matters — </span>
+                  {s.why}
+                </p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 /* --------------------------------- Section -------------------------------- */
 
 export default function ServicesHelix() {
+  const isMobile = useIsMobile()
+  if (isMobile) return <ServicesHelixMobile />
+  return <ServicesHelixDesktop />
+}
+
+function ServicesHelixDesktop() {
   const ref = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })

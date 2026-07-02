@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform, type MotionValue } from 'framer-motion'
 import { useRef } from 'react'
 import { Eyebrow } from './ui'
+import { useIsMobile } from './useIsMobile'
 
 const features = [
   {
@@ -73,7 +74,41 @@ function RollCard({ f, i, progress }: { f: (typeof features)[number]; i: number;
   )
 }
 
+function FeaturesMobile() {
+  return (
+    <section id="why" className="relative overflow-x-clip py-24">
+      <div className="mx-auto max-w-md px-6">
+        <div className="text-center">
+          <Eyebrow>Why Front Desk AI</Eyebrow>
+          <h2 className="mt-4 font-display text-[1.9rem] font-bold leading-[1.1] tracking-[-0.03em]">
+            Your entire growth team, <span className="gradient-text">under one roof.</span>
+          </h2>
+        </div>
+        <div className="mt-10 space-y-4">
+          {features.map((f) => (
+            <div key={f.title} className="glow-border rounded-3xl border border-black/[0.06] bg-white/90 p-6">
+              <span className={`inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br ${f.color}`}>
+                <svg viewBox="0 0 24 24" className="h-7 w-7 text-white" fill="currentColor">
+                  <path d={f.icon} />
+                </svg>
+              </span>
+              <h3 className="mt-4 font-display text-xl font-bold leading-tight tracking-[-0.02em] text-neutral-900">{f.title}</h3>
+              <p className="mt-2 text-[0.92rem] leading-relaxed text-neutral-600">{f.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
 export default function Features() {
+  const isMobile = useIsMobile()
+  if (isMobile) return <FeaturesMobile />
+  return <FeaturesDesktop />
+}
+
+function FeaturesDesktop() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
 

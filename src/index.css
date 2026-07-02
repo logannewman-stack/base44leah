@@ -136,10 +136,10 @@ section[id],
   mask-image: radial-gradient(ellipse 78% 58% at 50% 38%, #000 25%, transparent 78%);
 }
 
-/* backdrop-filter blur is one of the most expensive things a mobile GPU can do,
-   and it sits on dozens of glass cards. Drop it on small screens and lean on a
-   more opaque solid background so everything stays readable but scrolls smoothly. */
-@media (max-width: 640px) {
+/* MOBILE = FLAT & FAST. Below the md breakpoint we strip every expensive visual
+   effect: GPU-heavy backdrop/filter blur, CSS keyframe animations, and the big
+   decorative blur blobs. All immersive motion/3D is desktop-only (gated in JS). */
+@media (max-width: 767px) {
   .glass {
     background: rgba(255, 255, 255, 0.9);
     backdrop-filter: none;
@@ -153,6 +153,18 @@ section[id],
   [class*='backdrop-blur'] {
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
+  }
+  /* No CSS keyframe animations on mobile (float, pulse, ping, shimmer, …). */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
+  /* Hide the large decorative blur blobs — cheap flat background instead. */
+  [class*='blur-2xl'],
+  [class*='blur-3xl'],
+  [class*='blur-[1'] {
+    display: none !important;
   }
 }
 

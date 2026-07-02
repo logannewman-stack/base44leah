@@ -107,6 +107,115 @@ function FloatChip({ className, delay, label, value, icon }: { className: string
 }
 
 export default function Hero() {
+  const isMobile = useIsMobile()
+  if (isMobile) return <HeroMobile />
+  return <HeroDesktop />
+}
+
+/* Mobile: fully static — no Framer, no parallax, no springs. Flat & fast. */
+function HeroMobile() {
+  return (
+    <section id="top" className="relative overflow-x-clip pt-28 pb-16">
+      <div className="absolute inset-0 grid-overlay" />
+      <div className="relative mx-auto max-w-md px-6">
+        <span className="inline-flex items-center gap-2 rounded-full border border-black/[0.07] bg-white/70 px-3.5 py-1.5 text-[0.68rem] font-semibold uppercase tracking-[0.2em] text-neutral-500 shadow-soft">
+          <span className="h-1.5 w-1.5 rounded-full bg-cyber-blue shadow-[0_0_0_3px_rgba(79,124,255,0.14)]" />
+          Front Desk AI · Growth agency
+        </span>
+
+        <h1 className="mt-7 font-display text-[2.9rem] font-bold leading-[1.04] tracking-[-0.035em]">
+          <span className="block">The future of</span>
+          <span className="block gradient-text">sales management</span>
+          <span className="block">at your fingertips.</span>
+        </h1>
+
+        <p className="mt-6 text-[1.07rem] leading-[1.65] text-neutral-500">
+          We run your Meta &amp; Google ads, build and optimize your Google Business profile, design your
+          website, manage your social media, and answer every call with AI — one fully-managed growth team
+          for your entire front desk.
+        </p>
+
+        <div className="mt-9 flex flex-col gap-4">
+          <MagneticButton href="#contact" className="w-full">
+            Speak with a representative
+            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M5 12h14M13 6l6 6-6 6" />
+            </svg>
+          </MagneticButton>
+          <MagneticButton href="#services" variant="ghost" className="w-full">
+            Explore our services
+          </MagneticButton>
+        </div>
+
+        <p className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.82rem] font-medium text-neutral-500">
+          {['Free strategy call', 'No commitment', 'Reply within minutes'].map((t) => (
+            <span key={t} className="inline-flex items-center gap-1.5">
+              <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 text-cyber-blue" fill="none" stroke="currentColor" strokeWidth="3">
+                <path d="M5 13l4 4L19 7" />
+              </svg>
+              {t}
+            </span>
+          ))}
+        </p>
+
+        <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-neutral-500">
+          <span className="inline-flex items-center gap-2.5">
+            <span className="flex -space-x-2">
+              {['from-zinc-600 to-zinc-900', 'from-neutral-500 to-neutral-800', 'from-zinc-700 to-black', 'from-neutral-600 to-neutral-900', 'from-zinc-500 to-zinc-800'].map((g, i) => (
+                <span key={i} className={`h-6 w-6 rounded-full border-2 border-[#f7f7f8] bg-gradient-to-br ${g}`} />
+              ))}
+            </span>
+            <span>
+              <span className="font-semibold text-neutral-800">1,200+</span> businesses trust us
+            </span>
+          </span>
+          <span className="inline-flex items-center gap-1.5">
+            <span className="tracking-[0.1em] text-cyber-blue">★★★★★</span>
+            <span className="font-semibold text-neutral-800">4.9/5</span>
+          </span>
+        </div>
+
+        {/* Static "growth engine" card */}
+        <div className="glow-border glass-strong mt-12 rounded-3xl p-6 shadow-glow-violet">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-xs uppercase tracking-widest text-cyber-blue">Growth engine</p>
+              <p className="text-sm font-semibold text-neutral-900">All channels · Live</p>
+            </div>
+            <span className="flex items-center gap-1.5 rounded-full bg-black/[0.06] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-neutral-600">
+              <span className="h-1.5 w-1.5 rounded-full bg-neutral-800" /> Running
+            </span>
+          </div>
+          <div className="mt-5 space-y-2.5">
+            {channels.map((c) => (
+              <div key={c.name} className="flex items-center gap-3 rounded-xl bg-black/[0.04] px-3 py-2.5">
+                <span className={`flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br ${c.tone}`}>
+                  <svg viewBox="0 0 24 24" className="h-4 w-4 text-white" fill={c.name === 'Website' || c.name === 'Social Media' ? 'none' : 'currentColor'} stroke={c.name === 'Website' || c.name === 'Social Media' ? 'currentColor' : 'none'} strokeWidth="2">
+                    <path d={c.icon} />
+                  </svg>
+                </span>
+                <span className="flex-1 text-sm font-medium text-neutral-800">{c.name}</span>
+                <span className="text-[10px] uppercase tracking-wider text-neutral-600">Active</span>
+              </div>
+            ))}
+          </div>
+          <div className="mt-5 grid grid-cols-2 gap-2 text-center">
+            <div className="rounded-xl bg-black/[0.04] py-2.5">
+              <p className="text-sm font-bold gradient-text">+38%</p>
+              <p className="text-[10px] uppercase tracking-wider text-neutral-500">More booked</p>
+            </div>
+            <div className="rounded-xl bg-black/[0.04] py-2.5">
+              <p className="text-sm font-bold gradient-text">0</p>
+              <p className="text-[10px] uppercase tracking-wider text-neutral-500">Leads missed</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function HeroDesktop() {
   const ref = useRef<HTMLDivElement>(null)
   const isMobile = useIsMobile()
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })

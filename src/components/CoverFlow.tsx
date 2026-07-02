@@ -117,10 +117,14 @@ function CoverFlowStatic() {
 export default function CoverFlow() {
   const reduceMotion = useReducedMotion()
   const isMobile = useIsMobile()
+  // Mobile / reduced-motion: flat static column — no 3D, no scroll listener.
+  if (isMobile || reduceMotion) return <CoverFlowStatic />
+  return <CoverFlowMotion />
+}
+
+function CoverFlowMotion() {
   const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end end'] })
-
-  if (reduceMotion) return <CoverFlowStatic />
 
   return (
     <section ref={ref} className="relative overflow-x-clip" style={{ height: `${N * 58}vh` }}>
@@ -131,7 +135,7 @@ export default function CoverFlow() {
 
         <div className="absolute inset-0" style={{ transformStyle: 'preserve-3d' }}>
           {cards.map((c, i) => (
-            <FlowCard key={c.title} card={c} i={i} progress={scrollYProgress} isMobile={isMobile} />
+            <FlowCard key={c.title} card={c} i={i} progress={scrollYProgress} isMobile={false} />
           ))}
         </div>
 

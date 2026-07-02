@@ -1,8 +1,15 @@
 import { motion, useMotionValue, useScroll, useSpring } from 'framer-motion'
 import { useEffect, useRef, useState } from 'react'
+import { useIsMobile } from './useIsMobile'
 
-/** Thin gradient bar at the very top tracking scroll progress. */
+/** Thin gradient bar at the very top tracking scroll progress. Desktop-only. */
 export function ScrollProgress() {
+  const isMobile = useIsMobile()
+  if (isMobile) return null
+  return <ScrollBar />
+}
+
+function ScrollBar() {
   const { scrollYProgress } = useScroll()
   const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 30, mass: 0.3 })
   return (
@@ -21,7 +28,8 @@ const TAIL = 26 // number of points in the comet trail
  * head with a smooth lag.
  */
 export function CursorGlow() {
-  const [fine, setFine] = useState(true)
+  // Resolve pointer type synchronously so the rAF loop never starts on touch.
+  const [fine] = useState(() => typeof window !== 'undefined' && window.matchMedia('(pointer: fine)').matches)
   const [pts, setPts] = useState<{ x: number; y: number }[]>(() => Array.from({ length: TAIL }, () => ({ x: -200, y: -200 })))
   const mouse = useRef({ x: -200, y: -200 })
 
@@ -32,7 +40,8 @@ export function CursorGlow() {
   const auraY = useSpring(mvy, { stiffness: 110, damping: 18, mass: 0.5 })
 
   useEffect(() => {
-    setFine(window.matchMedia('(pointer: fine)').matches)
+    // On touch devices there is no cursor — never start the listener or rAF loop.
+    if (!fine) return
     const move = (e: PointerEvent) => {
       mouse.current = { x: e.clientX, y: e.clientY }
       mvx.set(e.clientX)

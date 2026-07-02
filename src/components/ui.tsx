@@ -1,6 +1,7 @@
 import { motion, useInView, useReducedMotion, useScroll, useTransform } from 'framer-motion'
 import { useRef, useState, type ReactNode, type MouseEvent } from 'react'
 import { contactModal } from './useContactModal'
+import { useIsMobile } from './useIsMobile'
 
 /**
  * Scroll-driven 3D depth: children rush up from deep in the scene, settle crisp
@@ -17,16 +18,23 @@ export function Depth3D({
   className?: string
   power?: number
 }) {
-  const ref = useRef<HTMLDivElement>(null)
+  const isMobile = useIsMobile()
   const reduceMotion = useReducedMotion()
+  // Mobile / reduced-motion: flat & static — no scroll listener, no 3D transform.
+  if (isMobile || reduceMotion) return <div className={className}>{children}</div>
+  return (
+    <Depth3DMotion className={className} power={power}>
+      {children}
+    </Depth3DMotion>
+  )
+}
+
+function Depth3DMotion({ children, className, power }: { children: ReactNode; className: string; power: number }) {
+  const ref = useRef<HTMLDivElement>(null)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] })
-  // Flat & crisp through the whole reading band (z=0, rotateX=0); the 3D fly-in
-  // and fly-out only happen at the edges, so text is never blurry while you read.
   const z = useTransform(scrollYProgress, [0, 0.4, 0.66, 1], [-560 * power, 0, 0, 220 * power])
   const rotateX = useTransform(scrollYProgress, [0, 0.4, 0.66, 1], [30, 0, 0, -18])
   const opacity = useTransform(scrollYProgress, [0, 0.18, 0.9, 1], [0, 1, 1, 0.45])
-  // Respect reduced-motion: skip the 3D fly-in entirely, render flat & static.
-  if (reduceMotion) return <div className={className}>{children}</div>
   return (
     <div ref={ref} className={className} style={{ perspective: 1300 }}>
       <motion.div className="h-full" style={{ z, rotateX, opacity, transformStyle: 'preserve-3d' }}>
@@ -75,6 +83,7 @@ export function MagneticButton({
   variant?: 'primary' | 'ghost'
   className?: string
 }) {
+  const isMobile = useIsMobile()
   const ref = useRef<HTMLAnchorElement>(null)
   const [t, setT] = useState({ x: 0, y: 0 })
 
@@ -101,6 +110,15 @@ export function MagneticButton({
     variant === 'primary'
       ? 'text-white bg-neutral-900 shadow-glow hover:bg-black hover:shadow-glow-violet'
       : 'text-neutral-900 border border-black/[0.09] bg-white/80 shadow-soft hover:bg-white hover:border-black/[0.14]'
+
+  // Mobile: plain anchor — no cursor-follow spring, no Framer on the touch path.
+  if (isMobile) {
+    return (
+      <a href={href} onClick={onClick} className={`${base} ${styles} ${className}`}>
+        {children}
+      </a>
+    )
+  }
 
   return (
     <motion.a

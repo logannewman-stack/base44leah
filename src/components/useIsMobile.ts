@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
  * geometry (orbit radius, card size) so the immersive sections fit a phone
  * screen instead of spilling off the edges. Desktop is untouched.
  */
-export function useIsMobile(query = '(max-width: 640px)') {
+export function useIsMobile(query = '(max-width: 767px)') {
   // Initialise synchronously so the heavy 3D sections never mount on mobile,
   // even for the first paint (avoids a flash + a wasted expensive mount).
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches)
